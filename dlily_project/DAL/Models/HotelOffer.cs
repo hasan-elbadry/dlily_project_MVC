@@ -1,6 +1,7 @@
 ﻿namespace dlily_project.DAL.Models
 {
-    public class Admin
+    public class HotelOffer : OfferBase
     {
+
     }
 }
