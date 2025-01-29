@@ -1,14 +1,24 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-
+    Layout = null;
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    @ViewData["Title"]
-    @ViewBag.hasan
-
-
-
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+<body id="body">
+    <div class="question">Are you a Tour Guide or a Tourist?</div>
+    <div class="container" id="container">
+        <div class="half left" onclick="activateSection(this, '#0052cc')">
+            <img src="Assets/Tourguide.png" alt="Tour Guide">
+            <h2>I'm a Tour Guide</h2>
+            <a href="#" class="signup-link">Signup as Tour Guide</a>
+            <p>Already have an account? <a href="#" style="color: white; text-decoration: underline;">Login here</a></p>
+        </div>
+        <div class="or-divider">OR</div>
+        <div class="half right" onclick="activateSection(this, '#66b3ff')">
+            <img src="Assets/Tourist.png" alt="Tourist">
+            <h2>I'm a Tourist</h2>
+            <a asp-controller="Auth" asp-action="SignUp" class="signup-link">Signup as Tourist</a>
+            <p>Already have an account? <a href="#" style="color: white; text-decoration: underline;">Login here</a></p>
+        </div>
+    </div>
+    <script src="~/js/index.js"></script>
+</body>

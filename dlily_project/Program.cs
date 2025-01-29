@@ -1,6 +1,13 @@
+using dlily_project.DAL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+
+builder.Services
+    .AddDbContext<ApplicationDbContext>(x=>x
+    .UseSqlServer(builder.Configuration
+    .GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

@@ -1,26 +1,23 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace dlily_project.DAL.Models
+namespace dlily_project.DAL.Models.Offers
 {
-    public class OfferBase
+    public class BaseOffer
     {
-        public int OfferId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(100)]
         public string Name { get; set; } = string.Empty;
 
         [Range(0, 5)]
-        public double Rating { get; set; }
+        public byte Rating { get; set; }
 
         [Required]
         [StringLength(200)]
         public string Location { get; set; } = string.Empty;
 
-        public string Reviews { get; set; } = string.Empty;
-
-        [StringLength(50)]
-        public string ImageUrl { get; set; } = string.Empty;
+        public byte[] ImageUrl { get; set; }
 
         [Range(0, double.MaxValue, ErrorMessage = "Price must be a positive value.")]
         public double Price { get; set; }

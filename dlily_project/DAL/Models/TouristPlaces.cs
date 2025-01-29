@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿
 namespace dlily_project.DAL.Models
 {
     public class TouristPlaces
     {
+        public int Id { get; set; }
         [Required]
         [StringLength(100)]
         public string Name { get; set; } = string.Empty;

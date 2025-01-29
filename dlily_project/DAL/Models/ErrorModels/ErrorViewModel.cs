@@ -1,4 +1,4 @@
-namespace dlily_project.DAL.Models
+namespace dlily_project.DAL.Models.ErrorModels
 {
     public class ErrorViewModel
     {

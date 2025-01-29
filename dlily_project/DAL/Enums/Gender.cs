@@ -1,9 +1,10 @@
-﻿namespace dlily_project.DAL.Models.Enum
+﻿namespace dlily_project.DAL.Enum
 {
     public enum Gender
     {
         Male,
         Female,
+        Unknown,
         Other
     }
 }

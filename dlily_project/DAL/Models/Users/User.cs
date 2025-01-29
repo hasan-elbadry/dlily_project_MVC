@@ -1,22 +1,23 @@
-﻿using dlily_project.DAL.Models.Enum;
-using System.ComponentModel.DataAnnotations;
+﻿using dlily_project.DAL.Enum;
 
-namespace dlily_project.DAL.Models
+namespace dlily_project.DAL.Models.Users
 {
     public class User
     {
         public int Id { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 3)]
-        public string Username { get; set; } = string.Empty;
+        [StringLength(100, MinimumLength = 3)]
+        public string Name { get; set; } = string.Empty;
 
         [Required]
         [EmailAddress]
+        [StringLength(300)]
         public string Email { get; set; } = string.Empty;
 
         [Required]
         [Phone]
+        [StringLength(15)]
         public string Phone { get; set; } = string.Empty;
 
         [Required]
@@ -28,9 +29,9 @@ namespace dlily_project.DAL.Models
         public string Address { get; set; } = string.Empty;
 
         [Required]
-        public Gender Gender { get; set; }  
+        public Gender Gender { get; set; } = Gender.Unknown;
 
-        public byte[] ProfilePic { get; set; } = Array.Empty<byte>();
-
+        [Display(Name = "Profile Picture")]
+        public byte[] ProfilePicture { get; set; } = Array.Empty<byte>();
     }
 }
