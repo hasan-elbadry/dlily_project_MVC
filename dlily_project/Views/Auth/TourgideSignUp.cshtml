@@ -12,8 +12,47 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,800&display=swap" rel="stylesheet">
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/signup.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+    @{
+        if (!string.IsNullOrEmpty(ViewBag.EmailExists))
+        {
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '@ViewBag.EmailExists'
+                });
+            </script>
+        }
+
+        if (!string.IsNullOrEmpty(ViewBag.error))
+        {
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '@ViewBag.error'
+                });
+            </script>
+        }
+
+        if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+        {
+            <script>
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: '@ViewBag.SuccessMessage',
+                    timer: 2000, // Auto close after 2 seconds
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = '/Auth/TourgideSignIn'; // Redirect to Sign-In page
+                });
+            </script>
+        }
+    }
     <div class="container">
         <h1>Sign Up</h1>
         <form method="post" enctype="multipart/form-data" id="signupForm">

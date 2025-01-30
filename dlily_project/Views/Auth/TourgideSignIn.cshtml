@@ -14,8 +14,38 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,800&display=swap" rel="stylesheet">
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/signup.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+
+    @{
+        if (!string.IsNullOrEmpty(ViewBag.error))
+        {
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '@ViewBag.error'
+                });
+            </script>
+        }
+
+        if (!string.IsNullOrEmpty(ViewBag.success))
+        {
+            <script>
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: '@ViewBag.success',
+                    timer: 2000, // Auto close after 3 seconds
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = '/Home/Index'; // Redirect to Sign-In page
+                });
+            </script>
+        }
+    }
+
     <div class="container">
         <h1>Sign In</h1>
         <form method="post" id="signinForm">

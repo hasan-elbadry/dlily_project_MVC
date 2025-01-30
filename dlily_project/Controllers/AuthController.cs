@@ -3,6 +3,7 @@ using dlily_project.DAL.Enum;
 using dlily_project.DAL.Models.Users;
 using dlily_project.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Scripting;
 
@@ -22,17 +23,32 @@ namespace dlily_project.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> TouristSignIn(TouristSignInViewModel model)
+        [ValidateAntiForgeryToken]
+        public IActionResult TouristSignIn(TouristSignInViewModel model)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = _context.Tourists.FirstOrDefault(x=>x.Email ==  model.Email && x.Password == model.Password);
+            if (user == null)
+            {
+                ViewBag.error = "Incorrect email or password, please try agian";
+                return View(model);
+            }
+
+            ViewBag.success = "Login sucessfully!";
+
+            return View(model); 
         }
+
 
         [HttpGet]
         public IActionResult TouristSignUp()
         {
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> TouristSignUp(TouristSignUpViewModel model)
@@ -44,6 +60,12 @@ namespace dlily_project.Controllers
             
             try
             {
+                var existTourist = _context.Tourists.FirstOrDefault(x => x.Email == model.Email);
+                if (existTourist != null)
+                {
+                    ViewBag.EmailExists = "This email is already registered!";
+                    return View(model);
+                }
                 var tourist = new Tourist
                 {
                     Name = model.Name,
@@ -67,12 +89,12 @@ namespace dlily_project.Controllers
                 _context.Tourists.Add(tourist);
                 await _context.SaveChangesAsync();
 
-                TempData["SuccessMessage"] = "Sign-up successful! You can now log in.";
-                return RedirectToAction("Index","Home");
+                ViewBag.SuccessMessage = "Your account has been created successfully!";
+                return View(model);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "An error occurred while processing your request.");
+                ViewBag.error = "An error occurred while processing your request. Please try again.";
                 return View(model);
             }
         }
@@ -90,6 +112,13 @@ namespace dlily_project.Controllers
         {
             if (!ModelState.IsValid)
             {
+                return View(model);
+            }
+
+            var existTourist = _context.Tourgides.FirstOrDefault(x => x.Email == model.Email);
+            if (existTourist != null)
+            {
+                ViewBag.EmailExists = "This email is already registered!";
                 return View(model);
             }
 
@@ -119,13 +148,12 @@ namespace dlily_project.Controllers
 
                 _context.Tourgides.Add(tourgide);
                 await _context.SaveChangesAsync();
-
-                TempData["SuccessMessage"] = "Sign-up successful! You can now log in.";
-                return RedirectToAction("Index", "Home");
+                ViewBag.SuccessMessage = "Your account has been created successfully!";
+                return View(model);
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "An error occurred while processing your request.");
+                ViewBag.error = "An error occurred while processing your request. Please try again.";
                 return View(model);
             }
         }
@@ -135,9 +163,23 @@ namespace dlily_project.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> TourgideSignIn(TourgideSignInViewModel model)
+        public IActionResult TourgideSignIn(TourgideSignInViewModel model)
         {
-            return View();
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = _context.Tourgides.FirstOrDefault(x => x.Email == model.Email && x.Password == model.Password);
+            if (user == null)
+            {
+                ViewBag.error = "Incorrect email or password, please try agian";
+                return View(model);
+            }
+
+            ViewBag.success = "Login sucessfully!";
+            return View(model);
         }
     
     }
