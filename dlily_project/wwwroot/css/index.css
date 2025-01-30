@@ -30,7 +30,7 @@ body {
     color: white;
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
     position: relative;
-    cursor: pointer;
+    cursor: default;
     transform: scale(1);
 }
 
@@ -76,10 +76,14 @@ a.signup-link {
     }
 
 img {
-    width: 200px;
+    max-width: 40%;
     height: auto;
     margin-bottom: 20px;
     transition: transform 0.3s ease;
+}
+
+img::selection {
+    color:transparent;
 }
 
 @keyframes float {
