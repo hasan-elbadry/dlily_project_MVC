@@ -1,0 +1,121 @@
+﻿* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+span {
+    display: block;
+    font-size: 14px; /* Adjust the font size of the error message */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffffff 50%, #1D8FE1 50%);
+}
+
+.container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 450px;
+    padding: 25px;
+    text-align: center;
+}
+
+h1 {
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+    .input-group i {
+        position: absolute;
+        left: 15px;
+        color: #555;
+    }
+
+    .input-group input {
+        width: 100%;
+        padding: 12px 12px 12px 40px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        display: block;
+    }
+
+.input-group-inline {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .input-group-inline .input-group {
+        width: 48%;
+    }
+
+.upload-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.upload-box {
+    width: 100%;
+    padding: 12px;
+    border: 2px dashed #1D8FE1;
+    border-radius: 8px;
+    background: #f9f9f9;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background: #f1f1f1;
+    margin-top: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    background: #1D8FE1;
+    color: #fff;
+    cursor: pointer;
+}
+
+.login-link {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+    .login-link a {
+        text-decoration: none;
+        color: #1D8FE1;
+    }
+
+.error-message {
+    text-align: left;
+    font-size: 12px;
+    color: red;
+    margin-top: 5px;
+}

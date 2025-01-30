@@ -18,14 +18,14 @@ namespace dlily_project.Controllers
         }
 
         [HttpGet]
-        public IActionResult SignUp()
+        public IActionResult TouristSignUp()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SignUp(TouristSignUpViewModel model)
+        public async Task<IActionResult> TouristSignUp(TouristSignUpViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -41,7 +41,7 @@ namespace dlily_project.Controllers
                     Phone = model.Phone,
                     Address = model.Address,
                     Gender = (Gender)model.Gender,
-                    Password = model.Password
+                    Password = model.Password,
                 };
 
 
@@ -58,7 +58,60 @@ namespace dlily_project.Controllers
                 await _context.SaveChangesAsync();
 
                 TempData["SuccessMessage"] = "Sign-up successful! You can now log in.";
-                return RedirectToAction("Login");
+                return RedirectToAction("Index","Home");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, "An error occurred while processing your request.");
+                return View(model);
+            }
+        }
+
+
+        [HttpGet]
+        public IActionResult TourgideSignUp()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> TourgideSignUp(TourgideSignUpViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            try
+            {
+                var tourgide = new Tourgide
+                {
+                    Name = model.Name,
+                    Email = model.Email,
+                    Phone = model.Phone,
+                    Address = model.Address,
+                    Gender = (Gender)model.Gender,
+                    Password = model.Password,
+                    Description = model.Description,
+                     SpokenLanguage = model.SpokenLanguage,
+                };
+
+
+                if (model.ProfilePicture != null)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        model.ProfilePicture.CopyTo(memoryStream);
+                        tourgide.ProfilePicture = memoryStream.ToArray();
+                    }
+                }
+
+                _context.Tourgides.Add(tourgide);
+                await _context.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Sign-up successful! You can now log in.";
+                return RedirectToAction("Index", "Home");
             }
             catch (Exception ex)
             {

@@ -2,7 +2,7 @@
 
 namespace dlily_project.ViewModels
 {
-    public class TouristSignUpViewModel
+    public class TourgideSignUpViewModel
     {
 
         [Required(ErrorMessage = "Username is required.")]
@@ -33,6 +33,16 @@ namespace dlily_project.ViewModels
 
         [Required(ErrorMessage = "Please select a gender.")]
         public Gender Gender { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string SpokenLanguage { get; set; } = string.Empty;
+
+        [Range(0, 5)]
+        public byte Rating { get; set; }
+
+        [StringLength(500)]
+        public string Description { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Address is required.")]
         [Display(Name = "Profile Picture")]
