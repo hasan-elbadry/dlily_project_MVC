@@ -16,6 +16,16 @@ namespace dlily_project.Controllers
         {
             _context = context;
         }
+        [HttpGet]
+        public IActionResult TouristSignIn()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> TouristSignIn(TouristSignInViewModel model)
+        {
+            return View();
+        }
 
         [HttpGet]
         public IActionResult TouristSignUp()
@@ -119,6 +129,16 @@ namespace dlily_project.Controllers
                 return View(model);
             }
         }
-
+        [HttpGet]
+        public IActionResult TourgideSignIn()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> TourgideSignIn(TourgideSignInViewModel model)
+        {
+            return View();
+        }
+    
     }
 }

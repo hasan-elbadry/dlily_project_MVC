@@ -1,0 +1,57 @@
+﻿@model dlily_project.ViewModels.TourgideSignInViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,800&display=swap" rel="stylesheet">
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/signup.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Sign In</h1>
+        <form method="post" id="signinForm">
+            @Html.AntiForgeryToken()
+
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input asp-for="Email" class="form-control" placeholder="Email" required id="email" />
+            </div>
+            <div class="error-message">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input asp-for="Password" class="form-control" type="password" placeholder="Password" required id="password" />
+            </div>
+            <div class="error-message">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Sign In</button>
+        </form>
+
+        <div class="signup-link">
+            <p>Don't have an account? <a asp-controller="Auth" asp-action="TourgideSignUp">Sign Up</a></p>
+        </div>
+    </div>
+
+    <script src="~/js/signin.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+</body>
+</html>

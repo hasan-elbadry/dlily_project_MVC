@@ -72,9 +72,49 @@
                 </div>
             </div>
             <div class="input-group">
-                    <i class=""></i>
-                    <input asp-for="SpokenLanguage" class="form-control" placeholder="SpokenLanguage" required id="SpokenLanguage" />
+                <select asp-for="SpokenLanguage" class="form-control" required id="SpokenLanguage">
+                    <option value="" disabled selected>Select a Language</option>
+                    <option value="English">English (EN)</option>
+                    <option value="Spanish">Spanish (ES)</option>
+                    <option value="Chinese">Chinese (ZH)</option>
+                    <option value="Hindi">Hindi (HI)</option>
+                    <option value="Arabic">Arabic (AR)</option>
+                    <option value="French">French (FR)</option>
+                    <option value="Russian">Russian (RU)</option>
+                    <option value="Portuguese">Portuguese (PT)</option>
+                    <option value="German">German (DE)</option>
+                    <option value="Japanese">Japanese (JA)</option>
+                    <option value="Korean">Korean (KO)</option>
+                    <option value="Italian">Italian (IT)</option>
+                    <option value="Turkish">Turkish (TR)</option>
+                    <option value="Dutch">Dutch (NL)</option>
+                    <option value="Swedish">Swedish (SV)</option>
+                    <option value="Polish">Polish (PL)</option>
+                    <option value="Thai">Thai (TH)</option>
+                    <option value="Vietnamese">Vietnamese (VI)</option>
+                    <option value="Indonesian">Indonesian (ID)</option>
+                    <option value="Hebrew">Hebrew (HE)</option>
+                    <option value="Persian">Persian (FA)</option>
+                    <option value="Bengali">Bengali (BN)</option>
+                    <option value="Ukrainian">Ukrainian (UK)</option>
+                    <option value="Greek">Greek (EL)</option>
+                    <option value="Hungarian">Hungarian (HU)</option>
+                    <option value="Czech">Czech (CS)</option>
+                    <option value="Romanian">Romanian (RO)</option>
+                    <option value="Finnish">Finnish (FI)</option>
+                    <option value="Danish">Danish (DA)</option>
+                    <option value="Norwegian">Norwegian (NO)</option>
+                    <option value="Serbian">Serbian (SR)</option>
+                    <option value="Croatian">Croatian (HR)</option>
+                    <option value="Malay">Malay (MS)</option>
+                    <option value="Tagalog">Tagalog (TL)</option>
+                    <option value="Urdu">Urdu (UR)</option>
+                </select>
             </div>
+            <div class="error-message">
+                <span asp-validation-for="SpokenLanguage" class="text-danger"></span>
+            </div>
+
 
             <div class="input-group">
                 <select asp-for="Gender" class="form-control" required id="gender">
@@ -90,6 +130,7 @@
 
             <div class="input-group">
                 <i class="fas fa-lock"></i>
+                <i class="fas fa-comment"></i>
                 <textarea  asp-for="Description" class="form-control" type="text" placeholder="Description" required id="Description"></textarea>
             </div>
             <div class="error-message">
@@ -100,7 +141,7 @@
         </form>
 
         <div class="login-link">
-            <p>Already have an account? <a href="signin.html">Sign In</a></p>
+            <p>Already have an account? <a asp-controller="Auth" asp-action="TourgideSignIn">Sign In</a></p>
         </div>
     </div>
 
