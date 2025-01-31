@@ -1,13 +1,4 @@
-﻿using dlily_project.DAL;
-using dlily_project.DAL.Enum;
-using dlily_project.DAL.Models.Users;
-using dlily_project.ViewModels;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Scripting;
-
-namespace dlily_project.Controllers
+﻿namespace dlily_project.Controllers
 {
     public class AuthController : Controller
     {
@@ -31,7 +22,7 @@ namespace dlily_project.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult TouristSignIn(TouristSignInViewModel model)
+        public async Task<IActionResult> TouristSignIn(TouristSignInViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -44,6 +35,23 @@ namespace dlily_project.Controllers
                 ViewBag.error = "Incorrect email or password, please try agian";
                 return View(model);
             }
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Role, "Tourist"),
+            };
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var authProperties = new AuthenticationProperties();
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties
+            );
 
             ViewBag.success = "Login sucessfully!";
 
@@ -66,7 +74,7 @@ namespace dlily_project.Controllers
             
             try
             {
-                var existTourist = _context.Tourists.FirstOrDefault(x => x.Email == model.Email);
+                var existTourist = await _context.Tourists.FirstOrDefaultAsync(x => x.Email == model.Email);
                 if (existTourist != null)
                 {
                     ViewBag.EmailExists = "This email is already registered!";
@@ -87,12 +95,12 @@ namespace dlily_project.Controllers
                 {
                     using (var memoryStream = new MemoryStream())
                     {
-                        model.ProfilePicture.CopyTo(memoryStream);
+                        await model.ProfilePicture.CopyToAsync(memoryStream);
                         tourist.ProfilePicture = memoryStream.ToArray();
                     }
                 }
 
-                _context.Tourists.Add(tourist);
+                await _context.Tourists.AddAsync(tourist);
                 await _context.SaveChangesAsync();
 
                 ViewBag.SuccessMessage = "Your account has been created successfully!";
@@ -119,7 +127,7 @@ namespace dlily_project.Controllers
                 return View(model);
             }
 
-            var existTourist = _context.Tourgides.FirstOrDefault(x => x.Email == model.Email);
+            var existTourist = await _context.Tourgides.FirstOrDefaultAsync(x => x.Email == model.Email);
             if (existTourist != null)
             {
                 ViewBag.EmailExists = "This email is already registered!";
@@ -145,12 +153,12 @@ namespace dlily_project.Controllers
                 {
                     using (var memoryStream = new MemoryStream())
                     {
-                        model.ProfilePicture.CopyTo(memoryStream);
+                        await model.ProfilePicture.CopyToAsync(memoryStream);
                         tourgide.ProfilePicture = memoryStream.ToArray();
                     }
                 }
 
-                _context.Tourgides.Add(tourgide);
+                await _context.Tourgides.AddAsync(tourgide);
                 await _context.SaveChangesAsync();
                 ViewBag.SuccessMessage = "Your account has been created successfully!";
                 return View(model);
@@ -169,7 +177,7 @@ namespace dlily_project.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult TourgideSignIn(TourgideSignInViewModel model)
+        public async Task<IActionResult> TourgideSignIn(TourgideSignInViewModel model)
         {
 
             if (!ModelState.IsValid)
@@ -177,12 +185,29 @@ namespace dlily_project.Controllers
                 return View(model);
             }
 
-            var user = _context.Tourgides.FirstOrDefault(x => x.Email == model.Email && x.Password == model.Password);
+            var user = await _context.Tourgides.FirstOrDefaultAsync(x => x.Email == model.Email && x.Password == model.Password);
             if (user == null)
             {
                 ViewBag.error = "Incorrect email or password, please try agian";
                 return View(model);
             }
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim(ClaimTypes.Role, "Tourgide"),
+            };
+
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var authProperties = new AuthenticationProperties();
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties
+            );
 
             ViewBag.success = "Login sucessfully!";
             return View(model);

@@ -8,6 +8,20 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    overflow: hidden;
     transition: background 0.5s ease-in-out;
 }
+
+.container {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1; /* Ensures main content takes up available space */
+}
+
+footer {
+    height:1vh;
+}
+

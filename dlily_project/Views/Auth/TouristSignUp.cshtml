@@ -8,9 +8,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,800&display=swap" rel="stylesheet">
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/signup.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -104,6 +103,57 @@
                 </div>
             </div>
 
+            <div class="input-group-inline">
+                <div class="input-group">
+                    <select asp-for="Gender" class="form-control" required id="gender">
+                        <option value="">Gender</option>
+                        <option value="2">Unknown</option>
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <select asp-for="SpokenLanguage" class="form-control" required id="SpokenLanguage">
+                        <option value="" disabled selected>Select a Language</option>
+                        <option value="English">English (EN)</option>
+                        <option value="Spanish">Spanish (ES)</option>
+                        <option value="Chinese">Chinese (ZH)</option>
+                        <option value="Hindi">Hindi (HI)</option>
+                        <option value="Arabic">Arabic (AR)</option>
+                        <option value="French">French (FR)</option>
+                        <option value="Russian">Russian (RU)</option>
+                        <option value="Portuguese">Portuguese (PT)</option>
+                        <option value="German">German (DE)</option>
+                        <option value="Japanese">Japanese (JA)</option>
+                        <option value="Korean">Korean (KO)</option>
+                        <option value="Italian">Italian (IT)</option>
+                        <option value="Turkish">Turkish (TR)</option>
+                        <option value="Dutch">Dutch (NL)</option>
+                        <option value="Swedish">Swedish (SV)</option>
+                        <option value="Polish">Polish (PL)</option>
+                        <option value="Thai">Thai (TH)</option>
+                        <option value="Vietnamese">Vietnamese (VI)</option>
+                        <option value="Indonesian">Indonesian (ID)</option>
+                        <option value="Hebrew">Hebrew (HE)</option>
+                        <option value="Persian">Persian (FA)</option>
+                        <option value="Bengali">Bengali (BN)</option>
+                        <option value="Ukrainian">Ukrainian (UK)</option>
+                        <option value="Greek">Greek (EL)</option>
+                        <option value="Hungarian">Hungarian (HU)</option>
+                        <option value="Czech">Czech (CS)</option>
+                        <option value="Romanian">Romanian (RO)</option>
+                        <option value="Finnish">Finnish (FI)</option>
+                        <option value="Danish">Danish (DA)</option>
+                        <option value="Norwegian">Norwegian (NO)</option>
+                        <option value="Serbian">Serbian (SR)</option>
+                        <option value="Croatian">Croatian (HR)</option>
+                        <option value="Malay">Malay (MS)</option>
+                        <option value="Tagalog">Tagalog (TL)</option>
+                        <option value="Urdu">Urdu (UR)</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="upload-container">
                 <div class="upload-box" onclick="document.getElementById('profilePic').click()">
                     <i class="fas fa-upload"></i> Click to upload Profile Picture
@@ -112,18 +162,6 @@
                 <div class="error-message">
                     <span asp-validation-for="ProfilePicture" class="text-danger"></span>
                 </div>
-            </div>
-
-            <div class="input-group">
-                <select asp-for="Gender" class="form-control" required id="gender">
-                    <option value="">Gender</option>
-                    <option value="2">Unknown</option>
-                    <option value="0">Male</option>
-                    <option value="1">Female</option>
-                </select>
-            </div>
-            <div class="error-message">
-                <span asp-validation-for="Gender" class="text-danger"></span>
             </div>
 
             <button type="submit" class="btn btn-primary">Sign Up</button>

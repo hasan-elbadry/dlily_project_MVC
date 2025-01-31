@@ -2,10 +2,6 @@
 {
     public class Tourgide : User
     {
-        [Required]
-        [StringLength(100)]
-        public string SpokenLanguage { get; set; } = string.Empty;
-
         [Range(0, 5)]
         public byte Rating { get; set; }
 
