@@ -17,6 +17,13 @@ namespace dlily_project.Controllers
         {
             _context = context;
         }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult TouristSignIn()
         {
@@ -42,7 +49,6 @@ namespace dlily_project.Controllers
 
             return View(model); 
         }
-
 
         [HttpGet]
         public IActionResult TouristSignUp()
@@ -99,13 +105,11 @@ namespace dlily_project.Controllers
             }
         }
 
-
         [HttpGet]
         public IActionResult TourgideSignUp()
         {
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> TourgideSignUp(TourgideSignUpViewModel model)
@@ -157,12 +161,14 @@ namespace dlily_project.Controllers
                 return View(model);
             }
         }
+
         [HttpGet]
         public IActionResult TourgideSignIn()
         {
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult TourgideSignIn(TourgideSignInViewModel model)
         {
 
@@ -181,6 +187,5 @@ namespace dlily_project.Controllers
             ViewBag.success = "Login sucessfully!";
             return View(model);
         }
-    
     }
 }
