@@ -4,45 +4,155 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - dlily_project</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/dlily_project.styles.css" asp-append-version="true" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+                function confirmLogout() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You will be logged out of your account.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, log out',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '@Url.Action("Logout", "Auth")';
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">dlily_project</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <div class="navbar-nav ms-3">
+                        <a class="nav-link active" href="#">Home</a>
+                        <a class="nav-link" href="#">Hotels</a>
+                        <a class="nav-link" href="#">Companies</a>
+                        <a class="nav-link" href="#">Tourist Places</a>
+                    </div>
+
+                    <a class="navbar-brand mx-auto" href="#">DLYLY TOURISM</a>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+                <div class="d-flex gap-2">
+                    @{
+                        if (!User.Identity.IsAuthenticated)
+                        {
+                            <a asp-controller="Auth" style="color: white;" class="btn auth-btn sign-in-btn" id="signInBtn">Sign In</a>
+                        }
+                        else
+                        {
+                            var name = User.Identity.Name;
+                            <button id="profileBtn" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Welcome, @name</button>
+                            <ul class="dropdown-menu" id="profileDropdown">
+                            @{
+                                    if (User.FindFirstValue(ClaimTypes.Role) == "Tourist")
+                                    {
+                                        <li><a class="dropdown-item" asp-controller="Tourist" asp-action="Profile">Edit Profile</a></li>
+                                    }
+                                    else{
+                                        <li><a class="dropdown-item">Edit Profile</a></li>
+
+                                    }
+                            }   
+                                <li><a class="dropdown-item" href="#">Support</a></li>
+                                <li><a class="dropdown-item text-danger" href="javascript:void(0);" id="logoutBtn" onclick="confirmLogout()">Logout</a></li>
+                            </ul>
+                        }
+                    }
                 </div>
             </div>
         </nav>
+
     </header>
+
     <div class="container">
         <main role="main" class="mb-5">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top text-muted">
-        <div class="container">
-            &copy; 2025 - dlily_project - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer>
+        <div class="content">
+            <div class="top">
+                <div class="logo-details">
+                    <span class="logo_name">DLYLY TOURISM</span>
+                </div>
+                <div class="media-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="link-boxes">
+                <ul class="box">
+                    <li class="link_name">Dlyly</li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Tourist Places</a></li>
+                    <li><a href="#">Hotels</a></li>
+                    <li><a href="#">Companies</a></li>
+                    <li><a href="#">Get Started</a></li>
+                </ul>
+                <ul class="box">
+                    <li class="link_name">Tourism Services</li>
+                    <li><a href="#">Tourist Packages</a></li>
+                    <li><a href="#">Guide Booking</a></li>
+                    <li><a href="#">Hotel Booking</a></li>
+                    <li><a href="#">Tourist Transportation</a></li>
+                </ul>
+                <ul class="box">
+                    <li class="link_name">Account</li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">My Bookings</a></li>
+                    <li><a href="#">Preferences</a></li>
+                    <li><a href="#">Purchases</a></li>
+                </ul>
+                <ul class="box">
+                    <li class="link_name">Explore</li>
+                    <li><a href="#">Popular Destinations</a></li>
+                    <li><a href="#">Travel Tips</a></li>
+                    <li><a href="#">Traveler Reviews</a></li>
+                    <li><a href="#">Travel Insurance</a></li>
+                </ul>
+                <ul class="box input-box">
+                    <li class="link_name">Subscribe</li>
+                    <li><input type="text" placeholder="Enter your email"></li>
+                    <li><input type="button" value="Subscribe"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom-details">
+            <div class="bottom_text">
+                <span class="copyright_text">Copyright © 2025 <a href="#">DLYLY TOURISM.</a> All rights reserved</span>
+                <span class="policy_terms">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Conditions</a>
+                </span>
+            </div>
         </div>
     </footer>
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -36,14 +36,14 @@
                 return View(model);
             }
 
+            var base64String = Convert.ToBase64String(user.ProfilePicture);
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Role, "Tourist"),
             };
-
+            ViewData["ProfileImage"] = base64String;
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var authProperties = new AuthenticationProperties();
 
@@ -212,5 +212,12 @@
             ViewBag.success = "Login sucessfully!";
             return View(model);
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(); 
+            return RedirectToAction("Index", "Home"); 
+        }
+
     }
 }
