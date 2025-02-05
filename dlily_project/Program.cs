@@ -1,3 +1,5 @@
+using dlily_project;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
@@ -16,6 +18,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 
 var app = builder.Build();
+
+
 
 if (!app.Environment.IsDevelopment())
 {

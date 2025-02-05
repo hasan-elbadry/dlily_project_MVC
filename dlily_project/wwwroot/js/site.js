@@ -1,17 +1,21 @@
-﻿// Get the button and the dropdown menu
-const profileBtn = document.getElementById("profileBtn");
-const profileDropdown = document.getElementById("profileDropdown");
+﻿document.addEventListener("DOMContentLoaded", function () {
+    const profileImg = document.getElementById("profileImg");
+    const dropdown = document.getElementById("profileDropdown");
 
-// Toggle the dropdown when the button is clicked
-profileBtn.addEventListener("click", function (event) {
-    profileDropdown.classList.toggle("show");
-    event.stopPropagation();  // Prevent click event from propagating to the document
-});
-
-// Close the dropdown when clicking anywhere outside of the button and dropdown
-document.addEventListener("click", function (event) {
-    // Check if the clicked target is neither the dropdown nor the button
-    if (!profileBtn.contains(event.target) && !profileDropdown.contains(event.target)) {
-        profileDropdown.classList.remove("show");
+    if (!profileImg || !dropdown) {
+        console.error("Profile image or dropdown not found!");
+        return;
     }
+
+    profileImg.addEventListener("click", function (event) {
+        event.stopPropagation(); // Prevent closing when clicking on the image
+        dropdown.classList.toggle("active");
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function (event) {
+        if (!dropdown.contains(event.target) && event.target !== profileImg) {
+            dropdown.classList.remove("active");
+        }
+    });
 });

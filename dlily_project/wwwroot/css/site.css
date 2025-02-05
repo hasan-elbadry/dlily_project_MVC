@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
 * {
@@ -31,14 +32,14 @@ footer {
     footer .content {
         max-width: 1250px;
         margin: auto;
-        padding: 30px 40px 0px 40px;
+        padding: 30px 40px 40px 40px;
     }
 
         footer .content .top {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 50px;
         }
 
 .content .top .logo-details {
@@ -75,6 +76,30 @@ footer {
 .top .media-icons a:nth-child(2) {
     background: #1DA1F2;
 }
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+    .profile-dropdown.active {
+        display: block;
+    }
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+
 
     .top .media-icons a:nth-child(2):hover {
         color: #1DA1F2;
@@ -179,7 +204,7 @@ footer .content .link-boxes {
 
     .link-boxes .input-box input[type="button"] {
         background: linear-gradient(135deg, #F7C948, #e0b136);
-            
+        ;
         color: #fbfbfb;
         border: none;
         font-size: 18px;
@@ -382,7 +407,7 @@ footer .bottom-details {
 
 .dropdown-menu {
     position: absolute;
-    top: 50px;
+    top: -5px;
     right: 0;
     background: white;
     border-radius: 8px;
@@ -432,17 +457,6 @@ footer .bottom-details {
         transform: scale(1.1);
     }
 
-.dropdown-menu {
-    position: absolute;
-    top: 50px;
-    right: 0;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-    display: none;
-    width: 160px;
-    padding: 10px;
-}
 
 .dropdown-item {
     padding: 10px;
