@@ -1,1 +1,401 @@
-﻿<h1>hello</h1>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css ">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/index.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <title>Home</title>
+</head>
+
+<body>
+    <section id="home" class="home">
+        <div class="content">
+            <h3>DLYLY Tourism</h3>
+            <p>discover new places with us, adventure awaits</p>
+        </div>
+
+        <div class="controls">
+            <span class="vid-btn active" data-src="~/Assets/videos/vid_1.mp4"></span>
+            <span class="vid-btn" data-src="~Assets/videos/vid_2.mp4"></span>
+            <span class="vid-btn" data-src="~/Assets/videos/vid_3.mp4"></span>
+            <span class="vid-btn" data-src="~/Assets/videos/vid_4.mp4"></span>
+            <span class="vid-btn" data-src="~/Assets/videos/vid_5.mp4"></span>
+            <span class="vid-btn" data-src="~/Assets/videos/vid_6.mp4"></span>
+            <span class="vid-btn" data-src="~/Assets/videos/vid_7.mp4"></span>
+            <span class="vid-btn" data-src="~/Assets/videos/vid_8.mp4"></span>
+        </div>
+        <div class="video-container">
+            <video src="/Assets/videos/vid_1.mp4" id="video-slider" autoplay muted></video>
+        </div>
+    </section>
+
+    <section class="hotels">
+
+        <div class="explore-heading">
+
+            <h1 class="heading">
+                <span>H</span>
+                <span>O</span>
+                <span>T</span>
+                <span>E</span>
+                <span>L</span>
+                <span>S</span>
+            </h1>
+
+
+        </div>
+        <div class="stacked-slider">
+            <div class="header-container">
+                <div class="separator-line"></div>
+                <div class="text-content">
+                    <h1><span>EXPLORE</span> <br> THE <span>HOTELS</span></h1>
+                    <br><br><br>
+                    <a><button class="book-button">BOOK NOW </button></a>
+                </div>
+            </div>
+
+            <div class="cards-wrapper">
+                <!-- Card 1 -->
+                <div class="card active">
+                    <div class="card-content">
+                        <div class="card-image">
+                            <img src="hotels_book/room-1.jpg" alt="Deluxe Suite">
+                            <span class="card-discount">25% OFF</span>
+                        </div>
+                        <div class="card-details">
+                            <h3>Deluxe Ocean View</h3>
+                            <p>Luxurious suite with panoramic ocean views and premium amenities</p>
+                            <div class="hotels-reviews">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="card-price">
+                                <span class="old-price">$800</span>
+                                <span class="new-price">$600</span>
+                            </div>
+                        </div>
+                        <a href="#" class="explore-btn">EXPLORE NOW</a>
+                    </div>
+                </div>
+
+                <div class="card next">
+                    <div class="card-content">
+                        <div class="card-image">
+                            <img src="hotels_book/room-2.jpg" alt="Executive Room">
+                            <span class="card-discount">50% OFF</span>
+                        </div>
+                        <div class="card-details">
+                            <h3>Executive Cityscape</h3>
+                            <p>Modern urban retreat with stunning city skyline views</p>
+                            <div class="hotels-reviews">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="card-price">
+                                <span class="old-price">$1000</span>
+                                <span class="new-price">$500</span>
+                            </div>
+                        </div>
+                        <a href="#" class="explore-btn">EXPLORE NOW</a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="card prev">
+                    <div class="card-content">
+                        <div class="card-image">
+                            <img src="hotels_book/room-3.jpg" alt="Family Suite">
+                            <span class="card-discount">10% OFF</span>
+                        </div>
+                        <div class="card-details">
+                            <h3>Family Garden Retreat</h3>
+                            <p>Spacious family-friendly accommodation with private garden</p>
+                            <div class="hotels-reviews">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="card-price">
+                                <span class="old-price">$1,430</span>
+                                <span class="new-price">$1,287</span>
+                            </div>
+                        </div>
+                        <a href="#" class="explore-btn">EXPLORE NOW</a>
+                    </div>
+                </div>
+                <div class="nav-buttons">
+                    <button class="nav-btn" id="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-btn" id="next-btn"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section id="companiess" class="companiess">
+        <div class="cos">
+            <div class="explore-heading">
+
+                <h1 class="heading">
+                    <span>c</span>
+                    <span>o</span>
+                    <span>m</span>
+                    <span>p</span>
+                    <span>a</span>
+                    <span>n</span>
+                    <span>i</span>
+                    <span>e</span>
+                    <span>s</span>
+
+
+            </div>
+            <div class="coms">
+                <div class="containerl">
+                    <div class="contentl">
+                        <div class="mks">
+                            <div class="lines"></div>
+                            <div class="text-ms">
+                                <h1>EXPLORE <br> <span>THE COMPANIES</span></h1>
+                                <p>Discover Egypt's premier tour operators offering bespoke travel experiences, combining ancient wonders with modern luxury for unforgettable journeys.</p>
+                                <button class="bks">Explore Packages</button>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="slider-containerl">
+                        <div class="slider-trackl">
+                            <!-- Cards -->
+                            <div class="cardl">
+                                <img src="companies_home/photo_3.png" alt="Card imagel">
+                                <div class="card-contentl">
+                                    <h3>Card Title 1</h3>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                </div>
+                            </div>
+                            <div class="cardl">
+                                <img src="companies_home/photo_3.png" alt="Card image">
+                                <div class="card-contentl">
+                                    <h3>Card Title 1</h3>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                </div>
+                            </div>
+                            <div class="cardl">
+                                <img src="companies_home/photo_3.png" alt="Card image">
+                                <div class="card-contentl">
+                                    <h3>Card Title 1</h3>
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                                </div>
+                            </div>
+                            <!-- Repeat similar card structure -->
+                            <!-- Add 5 more cards here -->
+                        </div>
+
+                        <!-- Navigation buttons -->
+                        <!-- Navigation buttons inside your slider-container -->
+                        <div class="slider-navl">
+                            <button class="nav-btnl prev-btnl">❮</button>
+                            <button class="nav-btnl next-btnl">❯</button>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="infoModal" style="display:none;">
+                    <span class="close-btn">×</span>
+                    <div id="modalTitle"></div>
+                    <div id="modalDesc"></div>
+                </div>
+                <div class="carousel-containers">
+                    <div class="carousel-tracks">
+                        <div class="cards actives" id="maxim">
+                            <img src="companies_home/photo_3.png" alt="" class="photo_3s">
+                            <h3>MAXIM TOURS</h3>
+                            <p>
+                                Maxim Tours is one of the most distinguished tourism companies,
+                                as it has more than thirteen years of experience in the tourism field.
+                            </p>
+                            <a><button>Read More</button></a>
+                        </div>
+
+                        <div class="cards" id="travel">
+                            <img src="companies_home/photo_4.png" alt="" class="photo_4s">
+                            <h3>TRAVEL CHOICE</h3>
+                            <p>
+                                Travel Choice is considered one of the distinguished tourism companies,
+                                as it is very interested in preparing business trips at the highest level,
+                                and it also provides medical tourism trips.
+                            </p>
+                            <a><button>Read More</button></a>
+                        </div>
+
+                        <div class="cards">
+                            <img src="companies_home/photo_1.png" alt="" class="photo_1s">
+                            <h3>SEEGYPT</h3>
+                            <p>
+                                SEEgypt is one of the most prominent tourism companies in Egypt,
+                                and is distinguished by providing integrated tourism services that include
+                                organizing trips and tourist tours inside and outside Egypt.
+                            </p>
+                            <a><button>Read More</button></a>
+                        </div>
+
+                        <div class="cards" id="sky">
+                            <img src="companies_home/photo_5.png" alt="" class="photo_5s">
+                            <h3>SKY EGYPT TOURS</h3>
+                            <p>
+                                Sky Egypt Tours is one of <br>the distinguished tourism companies, <br>
+                                as it provides its clients with all the services required for travel abroad or domestically.
+                            </p>
+                            <a><button>Read More</button></a>
+                        </div>
+
+                        <div class="cards" id="tri">
+                            <img src="companies_home/photo_6.png" alt="" class="photo_6s">
+                            <h3>TRI JOLIE TOURISM</h3>
+                            <p>Tri Jolie Tourism Company is keen <br>to provide the best services that its clients may need.</p>
+                            <a><button>Read More</button></a>
+                        </div>
+
+                        <div class="cards" id="masr">
+                            <img src="companies_home/photo_7.png" alt="" class="photo_7s">
+                            <h3>MASR ELGDEDA TRAVEL</h3>
+                            <p>
+                                Masr Elgdeda Travel Company is considered one of the top 10 tourism companies in Egypt.
+                                New Cairo Company is interested in domestic and international tourism,
+                                as well as organizing Hajj and Umrah trips, as well as honeymoon trips.
+                            </p>
+                            <a><button>Read More</button></a>
+                        </div>
+
+                        <div class="cards" id="ejaza">
+                            <img src="companies_home/photo_2.png" alt="" class="photo_2s">
+                            <h3>EJAZA CLUB</h3>
+                            <p>
+                                Ejaza Club Tourism Company is the best and strongest competitor in
+                                the world of tourism due to its highly experienced and efficient work team that has exceeded fifteen years.
+                            </p>
+                            <a><button>Read More</button></a>
+                        </div>
+                    </div>
+                    <div class="controlss">
+                        <button class="prevs">&laquo;</button>
+                        <button class="nexts">&raquo;</button>
+                    </div>
+                    <div class="indicatorss"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="touristplaces" class="touristplaces">
+        <div class="explore-heading">
+
+            <h1 class="heading">
+                <span>t</span>
+                <span>o</span>
+                <span>u</span>
+                <span>r</span>
+                <span>i</span>
+                <span>s</span>
+                <span>t</span>
+                <span>p</span>
+                <span>l</span>
+                <span>a</span>
+                <span>c</span>
+                <span>e</span>
+                <span>s</span>
+            </h1>
+
+
+        </div>
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide">
+                    <img src="touristplaces_home/Fiord Bay , Taba ,egypt.jpg" alt="">
+                    <div class="slide-content">
+                        <h2>Fiord Bay</h2>
+                        <p>A hidden gem in Egypt, offering crystal-clear waters, stunning fjords, and a peaceful escape for nature lovers and divers.</p>
+                    </div>
+
+                </div>
+                <div class="slide">
+                    <img src="touristplaces_home/Egyptian nature 🇪🇬🤍 📍Ras Muhammad Sharm Elsheikh 🇪🇬.jpg" alt="">
+                    <div class="slide-content">
+                        <h2>Ras Muhammad, Sharm El-Sheikh</h2>
+                        <p>A stunning national park with crystal-clear waters, vibrant coral reefs, and diverse marine life, perfect for snorkeling and diving.</p>
+                    </div>
+
+                </div>
+                <div class="slide">
+                    <img src="touristplaces_home/Sharm el Sheikh.jpg" alt="">
+                    <div class="slide-content">
+                        <h2>Sharm El-Sheikh</h2>
+                        <h3>A world-famous resort city with stunning beaches, vibrant coral reefs, and luxurious resorts, offering an unforgettable Red Sea experience.</h3>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Section -->
+        <section class="gallery">
+            <div class="gallery-grid">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item">
+                    <img src="touristplaces_home/Lake Siwa - All You Need to Know BEFORE You Go (2024).jpg" alt="">
+                    <div class="gallery-info">
+                        <h2>Lake Siwa</h2>
+                        <p>A tranquil saltwater lake nestled in the heart of Egypt's Siwa Oasis, known for its healing properties and picturesque surroundings.</p>
+                        <button class="btn see-more" data-title="Paris, France"
+                                data-desc="Paris is the capital and most populous city of France. Known for its iconic landmarks like the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral.">
+                            See More Info
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item">
+                    <img src="touristplaces_home/The beauty of Egyptian nature 🇪🇬 📍Wadi Elweshwash Nuweiba Egypt Sinai.jfif" alt="">
+                    <div class="gallery-info">
+                        <h2>Wadi Elweshwash</h2>
+                        <p>A stunning valley in Nuweiba, Sinai, known for its crystal-clear springs, breathtaking rock formations, and serene desert beauty.</p>
+                        <button class="btn see-more" data-title="Tokyo, Japan"
+                                data-desc="Tokyo, Japan’s busy capital, mixes the ultramodern and the traditional, from neon-lit skyscrapers to historic temples.">
+                            See More Info
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item">
+                    <img src="touristplaces_home/جزيرة ابو منقار - مصر_Juzur Abū Minqār - Island in Egypt.jfif" alt="">
+                    <div class="gallery-info">
+                        <h2>Juzur Abū Minqār</h2>
+                        <p>An idyllic island in Egypt, known for its crystal-clear waters, rich marine life, and serene atmosphere, perfect for a tranquil getaway.</p>
+                        <button class="btn see-more" data-title="New York City, USA"
+                                data-desc="New York City comprises 5 boroughs sitting where the Hudson River meets the Atlantic Ocean. Its iconic sites include skyscrapers such as the Empire State Building and sprawling Central Park.">
+                            See More Info
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </section>
+    <script src="~/js/index.js" asp-append-version="true"></script>
+</body>
+</html>

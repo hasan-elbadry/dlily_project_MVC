@@ -39,7 +39,7 @@
             var base64String = Convert.ToBase64String(user.ProfilePicture);
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(type: ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.Role, "Tourist"),
             };
