@@ -22,18 +22,20 @@
         </div>
 
         <div class="controls">
-            <span class="vid-btn active" data-src="~/Assets/videos/vid1.mp4"></span>
-            <span class="vid-btn" data-src="~Assets/videos/vid2.mp4"></span>
-            <span class="vid-btn" data-src="~/Assets/videos/vid3.mp4"></span>
-            <span class="vid-btn" data-src="~/Assets/videos/vid4.mp4"></span>
-            <span class="vid-btn" data-src="~/Assets/videos/vid5.mp4"></span>
-            <span class="vid-btn" data-src="~/Assets/videos/vid6.mp4"></span>
-            <span class="vid-btn" data-src="~/Assets/videos/vid7.mp4"></span>
-            <span class="vid-btn" data-src="~/Assets/videos/vid8.mp4"></span>
+            <span class="vid-btn active" data-src="@Url.Content("~/Assets/videos/vid1.mp4")"></span>
+            <span class="vid-btn" data-src="@Url.Content("~/Assets/videos/vid2.mp4")"></span>
+            <span class="vid-btn" data-src="@Url.Content("~/Assets/videos/vid3.mp4")"></span>
+            <span class="vid-btn" data-src="@Url.Content("~/Assets/videos/vid4.mp4")"></span>
+            <span class="vid-btn" data-src="@Url.Content("~/Assets/videos/vid5.mp4")"></span>
+            <span class="vid-btn" data-src="@Url.Content("~/Assets/videos/vid6.mp4")"></span>
+            <span class="vid-btn" data-src="@Url.Content("~/Assets/videos/vid7.mp4")"></span>
+            <span class="vid-btn" data-src="@Url.Content("~/Assets/videos/vid8.mp4")"></span>
         </div>
+
         <div class="video-container">
-            <video src="~/Assets/videos/vid1.mp4" id="video-slider" autoplay muted></video>
+            <video src="@Url.Content("~/Assets/videos/vid1.mp4")" id="video-slider" autoplay muted></video>
         </div>
+
     </section>
 
     <section class="hotels">
