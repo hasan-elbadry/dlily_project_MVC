@@ -19,16 +19,6 @@ footer {
     width: 100%;
 }
 
-    footer::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 100px;
-        height: 1px;
-        width: 100%;
-        background: #AFAFB6;
-    }
-
     footer .content {
         max-width: 1250px;
         margin: auto;
@@ -314,12 +304,11 @@ footer .bottom-details {
 }
 /* Navbar Custom Styling */
 .navbar-custom {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(5px);
     padding: 12px 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    box-shadow: 0 5px 29px rgba(0, 0, 0, 0.6);
     transition: all 0.3s ease-in-out;
+    height: 12vh;
 }
 
 .navbar-brand {
@@ -436,7 +425,6 @@ footer .bottom-details {
     backdrop-filter: blur(12px);
     padding: 12px 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
     transition: all 0.3s ease-in-out;
 }
 

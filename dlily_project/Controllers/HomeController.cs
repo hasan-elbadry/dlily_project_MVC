@@ -8,6 +8,11 @@ namespace dlily_project.Controllers
             return View();
         }
 
+        public IActionResult Hotels()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

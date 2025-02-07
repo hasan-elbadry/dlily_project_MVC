@@ -1,0 +1,358 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Hotel Collection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2d3436;
+            --secondary: #0984e3;
+            --accent: #e74c3c;
+            --text: #444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        body {
+            background: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Filters Section */
+        .filters-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 15vh;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 3rem;
+        }
+
+        .filter-group {
+            position: relative;
+        }
+
+        .price-range {
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .amenities-filter {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .amenity-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #f8f9fa;
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .amenity-label:hover {
+            background: #e9ecef;
+        }
+
+        /* Hotel Grid */
+        .hotel-grid {
+            display: grid;
+            padding: 10px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .hotel-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-header {
+            position: relative;
+        }
+
+        .hotel-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .favorite-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .favorite-btn:hover {
+            background: white;
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .hotel-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .hotel-name {
+            font-size: 1.25rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .hotel-price {
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .hotel-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: #f1c40f;
+            margin-bottom: 1rem;
+        }
+
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .amenity {
+            background: #f8f9fa;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .details-btn {
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .details-btn:hover {
+            background: #0873c4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Filters Section -->
+        <section class="filters-section">
+            <div class="filter-group">
+                <h3>Price Range</h3>
+                <input type="range" class="price-range" min="0" max="1000" value="500">
+                <div class="price-display">$0 - $500</div>
+            </div>
+            
+            <div class="filter-group">
+                <h3>Amenities</h3>
+                <div class="amenities-filter">
+                    <label class="amenity-label">
+                        <input type="checkbox" name="amenity" value="wifi">
+                        <i class="fas fa-wifi"></i> WiFi
+                    </label>
+                    <label class="amenity-label">
+                        <input type="checkbox" name="amenity" value="pool">
+                        <i class="fas fa-swimming-pool"></i> Pool
+                    </label>
+                    <label class="amenity-label">
+                        <input type="checkbox" name="amenity" value="spa">
+                        <i class="fas fa-spa"></i> Spa
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hotel List -->
+        <div class="hotel-grid" id="hotelList"></div>
+    </div>
+
+    <script>
+        const hotels = [
+            {
+                name: "Ocean View Resort & Spa",
+                price: 459,
+                rating: 4.8,
+                location: "Maldives",
+                image: "https://source.unsplash.com/random/800x600?luxury-resort",
+                amenities: ["wifi", "pool", "spa", "restaurant", "beach"],
+                guests: 2,
+                deals: ["Free Cancellation", "Breakfast Included"]
+            },
+            {
+                name: "Mountain Peak Lodge",
+                price: 299,
+                rating: 4.5,
+                location: "Swiss Alps",
+                image: "https://source.unsplash.com/random/800x600?mountain-lodge",
+                amenities: ["wifi", "fireplace", "ski-in", "sauna"],
+                guests: 4,
+                deals: ["Ski Package Available"]
+            },
+            // Add more hotels...
+        ];
+
+        function renderHotels() {
+            const hotelList = document.getElementById('hotelList');
+            hotelList.innerHTML = '';
+
+            hotels.forEach(hotel => {
+                const card = document.createElement('div');
+                card.className = 'hotel-card';
+                
+                card.innerHTML = `
+                    <div class="card-header">
+                        <img src="${hotel.image}" class="hotel-image" alt="${hotel.name}">
+                        <div class="badge">${hotel.deals[0]}</div>
+                        <button class="favorite-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <div class="hotel-header">
+                            <h3 class="hotel-name">${hotel.name}</h3>
+                            <div class="hotel-price">$${hotel.price}/night</div>
+                        </div>
+                        <div class="hotel-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            ${hotel.location}
+                        </div>
+                        <div class="rating">
+                            ${Array(Math.floor(hotel.rating)).fill('<i class="fas fa-star"></i>').join('')}
+                            <span>(${hotel.rating})</span>
+                        </div>
+                        <div class="amenities">
+                            ${hotel.amenities.map(amenity => `
+                                <span class="amenity">
+                                    ${getAmenityIcon(amenity)}
+                                    ${amenity.charAt(0).toUpperCase() + amenity.slice(1)}
+                                </span>
+                            `).join('')}
+                        </div>
+                        <div class="action-bar">
+                            <button class="details-btn">View Details</button>
+                            <div class="guest-capacity">
+                                <i class="fas fa-user-friends"></i>
+                                ${hotel.guests}
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                hotelList.appendChild(card);
+            });
+        }
+
+        function getAmenityIcon(amenity) {
+            const icons = {
+                wifi: '<i class="fas fa-wifi"></i>',
+                pool: '<i class="fas fa-swimming-pool"></i>',
+                spa: '<i class="fas fa-spa"></i>',
+                restaurant: '<i class="fas fa-utensils"></i>',
+                beach: '<i class="fas fa-umbrella-beach"></i>',
+                fireplace: '<i class="fas fa-fire"></i>',
+                sauna: '<i class="fas fa-hot-tub"></i>',
+                'ski-in': '<i class="fas fa-skiing"></i>'
+            };
+            return icons[amenity] || '';
+        }
+
+        // Initial render
+        renderHotels();
+
+        // Add interactivity
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.favorite-btn')) {
+                const btn = e.target.closest('.favorite-btn');
+                btn.innerHTML = btn.innerHTML.includes('far') 
+                    ? '<i class="fas fa-heart"></i>'
+                    : '<i class="far fa-heart"></i>';
+            }
+        });
+
+        // Filter functionality
+        const priceRange = document.querySelector('.price-range');
+        priceRange.addEventListener('input', function() {
+            document.querySelector('.price-display').textContent = 
+                `$0 - $${this.value}`;
+            // Add filter logic here
+        });
+
+    </script>
+</body>
+</html>
