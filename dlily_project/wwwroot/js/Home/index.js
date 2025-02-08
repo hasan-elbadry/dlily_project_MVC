@@ -118,6 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialize cards
     updateCards();
 });
+// ddddddddddd
 
 // Slider Functionality
 let currentSlide = 0;
