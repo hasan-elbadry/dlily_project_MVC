@@ -34,7 +34,8 @@ namespace dlily_project.Controllers
 
         public IActionResult Tourgides()
         {
-            return View();
+            var tourgides= _context.Tourgides.ToList();
+            return View(tourgides);
         }
 
         public IActionResult Privacy()

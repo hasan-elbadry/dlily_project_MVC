@@ -1,5 +1,152 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using dlily_project.DAL.Models.Users;
+@model List<Tourgide>
+
 @{
+    ViewData["Title"] = "Tour Guides Directory";
 }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Add loading overlay styles */
+        .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        transition: opacity 0.3s ease;
+        }
+
+        .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        }
+
+        /* Rest of your existing styles... */
+    </style>
+</head>
+<body>
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="container">
+        <div class="filters">
+            <div class="filter-group">
+                <input type="text" class="search-input" placeholder="Search guides..." id="searchInput">
+            </div>
+            <div class="filter-group">
+                <select class="search-input" id="languageFilter">
+                    <option value="">All Languages</option>
+                    <option>English</option>
+                    <option>Spanish</option>
+                    <option>French</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="guide-grid">
+            @if (Model != null && Model.Any())
+            {   
+                @foreach (var guide in Model)
+                {
+                    <div class="guide-card" data-languages="@guide.SpokenLanguage.ToLower()">
+                        <div class="guide-header">
+                            <img src="@(guide.ProfilePicture != null && guide.ProfilePicture.Length > 0
+        ? $"data:image/png;base64,{Convert.ToBase64String(guide.ProfilePicture)}"
+        : "/images/placeholder.jpg")"
+                                 class="guide-photo"
+                                 alt="@guide.Name"
+                                 loading="lazy">
+
+                        </div>
+                        <div class="guide-content">
+                            <h3 class="guide-name">@guide.Name</h3>
+                            <div class="guide-rating">
+                                @{
+                                    var fullStars = (int)guide.Rating;
+                                    var hasHalfStar = guide.Rating - fullStars >= 0.5;
+                                }
+                                @for (int i = 0; i < fullStars; i++)
+                                {
+                                    <i class="fas fa-star"></i>
+                                }
+                                @if (hasHalfStar)
+                                {
+                                    <i class="fas fa-star-half-alt"></i>
+                                }
+                                <span>(@guide.Rating.ToString("0.0"))</span>
+                            </div>
+                            <div class="languages">
+                                @foreach (var lang in guide.SpokenLanguage.Split(','))
+                                {
+                                    <span class="language-tag">@lang.Trim()</span>
+                                }
+                            </div>
+                            <div class="guide-details">
+                                <p>@guide.Description</p>
+                            </div>
+                            <div class="guide-footer">
+                                <span class="price">${@guide.Rating * 10}/day</span>
+                                <button class="contact-btn" 
+                                        onclick="location.href='mailto:@guide.Email'">
+                                    Contact
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No tour guides found.</p>
+            }
+        </div>
+    </div>
+
+    <script>
+        // Hide loading overlay when content is loaded
+        window.addEventListener('load', () => {
+            document.getElementById('loadingOverlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }, 300);
+        });
+
+        // Add search functionality
+        document.getElementById('searchInput').addEventListener('input', filterGuides);
+        document.getElementById('languageFilter').addEventListener('change', filterGuides);
+
+        function filterGuides() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const languageFilter = document.getElementById('languageFilter').value.toLowerCase();
+            
+            document.querySelectorAll('.guide-card').forEach(card => {
+                const name = card.querySelector('.guide-name').textContent.toLowerCase();
+                const languages = card.dataset.languages;
+                
+                const nameMatch = name.includes(searchTerm);
+                const languageMatch = !languageFilter || languages.includes(languageFilter);
+                
+                card.style.display = (nameMatch && languageMatch) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>
