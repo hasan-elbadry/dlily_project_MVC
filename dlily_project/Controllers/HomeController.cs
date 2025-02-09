@@ -14,7 +14,8 @@ namespace dlily_project.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var hotels = _context.HotelOffers.ToList();
+            return View(hotels);
         }
 
         public IActionResult Hotels()

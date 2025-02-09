@@ -1,5 +1,4 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@model List<HotelOffer>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,6 +37,8 @@
 
     </section>
 
+    
+
     <section class="hotels">
 
         <div class="explore-heading">
@@ -68,43 +69,41 @@
                 <div class="card active">
                     <div class="card-content">
                         <div class="card-image">
-                            <img src="~/Assets/hotels/room-1.jpg" alt="Deluxe Suite">
+                            <img src="data:image/png;base64,@Convert.ToBase64String(Model[0].ImageUrl)" alt="@Model[0].Name">
                             <span class="card-discount">25% OFF</span>
                         </div>
                         <div class="card-details">
-                            <h3>Deluxe Ocean View</h3>
-                            <p>Luxurious suite with panoramic ocean views and premium amenities</p>
+                            <h3>@Model[0].Name</h3>
+                            <p>@Model[0].Description</p>
                             <div class="hotels-reviews">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
+                              @for(int i=0;i<Model[0].Rating;i++){
+                                    <i class="fas fa-star yellow-star"></i>
+                              }
                             </div>
                             <div class="card-price">
                                 <span class="old-price">$800</span>
                                 <span class="new-price">$600</span>
                             </div>
                         </div>
-                        <a href="#" class="explore-btn">EXPLORE NOW</a>
+                        <a asp-action="Hotels" class="explore-btn">EXPLORE NOW</a>
                     </div>
                 </div>
 
                 <div class="card next">
                     <div class="card-content">
                         <div class="card-image">
-                            <img src="~/Assets/hotels/room-2.jpg" alt="Executive Room">
+                            <img src="data:image/png;base64,@Convert.ToBase64String(Model[1].ImageUrl)" alt="@Model[1].Name">
+
                             <span class="card-discount">50% OFF</span>
                         </div>
                         <div class="card-details">
-                            <h3>Executive Cityscape</h3>
-                            <p>Modern urban retreat with stunning city skyline views</p>
+                            <h3>@Model[1].Name</h3>
+                            <p>@Model[1].Description</p>
                             <div class="hotels-reviews">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
+                                @for (int i = 0; i < Model[1].Rating; i++)
+                                {
+                                    <i class="fas fa-star yellow-star"></i>
+                                }
                             </div>
                             <div class="card-price">
                                 <span class="old-price">$1000</span>
@@ -119,25 +118,24 @@
                 <div class="card prev">
                     <div class="card-content">
                         <div class="card-image">
-                            <img src="~/Assets/hotels/room-3.jpg" alt="Family Suite">
+                            <img src="data:image/png;base64,@Convert.ToBase64String(Model[2].ImageUrl)" alt="@Model[2].Name">
                             <span class="card-discount">10% OFF</span>
                         </div>
                         <div class="card-details">
-                            <h3>Family Garden Retreat</h3>
-                            <p>Spacious family-friendly accommodation with private garden</p>
+                            <h3>@Model[2].Name</h3>
+                            <p>@Model[2].Description</p>
                             <div class="hotels-reviews">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="far fa-star"></i>
+                                @for (int i = 0; i < Model[2].Rating; i++)
+                                {
+                                    <i class="fas fa-star yellow-star"></i>
+                                }
                             </div>
                             <div class="card-price">
                                 <span class="old-price">$1,430</span>
                                 <span class="new-price">$1,287</span>
                             </div>
                         </div>
-                        <a href="#" class="explore-btn">EXPLORE NOW</a>
+                        <a asp-action="Hotels" class="explore-btn">EXPLORE NOW</a>
                     </div>
                 </div>
                 <div class="nav-buttons">
