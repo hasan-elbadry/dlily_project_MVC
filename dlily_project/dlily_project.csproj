@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="C:\Users\BC\Music\Pictures\index.js" Link="index.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="DAL\Repositories\" />
   </ItemGroup>
 
