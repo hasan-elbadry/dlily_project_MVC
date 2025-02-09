@@ -34,10 +34,10 @@
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <div class="navbar-nav ms-3">
-                        <a class="nav-link active" asp-controller="Home" asp-action="Index">Home</a>
-                        <a class="nav-link" href="#">Hotels</a>
-                        <a class="nav-link" href="#">Companies</a>
-                        <a class="nav-link" href="#">Tourist Places</a>
+                        <a class="nav-link" id="homeLink" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-link" id="hotelsLink" href="#">Hotels</a>
+                        <a class="nav-link" id="companiesLink" href="#">Companies</a>
+                        <a class="nav-link" id="touristPlacesLink" href="#">Tourist Places</a>
                     </div>
 
                     <a class="navbar-brand mx-auto" href="#">DLYLY TOURISM</a>
@@ -81,7 +81,6 @@
                 </div>
             </div>
         </nav>
-
     </header>
 
         <main role="main" class="mb-5">
@@ -154,7 +153,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
