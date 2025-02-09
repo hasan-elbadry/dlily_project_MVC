@@ -13,6 +13,16 @@ namespace dlily_project.Controllers
             return View();
         }
 
+        public IActionResult Companies()
+        {
+            return View();
+        }
+
+        public IActionResult Tourgides()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
