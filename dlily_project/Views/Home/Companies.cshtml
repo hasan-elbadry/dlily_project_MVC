@@ -1,5 +1,61 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model List<CompanyOffer>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Directory</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="controls">
+            <input type="text" class="search-input" placeholder="Search companies...">
+        </div>
+
+        <div class="company-grid" id="companyList">
+            @foreach (var company in Model)
+            {
+                <div class="company-card">
+                    <div class="company-header">
+                        <img src="data:image/png;base64,@Convert.ToBase64String(company.ImageUrl)" class="company-logo" alt="@company.Name">
+                        <div>
+                            <h2 class="company-name">@company.Name</h2>
+                            <div class="company-rating">
+                                @for (int i = 0; i < company.Rating; i++)
+                                {
+                                    <i class="fas fa-star"></i>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="company-details">
+                        <p>@company.Description</p>
+                        <div class="detail-item">
+                            <i class="fas fa-map-marker-alt detail-icon"></i>
+                            @company.Location
+                        </div>
+                    </div>
+                    <div class="company-footer">
+                        <span class="price">$@company.Price</span>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $(".search-input").on("input", function() {
+                var searchTerm = $(this).val().toLowerCase();
+                $(".company-card").each(function() {
+                    var companyName = $(this).find(".company-name").text().toLowerCase();
+                    $(this).toggle(companyName.includes(searchTerm));
+                });
+            });
+        });
+    </script>
+</body>
+</html>
