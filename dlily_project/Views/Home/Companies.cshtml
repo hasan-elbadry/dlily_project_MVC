@@ -1,13 +1,169 @@
 ﻿@model List<CompanyOffer>
 
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Corporate Directory</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+                :root {
+                    --primary: #2A4365;
+                    --secondary: #4299E1;
+                    --accent: #48BB78;
+                    --text: #4A5568;
+                }
+
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                    font-family: 'Inter', sans-serif;
+                }
+
+                body {
+                    background: #F7FAFC;
+                    padding: 2rem;
+                }
+
+                .container {
+                   
+                    max-width: 1400px;
+                    margin: 0 auto;
+                }
+
+                /* Filters Section */
+                .controls {
+                    margin: 3rem;
+                    display: flex;
+                    gap: 1.5rem;
+                    margin-bottom: 2rem;
+                    flex-wrap: wrap;
+                }
+
+                .search-bar {
+                    flex: 1;
+                    max-width: 400px;
+                    position: relative;
+                }
+
+                .search-input {
+                    width: 100%;
+                    padding: 0.8rem 1rem;
+                    border: 2px solid #E2E8F0;
+                    border-radius: 8px;
+                    font-size: 1rem;
+                }
+
+         
+
+                /* Company Grid */
+                .company-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                    gap: 2rem;
+                }
+
+                .company-card {
+                    background: white;
+                    border-radius: 12px;
+                    padding: 1.5rem;
+                    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                    position: relative;
+                }
+
+                .company-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+                }
+
+                .company-header {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 1.5rem;
+                }
+
+                .company-logo {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 12px;
+                    margin-right: 1rem;
+                    object-fit: contain;
+                }
+
+                .company-name {
+                    font-size: 1.25rem;
+                    color: var(--primary);
+                    font-weight: 600;
+                }
+
+                .company-industry {
+                    color: var(--secondary);
+                    font-size: 0.9rem;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+
+                .company-details {
+                    margin: 1rem 0;
+                    color: var(--text);
+                }
+
+                .detail-item {
+                    display: flex;
+                    align-items: center;
+                    margin: 0.5rem 0;
+                    gap: 0.75rem;
+                }
+
+                .detail-icon {
+                    color: var(--secondary);
+                    width: 20px;
+                    text-align: center;
+                }
+
+
+
+                .company-footer {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 1.5rem;
+                    padding-top: 1rem;
+                    border-top: 1px solid #EDF2F7;
+                }
+
+                .website-link {
+                    color: var(--secondary);
+                    text-decoration: none;
+                    font-weight: 500;
+                }
+
+                .employees {
+                    color: var(--text);
+                    font-size: 0.9rem;
+                }
+                .company-rating {
+            color: #F6E05E;
+            margin-top: 0.25rem;
+        }
+
+        .company-rating .fa-star {
+            margin-right: 0.25rem;
+        }
+
+        .detail-item.price {
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+       
+    </style>
 </head>
 <body>
     <div class="container">
@@ -40,6 +196,12 @@
                     </div>
                     <div class="company-footer">
                         <span class="price">$@company.Price</span>
+                    </div>
+
+                      <div class="company-footer">
+                        <a href="${company.website}" class="website-link" target="_blank">
+                            Visit Website <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
                 </div>
             }
