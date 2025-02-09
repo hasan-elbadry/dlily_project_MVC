@@ -5,6 +5,13 @@ namespace dlily_project.Controllers
     public class HomeController : Controller
     {
 
+        private readonly ApplicationDbContext _context;
+
+        public HomeController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -12,36 +19,14 @@ namespace dlily_project.Controllers
 
         public IActionResult Hotels()
         {
-            return View();
+            var hotles = _context.HotelOffers.ToList();
+
+            return View(hotles);
         }
 
         public IActionResult Companies()
         {
-            var companies = new List<CompanyOffer>
-                {
-                    new CompanyOffer
-                    {
-                        Name = "TechNova Solutions",
-                        Rating = 5,
-                        Location = "San Francisco, USA",
-                        Price = 299.99,
-                        Description = "Leading provider of AI-driven enterprise solutions",
-                        ImageUrl = new byte[0] // Placeholder, in a real app use a real image source
-                    },
-                    new CompanyOffer
-                    {
-                        Name = "Global Finance Corp",
-                        Rating = 4,
-                        Location = "London, UK",
-                        Price = 199.99,
-                        Description = "Global financial services provider",
-                        ImageUrl = new byte[0]
-                    }
-            };
-
-
-
-            return View(companies);
+            return View();
 
         }
     

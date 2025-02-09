@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model List<HotelOffer>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -243,29 +245,7 @@
     </div>
 
     <script>
-        const hotels = [
-            {
-                name: "Ocean View Resort & Spa",
-                price: 459,
-                rating: 4.8,
-                location: "Maldives",
-                image: "https://source.unsplash.com/random/800x600?luxury-resort",
-                amenities: ["wifi", "pool", "spa", "restaurant", "beach"],
-                guests: 2,
-                deals: ["Free Cancellation", "Breakfast Included"]
-            },
-            {
-                name: "Mountain Peak Lodge",
-                price: 299,
-                rating: 4.5,
-                location: "Swiss Alps",
-                image: "https://source.unsplash.com/random/800x600?mountain-lodge",
-                amenities: ["wifi", "fireplace", "ski-in", "sauna"],
-                guests: 4,
-                deals: ["Ski Package Available"]
-            },
-            // Add more hotels...
-        ];
+        const hotels = @Model;
 
         function renderHotels() {
             const hotelList = document.getElementById('hotelList');

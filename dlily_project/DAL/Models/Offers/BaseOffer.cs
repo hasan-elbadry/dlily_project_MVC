@@ -19,6 +19,9 @@ namespace dlily_project.DAL.Models.Offers
 
         public byte[] ImageUrl { get; set; }
 
+        public string WebSiteUrl { get; set; }
+
+
         [Range(0, double.MaxValue, ErrorMessage = "Price must be a positive value.")]
         public double Price { get; set; }
 
