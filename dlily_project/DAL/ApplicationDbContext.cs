@@ -16,7 +16,7 @@ namespace dlily_project.DAL
         {
             modelBuilder.Entity<ReviewCompany>().HasKey(x => new {x.CompanyId,x.TouristId });
             modelBuilder.Entity<ReviewHotel>().HasKey(x => new { x.HotelId, x.TouristId });
-            modelBuilder.Entity<BaseOffer>().HasData(
+            modelBuilder.Entity<HotelOffer>().HasData(
               new BaseOffer
               {
                   Id = 1,

@@ -12,8 +12,8 @@ using dlily_project.DAL;
 namespace dlily_project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250209180023_seed_data")]
-    partial class seed_data
+    [Migration("20250209181948_seed_data_hotels")]
+    partial class seed_data_hotels
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace dlily_project.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("dlily_project.DAL.Models.Offers.BaseOffer", b =>
+            modelBuilder.Entity("dlily_project.DAL.Models.Offers.CompanyOffer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -37,11 +37,6 @@ namespace dlily_project.Migrations
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
 
                     b.Property<byte[]>("ImageUrl")
                         .IsRequired()
@@ -69,11 +64,49 @@ namespace dlily_project.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BaseOffer");
+                    b.ToTable("CompanyOffers");
+                });
 
-                    b.HasDiscriminator().HasValue("BaseOffer");
+            modelBuilder.Entity("dlily_project.DAL.Models.Offers.HotelOffer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.UseTphMappingStrategy();
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<byte[]>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<byte>("Rating")
+                        .HasColumnType("tinyint");
+
+                    b.Property<string>("WebSiteUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HotelOffers");
 
                     b.HasData(
                         new
@@ -339,20 +372,6 @@ namespace dlily_project.Migrations
                     b.ToTable("Tourists");
                 });
 
-            modelBuilder.Entity("dlily_project.DAL.Models.Offers.CompanyOffer", b =>
-                {
-                    b.HasBaseType("dlily_project.DAL.Models.Offers.BaseOffer");
-
-                    b.HasDiscriminator().HasValue("CompanyOffer");
-                });
-
-            modelBuilder.Entity("dlily_project.DAL.Models.Offers.HotelOffer", b =>
-                {
-                    b.HasBaseType("dlily_project.DAL.Models.Offers.BaseOffer");
-
-                    b.HasDiscriminator().HasValue("HotelOffer");
-                });
-
             modelBuilder.Entity("dlily_project.DAL.Models.Reviews.ReviewCompany", b =>
                 {
                     b.HasOne("dlily_project.DAL.Models.Offers.CompanyOffer", "CompanyOffer")
@@ -404,6 +423,16 @@ namespace dlily_project.Migrations
                     b.Navigation("Tourgide");
                 });
 
+            modelBuilder.Entity("dlily_project.DAL.Models.Offers.CompanyOffer", b =>
+                {
+                    b.Navigation("ReviewHotels");
+                });
+
+            modelBuilder.Entity("dlily_project.DAL.Models.Offers.HotelOffer", b =>
+                {
+                    b.Navigation("ReviewHotels");
+                });
+
             modelBuilder.Entity("dlily_project.DAL.Models.Users.Tourgide", b =>
                 {
                     b.Navigation("Tourists");
@@ -413,16 +442,6 @@ namespace dlily_project.Migrations
                 {
                     b.Navigation("ReviewCompanies");
 
-                    b.Navigation("ReviewHotels");
-                });
-
-            modelBuilder.Entity("dlily_project.DAL.Models.Offers.CompanyOffer", b =>
-                {
-                    b.Navigation("ReviewHotels");
-                });
-
-            modelBuilder.Entity("dlily_project.DAL.Models.Offers.HotelOffer", b =>
-                {
                     b.Navigation("ReviewHotels");
                 });
 #pragma warning restore 612, 618
