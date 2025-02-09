@@ -17,7 +17,7 @@ namespace dlily_project.Controllers
             var hotels = _context.HotelOffers.ToList();
             return View(hotels);
         }
-
+        [Authorize]
         public IActionResult Hotels()
         {
             var hotles = _context.HotelOffers.ToList();
@@ -25,13 +25,14 @@ namespace dlily_project.Controllers
             return View(hotles);
         }
 
+        [Authorize]
         public IActionResult Companies()
         {
             return View();
 
         }
     
-
+        [Authorize]
         public IActionResult Tourgides()
         {
             var tourgides= _context.Tourgides.ToList();

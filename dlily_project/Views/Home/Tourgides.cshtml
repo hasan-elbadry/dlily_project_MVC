@@ -2,7 +2,7 @@
 @model List<Tourgide>
 
 @{
-    ViewData["Title"] = "Tour Guides Directory";
+    ViewData["Title"] = "Tour Guides";
 }
 
 <!DOCTYPE html>
@@ -63,6 +63,7 @@
 
         /* Filters Section */
         .filters {
+            margin: 3rem 0 3rem 0;  
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
@@ -264,7 +265,7 @@
                                 <p>@guide.Description</p>
                             </div>
                             <div class="guide-footer">
-                                <span class="price">${@guide.Rating * 10}/day</span>
+                                <span class="price">@(guide.Price * 10)/day</span>
                                 <button class="contact-btn" 
                                         onclick="location.href='mailto:@guide.Email'">
                                     Contact

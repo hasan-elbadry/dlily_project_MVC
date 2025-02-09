@@ -8,6 +8,8 @@
         [StringLength(500)]
         public string Description { get; set; } = string.Empty;
 
+        public double Price { get; set; }
+
         public IEnumerable<Tourist>? Tourists { get; set; }
     }
 }
