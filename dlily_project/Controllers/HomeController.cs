@@ -15,7 +15,18 @@ namespace dlily_project.Controllers
         public IActionResult Index()
         {
             var hotels = _context.HotelOffers.ToList();
-            return View(hotels);
+            var compaines = _context.CompanyOffers.ToList();
+            var tourgide = _context.Tourgides.ToList();
+
+
+
+            var model = new HomeViewModel
+            {
+                HotelOffers = hotels,
+                CompanyOffers  = compaines,
+                Tourgides = tourgide
+            };
+            return View(model);
         }
         [Authorize]
         public IActionResult Hotels()
@@ -28,7 +39,8 @@ namespace dlily_project.Controllers
         [Authorize]
         public IActionResult Companies()
         {
-            return View();
+            var companies = _context.CompanyOffers.ToList();
+            return View(companies);
 
         }
     

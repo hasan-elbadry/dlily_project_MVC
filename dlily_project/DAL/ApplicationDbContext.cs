@@ -2,6 +2,7 @@
 using dlily_project.DAL.Models.Offers;
 using dlily_project.DAL.Models.Reviews;
 using dlily_project.DAL.Models.Users;
+using System;
 
 namespace dlily_project.DAL
 {
@@ -11,13 +12,134 @@ namespace dlily_project.DAL
         {
         }
 
-
+        private static byte[] GetImageBytes(string imagePath)
+        {
+            return File.Exists(imagePath) ? File.ReadAllBytes(imagePath) : Array.Empty<byte>();
+        }
+    
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ReviewCompany>().HasKey(x => new {x.CompanyId,x.TouristId });
             modelBuilder.Entity<ReviewHotel>().HasKey(x => new { x.HotelId, x.TouristId });
+
+
+            modelBuilder.Entity<Tourgide>().HasData(
+                new Tourgide
+                {
+                    Id = 1,
+                    Name = "Ahmed Aly Ahmed",
+                    Gender = Gender.Male,
+                    Phone = "01019273234",
+                    Email = "ahmed.aly@gmail.com",
+                    Address = "10 Karnak Temple Street, Luxor, Luxor Governorate",
+                    Rating = 3,
+                    Description = "Italian-speaking guide",
+                    Price = 55.0,
+                    SpokenLanguage = "Italian",
+                    ProfilePicture = GetImageBytes("Images/AhmedAlyAhmed.jpeg")
+                },
+                new Tourgide
+                {
+                    Id = 2,
+                    Name = "Ahmed Ramadan",
+                    Gender = Gender.Male,
+                    Phone = "01065502465",
+                    Email = "ahmed.ramadan@gmail.com",
+                    Address = "30 Zamalek Street, Cairo, Cairo Governorate",
+                    Rating = 3,
+                    Description = "German-speaking guide",
+                    Price = 52.0,
+                    SpokenLanguage = "German",
+                    ProfilePicture = GetImageBytes("Images/AhmedRamadan.jpeg")
+                },
+                new Tourgide
+                {
+                    Id = 3,
+                    Name = "Amr Fouad",
+                    Gender = Gender.Male,
+                    Phone = "01146146691",
+                    Email = "amr.fouad@gmail.com",
+                    Address = "25 Sharia Al Muizz Li-Din Allah, Cairo, Cairo Governorate",
+                    Rating = 5,
+                    Description = "English-speaking tour guide",
+                    Price = 42.0,
+                    SpokenLanguage = "English",
+                    ProfilePicture = GetImageBytes("Images/AmrFouad.jpeg")
+                },
+                new Tourgide
+                {
+                    Id = 4,
+                    Name = "Ibrahim Ghalwash",
+                    Gender = Gender.Male,
+                    Phone = "01033823595",
+                    Email = "ibrahim.ghalwash@gmail.com",
+                    Address = "18 Luxor Temple Street, Luxor, Luxor Governorate",
+                    Rating = 4,
+                    Description = "German-speaking guide",
+                    Price = 50.0,
+                    SpokenLanguage = "German",
+                    ProfilePicture = GetImageBytes("Images/IbrahimGhalwash.jpeg")
+                },
+                new Tourgide
+                {
+                    Id = 5,
+                    Name = "Mariam Ali",
+                    Gender = Gender.Female,
+                    Phone = "01065502465",
+                    Email = "mariam.ali@gmail.com",
+                    Address = "7 Philae Temple Road, Aswan, Aswan Governorate",
+                    Rating = 5,
+                    Description = "German-speaking guide",
+                    Price = 48.0,
+                    SpokenLanguage = "German",
+                    ProfilePicture = GetImageBytes("Images/MariamAli.jpeg")
+                },
+                new Tourgide
+                {
+                    Id = 6,
+                    Name = "Ahmed",
+                    Gender = Gender.Male,
+                    Phone = "01104682219",
+                    Email = "ahmed.guide@gmail.com",
+                    Address = "20 Al Azhar Street, Islamic Cairo, Cairo Governorate",
+                    Rating = 3,
+                    Description = "Italian-speaking guide",
+                    Price = 55.0,
+                    SpokenLanguage = "Italian",
+                    ProfilePicture = GetImageBytes("Images/SignorAhmedElAlily.jpeg")
+                },
+                new Tourgide
+                {
+                    Id = 7,
+                    Name = "Ebram Melles",
+                    Gender = Gender.Male,
+                    Phone = "01220801758",
+                    Email = "ebram_melles.guide@gmail.com",
+                    Address = "20 Al Azhar Street, Islamic Cairo, Cairo Governorate",
+                    Rating = 3,
+                    Description = "Speaking English and Japanese",
+                    Price = 55.0,
+                    SpokenLanguage = "English",
+                    ProfilePicture = GetImageBytes("Images/EbramMelles.jpeg")
+                },
+                new Tourgide
+                {
+                    Id = 8,
+                    Name = "Mohamed Gomaa",
+                    Gender = Gender.Male,
+                    Phone = "01022510710",
+                    Email = "mohamed.gomaa@gmail.com",
+                    Address = "12 Corniche El Nile Street, Aswan, Aswan Governorate",
+                    Rating = 5,
+                    Description = "English & Russian-speaking guide",
+                    Price = 50.0,
+                    SpokenLanguage = "English, Russian",
+                    ProfilePicture = GetImageBytes("Images/MohamedFriday.jpeg")
+                }
+            );
+
             modelBuilder.Entity<HotelOffer>().HasData(
-              new BaseOffer
+              new HotelOffer
               {
                   Id = 1,
                   Name = "Ramses Hilton",
@@ -28,7 +150,7 @@ namespace dlily_project.DAL
                   Price = 9759,
                   Description = "A five-star hotel with stunning views of the Nile, 817 rooms and suites."
               },
-              new BaseOffer
+              new HotelOffer
               {
                   Id = 2,
                   Name = "Grand Hyatt Cairo",
@@ -39,7 +161,7 @@ namespace dlily_project.DAL
                   Price = 4495,
                   Description = "Located directly on the Nile, offering 715 rooms with breathtaking views."
               },
-              new BaseOffer
+              new HotelOffer
               {
                   Id = 3,
                   Name = "Sonesta Cairo",
@@ -50,7 +172,7 @@ namespace dlily_project.DAL
                   Price = 6036,
                   Description = "A five-star hotel near Cairo International Conference Center with 409 luxurious rooms."
               },
-              new BaseOffer
+              new HotelOffer
               {
                   Id = 4,
                   Name = "Le Méridien",
@@ -62,6 +184,53 @@ namespace dlily_project.DAL
                   Description = "Offering premium services, restaurants, pools, and wellness spas."
               }
           );
+            
+            modelBuilder.Entity<CompanyOffer>().HasData(
+            new CompanyOffer
+            {
+                Id = 1,
+                Name = "MAXIM TOURS",
+                Location = "Cairo",
+                Price = 1800,
+                WebSiteUrl = "https://www.maximtours.com/",
+                Description = "Catch the opportunity and book your trip to Egypt. Enjoy the most beautiful days in Cairo, where the charming historical monuments, the picturesque Nile River, and various recreational activities, do not miss the opportunity.",
+                ImageUrl = "https://maxim-tours.com/ar/wp-content/uploads/2024/01/cropped-Maxim-Logo-removebg-preview.png",
+                Rating = 4
+            },
+            new CompanyOffer
+            {
+                Id = 2,
+                Name = "TRAVEL CHOICE",
+                Location = "Aswan",
+                Price = 99.00,
+                WebSiteUrl = "https://egypttravelchoice.com/to_book/private-tour-to-abu-simbel-from-aswan/",
+                Description = "Welcome to Abu Simbel, a breathtaking monument that's a must-see on any trip to Aswan. On this day trip, you'll embark on a journey through time, traveling to the heart of ancient Egypt.",
+                ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXwZHuUsybMP-q5fE4lPhAFpM31BLjGSVoFA&s",
+                Rating = 5
+            },
+            new CompanyOffer
+            {
+                Id = 4,
+                Name = "SKY EGYPT TOURS",
+                Location = "Hurghada",
+                Price = 10585,
+                WebSiteUrl = "https://skyegtours.com/eg/ar/Desert-rose-resort&offer=89",
+                Description = "Relaxing massage treatments are offered at the Planet Beach Spa Centre, which includes a gym and a sauna. Children are entertained at the Kids Club, and snorkelling and windsurfing activities can be enjoyed at the beach.",
+                ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFHp_ZkB39hpKVaS9BZ4gt7z0GssaWUdowk3MaqjehrJMRHH3RE9dyOAPAvo7ZgdSfN58&usqp=CAU",
+                Rating = 4
+            },
+            new CompanyOffer
+            {
+                Id = 5,
+                Name = "Egypt Tour",
+                Location = "Cairo and the Nile",
+                Price = 125000,
+                WebSiteUrl = "https://bit.ly/4hGWmqg",
+                Description = "A 10-day tourist tour in Egypt, Cairo and Nile Cruise. We offer a 10-day Egyptian tour package in Cairo and Nile Cruise, including 4 nights Cairo, 4 nights Nile cruise, 1 night in Luxor, visit the Giza Pyramids and the Egyptian Museum, then travel to Aswan and enjoy a 5-star Nile Cruise.",
+                ImageUrl = "https://www.egypttourpackages.com/ar/images/coloredLogo.png",
+                Rating = 5
+            }
+        );
             base.OnModelCreating(modelBuilder);
         }
 

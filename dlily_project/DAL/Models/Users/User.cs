@@ -35,7 +35,9 @@ namespace dlily_project.DAL.Models.Users
         [StringLength(100)]
         public string SpokenLanguage { get; set; } = string.Empty;
 
-        [Display(Name = "Profile Picture")]
         public byte[] ProfilePicture { get; set; } = Array.Empty<byte>();
     }
 }
+
+
+

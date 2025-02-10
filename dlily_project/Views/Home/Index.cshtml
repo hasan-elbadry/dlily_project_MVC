@@ -1,4 +1,4 @@
-﻿@model List<HotelOffer>
+﻿@model HomeViewModel
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,14 +69,15 @@
                 <div class="card active">
                     <div class="card-content">
                         <div class="card-image">
-                            <img src="data:image/png;base64,@Convert.ToBase64String(Model[0].ImageUrl)" alt="@Model[0].Name">
+                            <img src="data:image/png;base64,@Convert.ToBase64String(Model.HotelOffers[0].ImageUrl)" alt="@Model.HotelOffers[0].Name">
                             <span class="card-discount">25% OFF</span>
                         </div>
                         <div class="card-details">
-                            <h3>@Model[0].Name</h3>
-                            <p>@Model[0].Description</p>
+                            <h3>@Model.HotelOffers[0].Name</h3>
+                            <p>@Model.HotelOffers[0].Description</p>
                             <div class="hotels-reviews">
-                              @for(int i=0;i<Model[0].Rating;i++){
+                                @for (int i = 0; i < Model.HotelOffers[0].Rating; i++)
+                                {
                                     <i class="fas fa-star yellow-star"></i>
                               }
                             </div>
@@ -92,25 +93,24 @@
                 <div class="card next">
                     <div class="card-content">
                         <div class="card-image">
-                            <img src="data:image/png;base64,@Convert.ToBase64String(Model[1].ImageUrl)" alt="@Model[1].Name">
-
-                            <span class="card-discount">50% OFF</span>
+                            <img src="data:image/png;base64,@Convert.ToBase64String(Model.HotelOffers[1].ImageUrl)" alt="@Model.HotelOffers[1].Name">
+                            <span class="card-discount">25% OFF</span>
                         </div>
                         <div class="card-details">
-                            <h3>@Model[1].Name</h3>
-                            <p>@Model[1].Description</p>
+                            <h3>@Model.HotelOffers[1].Name</h3>
+                            <p>@Model.HotelOffers[1].Description</p>
                             <div class="hotels-reviews">
-                                @for (int i = 0; i < Model[1].Rating; i++)
+                                @for (int i = 0; i < Model.HotelOffers[1].Rating; i++)
                                 {
                                     <i class="fas fa-star yellow-star"></i>
                                 }
                             </div>
                             <div class="card-price">
-                                <span class="old-price">$1000</span>
-                                <span class="new-price">$500</span>
+                                <span class="old-price">$800</span>
+                                <span class="new-price">$600</span>
                             </div>
                         </div>
-                        <a href="#" class="explore-btn">EXPLORE NOW</a>
+                        <a asp-action="Hotels" class="explore-btn">EXPLORE NOW</a>
                     </div>
                 </div>
 
@@ -118,21 +118,21 @@
                 <div class="card prev">
                     <div class="card-content">
                         <div class="card-image">
-                            <img src="data:image/png;base64,@Convert.ToBase64String(Model[2].ImageUrl)" alt="@Model[2].Name">
-                            <span class="card-discount">10% OFF</span>
+                            <img src="data:image/png;base64,@Convert.ToBase64String(Model.HotelOffers[2].ImageUrl)" alt="@Model.HotelOffers[2].Name">
+                            <span class="card-discount">25% OFF</span>
                         </div>
                         <div class="card-details">
-                            <h3>@Model[2].Name</h3>
-                            <p>@Model[2].Description</p>
+                            <h3>@Model.HotelOffers[2].Name</h3>
+                            <p>@Model.HotelOffers[2].Description</p>
                             <div class="hotels-reviews">
-                                @for (int i = 0; i < Model[2].Rating; i++)
+                                @for (int i = 0; i < Model.HotelOffers[2].Rating; i++)
                                 {
                                     <i class="fas fa-star yellow-star"></i>
                                 }
                             </div>
                             <div class="card-price">
-                                <span class="old-price">$1,430</span>
-                                <span class="new-price">$1,287</span>
+                                <span class="old-price">$800</span>
+                                <span class="new-price">$600</span>
                             </div>
                         </div>
                         <a asp-action="Hotels" class="explore-btn">EXPLORE NOW</a>
@@ -169,7 +169,7 @@
                             <div class="text-ms">
                                 <h1>EXPLORE <br> <span>THE COMPANIES</span></h1>
                                 <p>Discover Egypt's premier tour operators offering bespoke travel experiences, combining ancient wonders with modern luxury for unforgettable journeys.</p>
-                                <button class="bks">Explore Packages</button>
+                                <a asp-action="companies"><button class="bks">Explore Packages</button></a>
                             </div>
                             <div>
                             </div>
@@ -181,77 +181,74 @@
                             <div class="cardr activer">
                                 <div class="card-contentr">
                                     <div class="card-imager">
-                                        <img src="~/Assets/hotels/room-1.jpg" alt="Deluxe Suite">
+                                    <img src="@Model.CompanyOffers[0].ImageUrl" alt="@Model.CompanyOffers[0].Name">
                                         <span class="card-discountr">25% OFF</span>
                                     </div>
                                     <div class="card-detailsr">
-                                        <h3>Deluxe Ocean View</h3>
-                                        <p>Luxurious suite with panoramic ocean views and premium amenities</p>
+                                    <h3>@Model.CompanyOffers[0].Name</h3>
+                                    <p>@Model.CompanyOffers[0].Description</p>
                                         <div class="hotels-reviews">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="far fa-star"></i>
+                                        @for (int i = 0; i < Model.CompanyOffers[0].Rating; i++)
+                                        {
+                                            <i class="fas fa-star yellow-star"></i>
+                                        }
                                         </div>
                                         <div class="card-price">
                                             <span class="old-pricer">$800</span>
                                             <span class="new-pricer">$600</span>
                                         </div>
                                     </div>
-                                    <a href="#" class="explore-btnr">EXPLORE NOW</a>
+                                    <a asp-action="companies" class="explore-btnr">EXPLORE NOW</a>
                                 </div>
                             </div>
 
                             <div class="cardr nextr">
                                 <div class="card-contentr">
                                     <div class="card-imager">
-                                        <img src="~/Assets/hotels/room-2.jpg" alt="Executive Room">
+                                    <img src="@Model.CompanyOffers[1].ImageUrl" alt="@Model.CompanyOffers[1].Name">
                                         <span class="card-discountr">50% OFF</span>
                                     </div>
                                     <div class="card-detailsr">
-                                        <h3>Executive Cityscape</h3>
-                                        <p>Modern urban retreat with stunning city skyline views</p>
+                                    <h3>@Model.CompanyOffers[1].Name</h3>
+                                    <p>@Model.CompanyOffers[1].Description</p>
                                         <div class="hotels-reviews">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="far fa-star"></i>
+                                        @for (int i = 0; i < Model.CompanyOffers[1].Rating; i++)
+                                        {
+                                            <i class="fas fa-star yellow-star"></i>
+                                        }
                                         </div>
                                         <div class="card-pricer">
                                             <span class="old-pricer">$1000</span>
                                             <span class="new-pricer">$500</span>
                                         </div>
                                     </div>
-                                    <a href="#" class="explore-btnr">EXPLORE NOW</a>
+                                <a asp-action="companies" class="explore-btnr">EXPLORE NOW</a>
                                 </div>
                             </div>
 
                             <!-- Card 3 -->
                             <div class="cardr prevr">
-                                <div class="card-contentr">
-                                    <div class="card-imager">
-                                        <img src="~/Assets/hotels/room-3.jpg" alt="Family Suite">
-                                        <span class="card-discountr">10% OFF</span>
-                                    </div>
-                                    <div class="card-detailsr">
-                                        <h3>Family Garden Retreat</h3>
-                                        <p>Spacious family-friendly accommodation with private garden</p>
-                                        <div class="hotels-reviews">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <div class="card-pricer">
-                                            <span class="old-pricer">$1,430</span>
-                                            <span class="new-pricer">$1,287</span>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="explore-btnr">EXPLORE NOW</a>
+                            <div class="card-contentr">
+                                <div class="card-imager">
+                                    <img src="@Model.CompanyOffers[3].ImageUrl" alt="@Model.CompanyOffers[3].Name">
+                                    <span class="card-discountr">50% OFF</span>
                                 </div>
+                                <div class="card-detailsr">
+                                    <h3>@Model.CompanyOffers[3].Name</h3>
+                                    <p>@Model.CompanyOffers[3].Description</p>
+                                    <div class="hotels-reviews">
+                                        @for (int i = 0; i < Model.CompanyOffers[3].Rating; i++)
+                                        {
+                                            <i class="fas fa-star yellow-star"></i>
+                                        }
+                                    </div>
+                                    <div class="card-pricer">
+                                        <span class="old-pricer">$1000</span>
+                                        <span class="new-pricer">$500</span>
+                                    </div>
+                                </div>
+                                <a asp-action="companies" class="explore-btnr">EXPLORE NOW</a>
+                            </div>
                             </div>
                         </div>
 
@@ -277,11 +274,6 @@
             </div>
             <div class="coms">
                 <div class="containerl">
-                    <div id="infoModal" style="display:none;">
-                        <span class="close-btn">×</span>
-                        <div id="modalTitle"></div>
-                        <div id="modalDesc"></div>
-                    </div>
                     <div class="carousel-containers">
                         <div class="carousel-tracks">
                             <div class="cards actives" id="maxim">
@@ -291,18 +283,16 @@
                                     Maxim Tours is one of the most distinguished tourism companies,
                                     as it has more than thirteen years of experience in the tourism field.
                                 </p>
-                                <a><button>Read More</button></a>
+                                <a asp-action="tourgides"><button>Read More</button></a>
                             </div>
 
                             <div class="cards" id="travel">
-                                <img src="companies_home/photo_4.png" alt="" class="photo_4s">
-                                <h3>TRAVEL CHOICE</h3>
+                                <img src="~/Assets/@Model.Tourgides[0].ProfilePicture" alt="" class="photo_4s">
+                                <h3>@Model.Tourgides[0].Name</h3>
                                 <p>
-                                    Travel Choice is considered one of the distinguished tourism companies,
-                                    as it is very interested in preparing business trips at the highest level,
-                                    and it also provides medical tourism trips.
+                                    @Model.Tourgides[0].Description
                                 </p>
-                                <a><button>Read More</button></a>
+                                <a asp-action="tourgides" ><button>Read More</button></a>
                             </div>
 
                             <div class="cards">

@@ -7,7 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DAL\Repositories\" />
+    <Compile Remove="DAL\Repositories\**" />
+    <Content Remove="DAL\Repositories\**" />
+    <EmbeddedResource Remove="DAL\Repositories\**" />
+    <None Remove="DAL\Repositories\**" />
   </ItemGroup>
 
   <ItemGroup>

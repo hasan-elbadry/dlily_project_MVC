@@ -17,7 +17,6 @@ namespace dlily_project.DAL.Models.Offers
         [StringLength(200)]
         public string Location { get; set; } = string.Empty;
 
-        public byte[] ImageUrl { get; set; }
 
         public string WebSiteUrl { get; set; }
 

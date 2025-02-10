@@ -176,7 +176,7 @@
             {
                 <div class="company-card">
                     <div class="company-header">
-                        <img src="data:image/png;base64,@Convert.ToBase64String(company.ImageUrl)" class="company-logo" alt="@company.Name">
+                        <img src="@company.ImageUrl" class="company-logo" alt="@company.Name">
                         <div>
                             <h2 class="company-name">@company.Name</h2>
                             <div class="company-rating">
@@ -194,14 +194,16 @@
                             @company.Location
                         </div>
                     </div>
-                    <div class="company-footer">
-                        <span class="price">$@company.Price</span>
+                    <div>
+                        <div class="company-footer">
+                            <span class="price">$@company.Price</span>
+                        </div>
                     </div>
 
                       <div class="company-footer">
-                        <a href="${company.website}" class="website-link" target="_blank">
+                        <a href="@company.WebSiteUrl" class="website-link" target="_blank">
                             Visit Website <i class="fas fa-external-link-alt"></i>
-                        </a>
+                        </a>-
                     </div>
                 </div>
             }

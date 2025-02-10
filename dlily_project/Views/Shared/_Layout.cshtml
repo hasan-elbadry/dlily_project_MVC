@@ -35,9 +35,9 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <div class="navbar-nav ms-3">
                         <a class="nav-link" id="homeLink" asp-controller="Home" asp-action="Index">Home</a>
-                        <a class="nav-link" id="hotelsLink" href="#">Hotels</a>
-                        <a class="nav-link" id="companiesLink" href="#">Companies</a>
-                        <a class="nav-link" id="touristPlacesLink" href="#">Tourist Places</a>
+                        <a class="nav-link" id="hotelsLink" asp-action="hotels">Hotels</a>
+                        <a class="nav-link" id="companiesLink" asp-action="companies">Companies</a>
+                        <a class="nav-link" id="touristPlacesLink" href="#touristplaces">Tourist Places</a>
                     </div>
 
                     <a class="navbar-brand mx-auto" href="#">DLYLY TOURISM</a>
@@ -49,6 +49,7 @@
 
                 <div class="d-flex gap-2">
                     @{
+
                         if (!User.Identity.IsAuthenticated)
                         {
                             <a asp-controller="Auth" style="color: white;" class="btn auth-btn sign-in-btn" id="signInBtn">Sign In</a>

@@ -12,8 +12,8 @@ using dlily_project.DAL;
 namespace dlily_project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250209181948_seed_data_hotels")]
-    partial class seed_data_hotels
+    [Migration("20250210101653_intial-database")]
+    partial class intialdatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,9 +38,9 @@ namespace dlily_project.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<byte[]>("ImageUrl")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
                         .IsRequired()
@@ -65,6 +65,52 @@ namespace dlily_project.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CompanyOffers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Catch the opportunity and book your trip to Egypt. Enjoy the most beautiful days in Cairo, where the charming historical monuments, the picturesque Nile River, and various recreational activities, do not miss the opportunity.",
+                            ImageUrl = "https://maxim-tours.com/ar/wp-content/uploads/2024/01/cropped-Maxim-Logo-removebg-preview.png",
+                            Location = "Cairo",
+                            Name = "MAXIM TOURS",
+                            Price = 1800.0,
+                            Rating = (byte)4,
+                            WebSiteUrl = "https://www.maximtours.com/"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Welcome to Abu Simbel, a breathtaking monument that's a must-see on any trip to Aswan. On this day trip, you'll embark on a journey through time, traveling to the heart of ancient Egypt.",
+                            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXwZHuUsybMP-q5fE4lPhAFpM31BLjGSVoFA&s",
+                            Location = "Aswan",
+                            Name = "TRAVEL CHOICE",
+                            Price = 99.0,
+                            Rating = (byte)5,
+                            WebSiteUrl = "https://egypttravelchoice.com/to_book/private-tour-to-abu-simbel-from-aswan/"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Relaxing massage treatments are offered at the Planet Beach Spa Centre, which includes a gym and a sauna. Children are entertained at the Kids Club, and snorkelling and windsurfing activities can be enjoyed at the beach.",
+                            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFHp_ZkB39hpKVaS9BZ4gt7z0GssaWUdowk3MaqjehrJMRHH3RE9dyOAPAvo7ZgdSfN58&usqp=CAU",
+                            Location = "Hurghada",
+                            Name = "SKY EGYPT TOURS",
+                            Price = 10585.0,
+                            Rating = (byte)4,
+                            WebSiteUrl = "https://skyegtours.com/eg/ar/Desert-rose-resort&offer=89"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "A 10-day tourist tour in Egypt, Cairo and Nile Cruise. We offer a 10-day Egyptian tour package in Cairo and Nile Cruise, including 4 nights Cairo, 4 nights Nile cruise, 1 night in Luxor, visit the Giza Pyramids and the Egyptian Museum, then travel to Aswan and enjoy a 5-star Nile Cruise.",
+                            ImageUrl = "https://www.egypttourpackages.com/ar/images/coloredLogo.png",
+                            Location = "Cairo and the Nile",
+                            Name = "Egypt Tour",
+                            Price = 125000.0,
+                            Rating = (byte)5,
+                            WebSiteUrl = "https://bit.ly/4hGWmqg"
+                        });
                 });
 
             modelBuilder.Entity("dlily_project.DAL.Models.Offers.HotelOffer", b =>
@@ -299,6 +345,9 @@ namespace dlily_project.Migrations
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<byte[]>("ProfilePicture")
                         .IsRequired()

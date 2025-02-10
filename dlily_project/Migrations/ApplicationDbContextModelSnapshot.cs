@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dlily_project.DAL;
 
@@ -12,11 +11,9 @@ using dlily_project.DAL;
 namespace dlily_project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250209201000_mm")]
-    partial class mm
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,9 +35,9 @@ namespace dlily_project.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<byte[]>("ImageUrl")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Location")
                         .IsRequired()
@@ -65,6 +62,52 @@ namespace dlily_project.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CompanyOffers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Catch the opportunity and book your trip to Egypt. Enjoy the most beautiful days in Cairo, where the charming historical monuments, the picturesque Nile River, and various recreational activities, do not miss the opportunity.",
+                            ImageUrl = "https://maxim-tours.com/ar/wp-content/uploads/2024/01/cropped-Maxim-Logo-removebg-preview.png",
+                            Location = "Cairo",
+                            Name = "MAXIM TOURS",
+                            Price = 1800.0,
+                            Rating = (byte)4,
+                            WebSiteUrl = "https://www.maximtours.com/"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Welcome to Abu Simbel, a breathtaking monument that's a must-see on any trip to Aswan. On this day trip, you'll embark on a journey through time, traveling to the heart of ancient Egypt.",
+                            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXwZHuUsybMP-q5fE4lPhAFpM31BLjGSVoFA&s",
+                            Location = "Aswan",
+                            Name = "TRAVEL CHOICE",
+                            Price = 99.0,
+                            Rating = (byte)5,
+                            WebSiteUrl = "https://egypttravelchoice.com/to_book/private-tour-to-abu-simbel-from-aswan/"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Relaxing massage treatments are offered at the Planet Beach Spa Centre, which includes a gym and a sauna. Children are entertained at the Kids Club, and snorkelling and windsurfing activities can be enjoyed at the beach.",
+                            ImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFHp_ZkB39hpKVaS9BZ4gt7z0GssaWUdowk3MaqjehrJMRHH3RE9dyOAPAvo7ZgdSfN58&usqp=CAU",
+                            Location = "Hurghada",
+                            Name = "SKY EGYPT TOURS",
+                            Price = 10585.0,
+                            Rating = (byte)4,
+                            WebSiteUrl = "https://skyegtours.com/eg/ar/Desert-rose-resort&offer=89"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Description = "A 10-day tourist tour in Egypt, Cairo and Nile Cruise. We offer a 10-day Egyptian tour package in Cairo and Nile Cruise, including 4 nights Cairo, 4 nights Nile cruise, 1 night in Luxor, visit the Giza Pyramids and the Egyptian Museum, then travel to Aswan and enjoy a 5-star Nile Cruise.",
+                            ImageUrl = "https://www.egypttourpackages.com/ar/images/coloredLogo.png",
+                            Location = "Cairo and the Nile",
+                            Name = "Egypt Tour",
+                            Price = 125000.0,
+                            Rating = (byte)5,
+                            WebSiteUrl = "https://bit.ly/4hGWmqg"
+                        });
                 });
 
             modelBuilder.Entity("dlily_project.DAL.Models.Offers.HotelOffer", b =>
@@ -318,6 +361,128 @@ namespace dlily_project.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tourgides");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "10 Karnak Temple Street, Luxor, Luxor Governorate",
+                            Description = "Italian-speaking guide",
+                            Email = "ahmed.aly@gmail.com",
+                            Gender = 0,
+                            Name = "Ahmed Aly Ahmed",
+                            Password = "",
+                            Phone = "01019273234",
+                            Price = 55.0,
+                            ProfilePicture = new byte[0],
+                            Rating = (byte)3,
+                            SpokenLanguage = "Italian"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "30 Zamalek Street, Cairo, Cairo Governorate",
+                            Description = "German-speaking guide",
+                            Email = "ahmed.ramadan@gmail.com",
+                            Gender = 0,
+                            Name = "Ahmed Ramadan",
+                            Password = "",
+                            Phone = "01065502465",
+                            Price = 52.0,
+                            ProfilePicture = new byte[0],
+                            Rating = (byte)3,
+                            SpokenLanguage = "German"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Address = "25 Sharia Al Muizz Li-Din Allah, Cairo, Cairo Governorate",
+                            Description = "English-speaking tour guide",
+                            Email = "amr.fouad@gmail.com",
+                            Gender = 0,
+                            Name = "Amr Fouad",
+                            Password = "",
+                            Phone = "01146146691",
+                            Price = 42.0,
+                            ProfilePicture = new byte[0],
+                            Rating = (byte)5,
+                            SpokenLanguage = "English"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Address = "18 Luxor Temple Street, Luxor, Luxor Governorate",
+                            Description = "German-speaking guide",
+                            Email = "ibrahim.ghalwash@gmail.com",
+                            Gender = 0,
+                            Name = "Ibrahim Ghalwash",
+                            Password = "",
+                            Phone = "01033823595",
+                            Price = 50.0,
+                            ProfilePicture = new byte[0],
+                            Rating = (byte)4,
+                            SpokenLanguage = "German"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Address = "7 Philae Temple Road, Aswan, Aswan Governorate",
+                            Description = "German-speaking guide",
+                            Email = "mariam.ali@gmail.com",
+                            Gender = 1,
+                            Name = "Mariam Ali",
+                            Password = "",
+                            Phone = "01065502465",
+                            Price = 48.0,
+                            ProfilePicture = new byte[0],
+                            Rating = (byte)5,
+                            SpokenLanguage = "German"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Address = "20 Al Azhar Street, Islamic Cairo, Cairo Governorate",
+                            Description = "Italian-speaking guide",
+                            Email = "ahmed.guide@gmail.com",
+                            Gender = 0,
+                            Name = "Ahmed",
+                            Password = "",
+                            Phone = "01104682219",
+                            Price = 55.0,
+                            ProfilePicture = new byte[0],
+                            Rating = (byte)3,
+                            SpokenLanguage = "Italian"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Address = "20 Al Azhar Street, Islamic Cairo, Cairo Governorate",
+                            Description = "Speaking English and Japanese",
+                            Email = "ebram_melles.guide@gmail.com",
+                            Gender = 0,
+                            Name = "Ebram Melles",
+                            Password = "",
+                            Phone = "01220801758",
+                            Price = 55.0,
+                            ProfilePicture = new byte[0],
+                            Rating = (byte)3,
+                            SpokenLanguage = "English"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Address = "12 Corniche El Nile Street, Aswan, Aswan Governorate",
+                            Description = "English & Russian-speaking guide",
+                            Email = "mohamed.gomaa@gmail.com",
+                            Gender = 0,
+                            Name = "Mohamed Gomaa",
+                            Password = "",
+                            Phone = "01022510710",
+                            Price = 50.0,
+                            ProfilePicture = new byte[0],
+                            Rating = (byte)5,
+                            SpokenLanguage = "English, Russian"
+                        });
                 });
 
             modelBuilder.Entity("dlily_project.DAL.Models.Users.Tourist", b =>
