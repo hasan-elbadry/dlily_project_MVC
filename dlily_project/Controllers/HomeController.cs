@@ -11,7 +11,11 @@ namespace dlily_project.Controllers
         {
             _context = context;
         }
-
+        [Authorize]
+        public IActionResult Translation()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
             var hotels = _context.HotelOffers.ToList();

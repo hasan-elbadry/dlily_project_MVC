@@ -11,6 +11,8 @@ namespace dlily_project.DAL.Models
         [Required]
         [StringLength(500)]
         public string Description { get; set; } = string.Empty;
+        [Required]
+        public string Article { get; set; } = string.Empty;
 
         [Required]
         [StringLength(200)]

@@ -1,0 +1,264 @@
+﻿using TouristPlaces.Models
+@{
+    ViewData["Title"] = "Index";
+}
+@model List<TouristPlaces>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egypt Attractions - Travel Guide</title>
+    <link rel="stylesheet" href="~/css/site.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+ <style>
+
+
+      body {
+          background-color: #f9f9f9;
+          color: #333;
+          line-height: 1.6;
+          font-family: 'Poppins', sans-serif;
+          margin: 0;
+          padding: 20px;
+          text-align: center;
+      }
+
+      .base-contianer
+      {
+          margin: 3rem; 
+      }
+
+      .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 40px 20px;
+      }
+
+      h1 {
+          font-size: 2.8rem;
+          color: #003b57;
+          font-weight: 600;
+          letter-spacing: -0.5px;
+          text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+
+      .attraction-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+          gap: 30px;
+      }
+
+      .attraction-card {
+          background: white;
+          border-radius: 8px;
+          overflow: hidden;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          position: relative;
+      }
+
+      .attraction-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+      }
+
+      .card-image {
+          height: 240px;
+          position: relative;
+          overflow: hidden;
+      }
+
+      .card-image img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+      }
+
+      .attraction-card:hover .card-image img {
+          transform: scale(1.05);
+      }
+
+      .card-content {
+          padding: 25px;
+      }
+
+      .attraction-location {
+          color: #00a6b5;
+          font-size: 0.9rem;
+          text-transform: uppercase;
+          margin: 12px 0;
+          letter-spacing: 1.2px;
+          font-weight: 600;
+      }
+
+      .attraction-description {
+          color: #444;
+          font-size: 1rem;
+          line-height: 1.7;
+          margin-bottom: 20px;
+      }
+
+      .read-more {
+          color: #003b57;
+          text-decoration: none;
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          transition: color 0.3s ease;
+      }
+
+      .read-more:hover {
+          color: #00a6b5;
+      }
+
+
+      .card-rating {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          background: rgba(255, 255, 255, 0.9);
+          padding: 6px 12px;
+          border-radius: 20px;
+          font-size: 0.9rem;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+      }
+
+      .card-rating svg {
+          width: 16px;
+          height: 16px;
+          fill: #ffc107;
+      }
+
+      h2 {
+          margin-bottom: 15px;
+          font-size: 24px;
+      }
+
+      .filters {
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 10px;
+          margin-bottom: 15px;
+      }
+
+      .filters input, .filters select {
+          padding: 12px;
+          font-size: 16px;
+          border: none;
+          border-radius: 5px;
+          box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease;
+          flex: 1;
+          min-width: 120px;
+      }
+
+      .filters input:focus, .filters select:focus {
+          outline: none;
+          transform: scale(1.01);
+      }
+
+ 
+</style>
+
+
+</head>
+<body>
+     <div class="base-contianer">
+         
+    <div class="filter-container">
+        <div class="filters">
+            <input type="text" id="search" placeholder="Search places...">
+            <select id="category">
+                <option value="all">All Categories</option>
+                <option value="Ancient Monument">Ancient Monuments</option>
+                <option value="Archaeological Site">Archaeological Sites</option>
+                <option value="Historical Site">Historical Sites</option>
+                <option value="Museum">Museums</option>
+            </select>
+            <select id="rating">
+                <option value="0">All Ratings</option>
+                <option value="5">5 Stars</option>
+                <option value="4">4+ Stars</option>
+                <option value="3">3+ Stars</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="attraction-grid">
+            @foreach (var place in Model)
+            {
+                <div class="attraction-card" 
+                     data-category="@place.Category" 
+                     data-rating="@place.Rating"
+                     data-name="@place.Name.ToLower()">
+                    <div class="card-image">
+                        <img src="@place.ImageUrl" alt="@place.Name">
+                        <div class="card-rating">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                            </svg>
+                            @place.Rating.ToString("0.0")
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h2>@place.Name</h2>
+                    
+                        <p class="attraction-description">@place.Description</p>
+                      
+            
+                            <a asp-controller="Attractions" 
+                               asp-action="Detail" 
+                               asp-route-id="@place.Id" 
+                               class="read-more">
+                                Read More
+                            </a>
+                      
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("search");
+            const categorySelect = document.getElementById("category");
+            const ratingSelect = document.getElementById("rating");
+            const attractionCards = document.querySelectorAll(".attraction-card");
+
+            function filterPlaces() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedCategory = categorySelect.value;
+                const minRating = parseFloat(ratingSelect.value);
+
+                attractionCards.forEach(card => {
+                    const name = card.dataset.name;
+                    const category = card.dataset.category;
+                    const rating = parseFloat(card.dataset.rating);
+
+                    const matchesSearch = name.includes(searchTerm);
+                    const matchesCategory = (selectedCategory === "all") || (category === selectedCategory);
+                    const matchesRating = rating >= minRating;
+
+                    card.style.display = (matchesSearch && matchesCategory && matchesRating) 
+                        ? "block" 
+                        : "none";
+                });
+            }
+
+            searchInput.addEventListener("input", filterPlaces);
+            categorySelect.addEventListener("change", filterPlaces);
+            ratingSelect.addEventListener("change", filterPlaces);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+﻿using TouristPlaces.Models;
+@{
+    ViewData["Title"] = "Detail";
+}
+
+@model TouristPlaces
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egypt Travel Guide | Ancient Wonders</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #2A3B47;
+            --accent-blue: #3A6B8A;
+            --light-blue: #EFF7FC;
+            --pure-white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-blue);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .hero-card {
+            background: var(--pure-white);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .hero-image {
+            height: 400px;
+            background: linear-gradient(rgba(42,59,71,0.3), rgba(42,59,71,0.3)),
+                        url('https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-content {
+            padding: 2rem;
+            position: relative;
+        }
+
+        .place-title {
+            color: var(--primary-blue);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .meta-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--light-blue);
+            border-radius: 10px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-item i {
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+        }
+
+        .rating {
+            color: #FFD700;
+            font-size: 1.2rem;
+        }
+
+        .description {
+            line-height: 1.8;
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+            margin: 2rem 0;
+        }
+
+        .badge {
+            background: var(--accent-blue);
+            color: var(--pure-white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+
+        .location-btn {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .location-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+      
+    </style>
+</head>
+<body>
+<article class="hero-card">
+    <div class="hero-image" 
+         style="background-image: linear-gradient(rgba(42,59,71,0.3), rgba(42,59,71,0.3)), url('@Model.ImageUrl')">
+    </div>
+    
+    <div class="hero-content">
+        <h1 class="place-title">@Model.Name</h1>
+        
+    
+            
+            <div class="info-item">
+                <i class="fas fa-clock"></i>
+                <div>
+                    <h3>Opening Hours</h3>
+                    <p>@Model.OpenAt.ToString(@"hh\:mm") - @Model.CloseAt.ToString(@"hh\:mm")</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <i class="fas fa-tag"></i>
+                <div>
+                    <h3>Category</h3>
+                    <p>@Model.Category</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <i class="fas fa-star"></i>
+                <div>
+                    <h3>Rating</h3>
+                    <div class="rating">
+                        @for (int i = 0; i < Model.Rating; i++)
+                        {
+                            <i class="fas fa-star"></i>
+                        }
+                        @if (Model.Rating % 1 > 0)
+                        {
+                            <i class="fas fa-star-half-alt"></i>
+                        }
+                        @Model.Rating.ToString("0.0")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="price-badge">
+            <i class="fas fa-ticket-alt"></i>
+            EGP @Model.EntryFee.ToString("0.00")
+        </div>
+
+        <p class="description">@Model.Description</p>
+         <p class="description">@Model.Article</p>
+          <a href="@Model.Location" class="location-btn" target="_blank">
+            <i class="fas fa-map-marked-alt"></i> View on Map
+        </a>
+    </div>
+</article>
+</body>
+</html>

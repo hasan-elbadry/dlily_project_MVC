@@ -21,7 +21,78 @@ namespace dlily_project.DAL
         {
             modelBuilder.Entity<ReviewCompany>().HasKey(x => new {x.CompanyId,x.TouristId });
             modelBuilder.Entity<ReviewHotel>().HasKey(x => new { x.HotelId, x.TouristId });
-
+            modelBuilder.Entity<TouristPlaces>().HasData(
+    new TouristPlaces
+    {
+        Id = 4,
+        Name = "Great Pyramids of Giza",
+        Description = "Ancient pyramids and the last surviving Wonder of the Ancient World",
+        Article = "The Giza pyramid complex includes the Great Pyramid of Giza...",
+        Location = "https://www.google.com/maps/place/The+Great+Pyramid+of+Giza/@29.9792345,31.1342019,15z/",
+        OpenAt = new TimeSpan(8, 0, 0),
+        CloseAt = new TimeSpan(17, 0, 0),
+        Rating = 5,
+        Category = "Ancient Monument",
+        EntryFee = 200.00,
+        ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/a/af/Giza_pyramid_complex_%28edited%29.jpg"
+    },
+    new TouristPlaces
+    {
+        Id = 5,
+        Name = "Luxor Temple",
+        Description = "Massive Ancient Egyptian temple complex on the east bank of the Nile",
+        Article = "Built approximately 1400 BCE, this temple was dedicated to the Theban Triad...",
+        Location = "https://www.google.com/maps/place/Luxor+Temple/@25.6996147,32.6366406,17z/",
+        OpenAt = new TimeSpan(6, 0, 0),
+        CloseAt = new TimeSpan(22, 0, 0),
+        Rating = 5,
+        Category = "Archaeological Site",
+        EntryFee = 160.00,
+        ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/4/49/Luxor_Temple_18.jpg"
+    },
+    new TouristPlaces
+    {
+        Id = 6,
+        Name = "Abu Simbel Temples",
+        Description = "Twin rock-cut temples dating back to the 13th century BCE",
+        Article = "Commissioned by Pharaoh Ramesses II to commemorate his victory...",
+        Location = "https://www.google.com/maps/place/Abu+Simbel+Temples/@22.3369232,31.6254713,17z/",
+        OpenAt = new TimeSpan(5, 0, 0),
+        CloseAt = new TimeSpan(18, 0, 0),
+        Rating = 5,
+        Category = "Historical Site",
+        EntryFee = 240.00,
+        ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/8/8e/Abu_Simbel_Temple_%288488942077%29.jpg"
+    },
+    new TouristPlaces
+    {
+        Id = 7,
+        Name = "The Egyptian Museum",
+        Description = "Home to the world's most extensive collection of Pharaonic antiquities",
+        Article = "Contains over 120,000 items including the treasures of Tutankhamun...",
+        Location = "https://www.google.com/maps/place/The+Egyptian+Museum/@30.0478085,31.2335643,17z/",
+        OpenAt = new TimeSpan(9, 0, 0),
+        CloseAt = new TimeSpan(17, 0, 0),
+        Rating = 5,
+        Category = "Museum",
+        EntryFee = 300.00,
+        ImageUrl = "https://live.staticflickr.com/65535/53609865504_1c1a8d7c0e_b.jpg"
+    },
+    new TouristPlaces
+    {
+        Id = 8,
+        Name = "Valley of the Kings",
+        Description = "Ancient burial ground for Egyptian royalty",
+        Article = "Contains 63 magnificent royal tombs from the New Kingdom period...",
+        Location = "https://www.google.com/maps/place/Valley+of+the+Kings/@25.7401865,32.6015273,17z/",
+        OpenAt = new TimeSpan(6, 0, 0),
+        CloseAt = new TimeSpan(17, 0, 0),
+        Rating = 5,
+        Category = "Archaeological Site",
+        EntryFee = 240.00,
+        ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/4/4a/Valley_of_the_Kings_Overview.jpg"
+    }
+);
 
             modelBuilder.Entity<Tourgide>().HasData(
                 new Tourgide

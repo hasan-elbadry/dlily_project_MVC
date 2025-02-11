@@ -37,7 +37,7 @@
                         <a class="nav-link" id="homeLink" asp-controller="Home" asp-action="Index">Home</a>
                         <a class="nav-link" id="hotelsLink" asp-action="hotels">Hotels</a>
                         <a class="nav-link" id="companiesLink" asp-action="companies">Companies</a>
-                        <a class="nav-link" id="touristPlacesLink" href="#touristplaces">Tourist Places</a>
+                        <a class="nav-link" id="touristPlacesLink"  asp-controller="Attractions" asp-action="Index">Tourist Places</a>
                     </div>
 
                     <a class="navbar-brand mx-auto" href="#">DLYLY TOURISM</a>
@@ -66,6 +66,7 @@
                                     @{
                                         if (User.FindFirstValue(ClaimTypes.Role) == "Tourist")
                                         {
+                                           
                                             <li><a class="dropdown-item" asp-controller="Tourist" asp-action="Profile">Edit Profile</a></li>
                                         }
                                         else

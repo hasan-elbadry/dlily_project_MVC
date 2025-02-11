@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dlily_project.DAL;
 
@@ -11,9 +12,11 @@ using dlily_project.DAL;
 namespace dlily_project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250211200613_articleMigration")]
+    partial class articleMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -304,78 +307,6 @@ namespace dlily_project.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TouristPlaces");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 4,
-                            Article = "The Giza pyramid complex includes the Great Pyramid of Giza...",
-                            Category = "Ancient Monument",
-                            CloseAt = new TimeSpan(0, 17, 0, 0, 0),
-                            Description = "Ancient pyramids and the last surviving Wonder of the Ancient World",
-                            EntryFee = 200.0,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/a/af/Giza_pyramid_complex_%28edited%29.jpg",
-                            Location = "https://www.google.com/maps/place/The+Great+Pyramid+of+Giza/@29.9792345,31.1342019,15z/",
-                            Name = "Great Pyramids of Giza",
-                            OpenAt = new TimeSpan(0, 8, 0, 0, 0),
-                            Rating = (byte)5
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Article = "Built approximately 1400 BCE, this temple was dedicated to the Theban Triad...",
-                            Category = "Archaeological Site",
-                            CloseAt = new TimeSpan(0, 22, 0, 0, 0),
-                            Description = "Massive Ancient Egyptian temple complex on the east bank of the Nile",
-                            EntryFee = 160.0,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/4/49/Luxor_Temple_18.jpg",
-                            Location = "https://www.google.com/maps/place/Luxor+Temple/@25.6996147,32.6366406,17z/",
-                            Name = "Luxor Temple",
-                            OpenAt = new TimeSpan(0, 6, 0, 0, 0),
-                            Rating = (byte)5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Article = "Commissioned by Pharaoh Ramesses II to commemorate his victory...",
-                            Category = "Historical Site",
-                            CloseAt = new TimeSpan(0, 18, 0, 0, 0),
-                            Description = "Twin rock-cut temples dating back to the 13th century BCE",
-                            EntryFee = 240.0,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/8/8e/Abu_Simbel_Temple_%288488942077%29.jpg",
-                            Location = "https://www.google.com/maps/place/Abu+Simbel+Temples/@22.3369232,31.6254713,17z/",
-                            Name = "Abu Simbel Temples",
-                            OpenAt = new TimeSpan(0, 5, 0, 0, 0),
-                            Rating = (byte)5
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Article = "Contains over 120,000 items including the treasures of Tutankhamun...",
-                            Category = "Museum",
-                            CloseAt = new TimeSpan(0, 17, 0, 0, 0),
-                            Description = "Home to the world's most extensive collection of Pharaonic antiquities",
-                            EntryFee = 300.0,
-                            ImageUrl = "https://live.staticflickr.com/65535/53609865504_1c1a8d7c0e_b.jpg",
-                            Location = "https://www.google.com/maps/place/The+Egyptian+Museum/@30.0478085,31.2335643,17z/",
-                            Name = "The Egyptian Museum",
-                            OpenAt = new TimeSpan(0, 9, 0, 0, 0),
-                            Rating = (byte)5
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Article = "Contains 63 magnificent royal tombs from the New Kingdom period...",
-                            Category = "Archaeological Site",
-                            CloseAt = new TimeSpan(0, 17, 0, 0, 0),
-                            Description = "Ancient burial ground for Egyptian royalty",
-                            EntryFee = 240.0,
-                            ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/4/4a/Valley_of_the_Kings_Overview.jpg",
-                            Location = "https://www.google.com/maps/place/Valley+of+the+Kings/@25.7401865,32.6015273,17z/",
-                            Name = "Valley of the Kings",
-                            OpenAt = new TimeSpan(0, 6, 0, 0, 0),
-                            Rating = (byte)5
-                        });
                 });
 
             modelBuilder.Entity("dlily_project.DAL.Models.Users.Tourgide", b =>
