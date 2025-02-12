@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Egypt Travel Guide | Ancient Wonders</title>
+    <title>Egypt Travel Guide | @Model.Name</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -17,170 +17,311 @@
             --accent-blue: #3A6B8A;
             --light-blue: #EFF7FC;
             --pure-white: #FFFFFF;
+            --gold: #FFD700;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
-            background-color: var(--light-blue);
+            background: linear-gradient(135deg, var(--light-blue) 0%, #dfe9f3 100%);
+            min-height: 100vh;
         }
 
         .container {
             max-width: 1200px;
-            margin: 2rem auto;
+            margin: 3rem auto;
             padding: 0 20px;
         }
 
         .hero-card {
             background: var(--pure-white);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
             overflow: hidden;
-        }
-
-        .hero-image {
-            height: 400px;
-            background: linear-gradient(rgba(42,59,71,0.3), rgba(42,59,71,0.3)),
-                        url('https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
+            transform: translateY(0);
+            transition: var(--transition);
             position: relative;
         }
 
+        .hero-image {
+            height: 500px;
+            background: linear-gradient(45deg, rgba(42,59,71,0.4), rgba(42,59,71,0.2)),
+                        url('@Model.ImageUrl');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(transparent, var(--pure-white));
+        }
+
         .hero-content {
-            padding: 2rem;
+            padding: 3rem;
             position: relative;
         }
 
         .place-title {
             color: var(--primary-blue);
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
         }
 
-        .meta-info {
+        .place-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-blue);
+            border-radius: 2px;
+        }
+
+        .meta-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2.5rem 0;
+        }
+
+        .meta-card {
+            background: var(--pure-white);
             padding: 1.5rem;
-            background: var(--light-blue);
-            border-radius: 10px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .meta-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
         }
 
         .info-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 1rem;
         }
 
-        .info-item i {
+        .info-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--light-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
             color: var(--accent-blue);
-            font-size: 1.2rem;
         }
 
-        .rating {
-            color: #FFD700;
-            font-size: 1.2rem;
+        .rating-stars {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .star {
+            color: var(--gold);
+            font-size: 1.4rem;
+            position: relative;
+        }
+
+        .star.half::before {
+            content: '\f089';
+            position: absolute;
+            left: 0;
+            width: 50%;
+            overflow: hidden;
+        }
+
+        .price-badge {
+            position: absolute;
+            top: -25px;
+            right: 30px;
+            background: var(--accent-blue);
+            color: var(--pure-white);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(58,107,138,0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+    
+
+        .description-section {
+            margin: 3rem 0;
+            position: relative;
         }
 
         .description {
             line-height: 1.8;
             color: var(--primary-blue);
             font-size: 1.1rem;
-            margin: 2rem 0;
+            position: relative;
+            padding-left: 2rem;
+            border-left: 3px solid var(--accent-blue);
         }
 
-        .badge {
-            background: var(--accent-blue);
-            color: var(--pure-white);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            display: inline-block;
-            margin: 0.5rem 0;
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .highlight-card {
+            background: var(--pure-white);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-5px);
         }
 
         .location-btn {
-            background: var(--primary-blue);
+            background: linear-gradient(45deg, var(--primary-blue), var(--accent-blue));
             color: white;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             border-radius: 30px;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
             text-decoration: none;
-            transition: transform 0.3s ease;
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
-        .location-btn:hover {
-            transform: translateY(-3px);
+        .location-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255,255,255,0.3),
+                transparent
+            );
+            transition: 0.5s;
         }
-        
-      
+
+        .location-btn:hover::before {
+            left: 100%;
+        }
+
+
+
+       
     </style>
 </head>
 <body>
-<article class="hero-card">
-    <div class="hero-image" 
-         style="background-image: linear-gradient(rgba(42,59,71,0.3), rgba(42,59,71,0.3)), url('@Model.ImageUrl')">
-    </div>
-    
-    <div class="hero-content">
-        <h1 class="place-title">@Model.Name</h1>
+<div class="container">
+    <article class="hero-card">
+        <div class="hero-image"></div>
         
-    
-            
-            <div class="info-item">
-                <i class="fas fa-clock"></i>
-                <div>
-                    <h3>Opening Hours</h3>
-                    <p>@Model.OpenAt.ToString(@"hh\:mm") - @Model.CloseAt.ToString(@"hh\:mm")</p>
-                </div>
+        <div class="hero-content">
+            <div class="price-badge">
+                <i class="fas fa-ticket-alt"></i>
+                EGP @Model.EntryFee.ToString("0.00")
             </div>
             
-            <div class="info-item">
-                <i class="fas fa-tag"></i>
-                <div>
-                    <h3>Category</h3>
-                    <p>@Model.Category</p>
-                </div>
-            </div>
+            <h1 class="place-title">@Model.Name</h1>
             
-            <div class="info-item">
-                <i class="fas fa-star"></i>
-                <div>
-                    <h3>Rating</h3>
-                    <div class="rating">
-                        @for (int i = 0; i < Model.Rating; i++)
-                        {
+            <div class="meta-grid">
+                <div class="meta-card">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h3>Opening Hours</h3>
+                            <p>@Model.OpenAt.ToString(@"hh\:mm") - @Model.CloseAt.ToString(@"hh\:mm")</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meta-card">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        <div>
+                            <h3>Category</h3>
+                            <p>@Model.Category</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meta-card">
+                    <div class="info-item">
+                        <div class="info-icon">
                             <i class="fas fa-star"></i>
-                        }
-                        @if (Model.Rating % 1 > 0)
-                        {
-                            <i class="fas fa-star-half-alt"></i>
-                        }
-                        @Model.Rating.ToString("0.0")
+                        </div>
+                        <div>
+                            <h3>Rating</h3>
+                            <div class="rating-stars">
+                                @{
+                                    int fullStars = (int)Model.Rating;
+                                    bool hasHalfStar = (Model.Rating - fullStars) >= 0.5;
+                                }
+                                @for (int i = 0; i < fullStars; i++)
+                                {
+                                    <i class="fas fa-star star"></i>
+                                }
+                                @if (hasHalfStar)
+                                {
+                                    <i class="fas fa-star-half-alt star"></i>
+                                }
+                                <span>(@Model.Rating.ToString("0.0"))</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="price-badge">
-            <i class="fas fa-ticket-alt"></i>
-            EGP @Model.EntryFee.ToString("0.00")
-        </div>
+            <div class="description-section">
+                <p class="description">@Model.Description</p
+                <p class="description">@Model.Article</p>
+            </div>
 
-        <p class="description">@Model.Description</p>
-         <p class="description">@Model.Article</p>
-          <a href="@Model.Location" class="location-btn" target="_blank">
-            <i class="fas fa-map-marked-alt"></i> View on Map
-        </a>
-    </div>
-</article>
+   
+
+            <a href="@Model.Location" class="location-btn" target="_blank">
+                <i class="fas fa-map-marked-alt"></i> 
+                View on Map
+            </a>
+        </div>
+    </article>
+</div>
 </body>
 </html>
