@@ -1,4 +1,4 @@
-﻿using TouristPlaces.Models
+using TouristPlaces.Models
 @{
     ViewData["Title"] = "Index";
 }
@@ -10,11 +10,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Egypt Attractions - Travel Guide</title>
-    <link rel="stylesheet" href="~/css/site.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
  <style>
 
+           :root {
+            --primary-blue: #2A3B47;
+            --accent-blue: #3A6B8A;
+            --light-blue: #EFF7FC;
+            --pure-white: #FFFFFF;
+            --gold: #FFD700;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
       body {
           background-color: #f9f9f9;
           color: #333;
@@ -36,14 +50,7 @@
           padding: 40px 20px;
       }
 
-      h1 {
-          font-size: 2.8rem;
-          color: #003b57;
-          font-weight: 600;
-          letter-spacing: -0.5px;
-          text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      }
-
+   
       .attraction-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -135,7 +142,7 @@
           fill: #ffc107;
       }
 
-      h2 {
+        .place-name {
           margin-bottom: 15px;
           font-size: 24px;
       }
@@ -209,7 +216,7 @@
                         </div>
                     </div>
                     <div class="card-content">
-                        <h2>@place.Name</h2>
+                        <h2 class="place-name">@place.Name</h2>
                     
                         <p class="attraction-description">@place.Description</p>
                       
@@ -218,7 +225,7 @@
                                asp-action="Detail" 
                                asp-route-id="@place.Id" 
                                class="read-more">
-                                Read More
+                                Read More →
                             </a>
                       
                     </div>
