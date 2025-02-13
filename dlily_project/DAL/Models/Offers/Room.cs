@@ -5,13 +5,7 @@
         public int Id { get; set; }
 
         public string Number { get; set; }
-        public string Image { get; set; }
-
-
-
+        public string Images { get; set; }
         public string Type { get; set; }
-
-
-
     }
 }

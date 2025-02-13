@@ -18,7 +18,7 @@ namespace dlily_project.Controllers
         }
         public IActionResult Index()
         {
-            var hotels = _context.HotelOffers.ToList();
+            var hotels = _context.Hotels.ToList();
             var compaines = _context.CompanyOffers.ToList();
             var tourgide = _context.Tourgides.ToList();
 
@@ -26,7 +26,7 @@ namespace dlily_project.Controllers
 
             var model = new HomeViewModel
             {
-                HotelOffers = hotels,
+                Hotels = hotels,
                 CompanyOffers  = compaines,
                 Tourgides = tourgide
             };
@@ -35,9 +35,23 @@ namespace dlily_project.Controllers
         [Authorize]
         public IActionResult Hotels()
         {
-            var hotles = _context.HotelOffers.ToList();
+            var hotels = _context.Hotels
+      .ToList() // Move data into memory
+      .Select(x => new HotelViewModel
+      {
+          HomeImage = x.HomeImage,
+          Description = x.Description,
+          Id = x.Id,
+          Location = x.Location,
+          Name = x.Name,
+          Price = x.Price,
+          Rating = x.Rating,
+          Services = (x.Services ?? "").Split(",").ToList(),
+          OtherImages = (x.OtherImages ?? "").Split(",").ToList(),
+      })
+      .ToList();
 
-            return View(hotles);
+            return View(hotels);
         }
 
         [Authorize]

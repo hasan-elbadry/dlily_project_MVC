@@ -17,9 +17,7 @@ namespace dlily_project.DAL.Models.Offers
         [StringLength(200)]
         public string Location { get; set; } = string.Empty;
 
-
         public string WebSiteUrl { get; set; }
-
 
         [Range(0, double.MaxValue, ErrorMessage = "Price must be a positive value.")]
         public double Price { get; set; }
