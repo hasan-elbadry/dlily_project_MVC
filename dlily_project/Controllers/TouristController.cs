@@ -1,4 +1,5 @@
 ﻿using dlily_project.DAL.Models.Users;
+using dlily_project.ViewModels.AuthViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

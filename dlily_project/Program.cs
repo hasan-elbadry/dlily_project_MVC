@@ -16,6 +16,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/Home/Error";
     });
 
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 

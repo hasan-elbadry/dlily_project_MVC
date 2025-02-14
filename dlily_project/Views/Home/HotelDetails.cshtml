@@ -1,0 +1,109 @@
+﻿@model HotelViewModel
+
+<html>
+
+<head>
+    <title>Hotel Details</title>
+    <link rel="stylesheet" href="~/css/hotelsdetails.css" asp-append-version="true">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="pagehotel" id="page-content">
+        <div class="hotel-card">
+            <div class="hotel-content">
+                <div class="hotel-de">
+                    <div class="hotel-details">
+                        <h2 class="hotel-name">@Model.Name</h2>
+                        <div class="stars">
+                            @for (int i = 0; i < Model.Rating; i++)
+                            {
+                                <i class="fas fa-star"></i>
+                            }
+                        </div>
+                        <a href="@Model.Location"
+                        target="_blank" class="map-link">📍 New Administrative Capital, Cairo - View on map</a>
+                        <br>
+                        <p class="description">@Model.Description</p>
+                    </div>
+                    <div class="separator" id="h"></div>
+                    <div class="hotel-footer">
+                        <div class="price">
+                            <span class="label">Avg price per night</span><br>
+                            <span class="amount">@Model.Price$</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="galleryyy">
+                <img class="large"
+                src="@Model.HomeImage">
+                @for (int i = 0; i < Model.OtherImages.Count; i++)
+                {
+                    <img src="@Model.OtherImages[i]">
+                }
+            </div>
+        </div>
+        <div class="amenities">
+            @foreach (var item in Model.Services)
+            {
+                <div class="amenity">
+                    <i class="fas fa-check"></i>
+                    @item
+                </div>
+
+            }
+        </div>
+       
+
+        <section id="hotels" class="hotels">
+            
+                <div class="hotels-container">
+                @foreach (var room in Model.Rooms)
+                {
+
+                        <form method="post" asp-action="RoomDetails">
+                            <!-- Hidden Input to Send Entire Room Data as JSON -->
+                            <input type="hidden" name="roomData" value='@System.Text.Json.JsonSerializer.Serialize(room)' />
+
+                            <button type="submit" class="hotels-card" style="border: none; background: none; padding: 0; cursor: pointer;">
+                                <div class="hotels-card-image">
+                                    <img src="@room.Images[0]" alt="Room Image">
+                                    @if (room.OfferPresentage != 0)
+                                    {
+                                        <span class="hotels-discount">@room.OfferPresentage% Off</span>
+                                    }
+                                </div>
+                                <div class="hotels-card-content">
+                                    <h3>@room.RoomType</h3>
+                                    <p>@room.BedType</p>
+                                    <hr>
+                                    <div class="hotels-card-details">
+                                        <div class="hotels-duration">
+                                            <i class="far fa-clock hotels-icon"></i>
+                                            <span>@room.Days Days</span>
+                                        </div>
+                                        <div class="hotels-price">
+                                            @if (room.OfferPresentage != 0)
+                                            {
+                                                <span class="hotels-old-price">@room.OldPrice EGP</span>
+                                            }
+                                            <span class="hotels-new-price">@room.Price EGP</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+
+                }
+                </div>
+            
+        </section>
+       
+    </nav>
+</body>
+
+</html>

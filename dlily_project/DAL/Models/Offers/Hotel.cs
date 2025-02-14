@@ -17,6 +17,5 @@ namespace dlily_project.DAL.Models.Offers
 
         public IEnumerable<Room> Rooms { get; set; }
         public IEnumerable<ReviewHotel> ReviewHotels { get; set; }
-
     }
 }

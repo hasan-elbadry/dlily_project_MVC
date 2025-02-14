@@ -1,7 +1,10 @@
-﻿namespace dlily_project.ViewModels
+﻿using dlily_project.DAL.Enum;
+
+namespace dlily_project.ViewModels.AuthViewModel
 {
-    public class TouristProfileViewModel
+    public class TourgideSignUpViewModel
     {
+
         [Required(ErrorMessage = "Username is required.")]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "Username must be at least 3 characters.")]
         public string Name { get; set; }
@@ -16,13 +19,13 @@
         [StringLength(15)]
         public string Phone { get; set; }
 
-        public string? CurrentPassword { get; set; }
-
+        [Required(ErrorMessage = "Password is required.")]
         [StringLength(100, MinimumLength = 6, ErrorMessage = "Password must be at least 6 characters.")]
-        public string? NewPassword { get; set; }
+        public string Password { get; set; }
 
-        [Compare("NewPassword", ErrorMessage = "Passwords do not match")]
-        public string? ConfirmNewPassword { get; set; }
+        [Required(ErrorMessage = "Confirm Password is required")]
+        [Compare("Password", ErrorMessage = "Passwords do not match")]
+        public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "Address is required.")]
         [StringLength(100)]
@@ -35,9 +38,14 @@
         [StringLength(100)]
         public string SpokenLanguage { get; set; } = string.Empty;
 
-        [Display(Name = "Profile Picture")]
-        public byte[]? ShowProfilePicture { get; set; }
+        [Range(0, 5)]
+        public byte Rating { get; set; }
 
-        public IFormFile? NewProfilePicture { get; set; }
+        [StringLength(500)]
+        public string Description { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Address is required.")]
+        [Display(Name = "Profile Picture")]
+        public IFormFile ProfilePicture { get; set; }
     }
 }

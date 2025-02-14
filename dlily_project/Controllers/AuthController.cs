@@ -1,4 +1,6 @@
-﻿namespace dlily_project.Controllers
+﻿using dlily_project.ViewModels.AuthViewModel;
+
+namespace dlily_project.Controllers
 {
     public class AuthController : Controller
     {

@@ -20,8 +20,8 @@ namespace dlily_project.DAL
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ReviewCompany>().HasKey(x => new {x.CompanyId,x.TouristId });
-
             modelBuilder.Entity<ReviewHotel>().HasKey(x => new { x.HotelId, x.TouristId });
+
             modelBuilder.Entity<TouristPlaces>().HasData(
     new TouristPlaces
     {
@@ -209,69 +209,140 @@ namespace dlily_project.DAL
                     ProfilePicture = GetImageBytes("Images/MohamedFriday.jpeg")
                 }
             );
-
             modelBuilder.Entity<Hotel>().HasData(
-               new Hotel
-               {
-                   Id = 1,
-                   Name = "Luxury Paradise Resort",
-                   Rating = 5,
-                   Location = "Maldives",
-                   Services = "Spa, Pool, Gym, Free Wi-Fi, Restaurant",
-                   Description = "A luxurious resort located in the heart of the Maldives, offering breathtaking views and world-class amenities.",
-                   HomeImage = "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                   OtherImages = "https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                   Price = 450.00
-               },
-               new Hotel
-               {
-                   Id = 2,
-                   Name = "Sunset Beach Hotel",
-                   Rating = 4,
-                   Location = "Bali, Indonesia",
-                   Services = "Beach Access, Pool, Bar, Free Wi-Fi, Restaurant",
-                   Description = "A serene beachfront hotel with stunning sunset views and a relaxing atmosphere.",
-                   HomeImage = "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                   OtherImages = "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                   Price = 350.00
-               },
-               new Hotel
-               {
-                   Id = 3,
-                   Name = "Mountain View Lodge",
-                   Rating = 4,
-                   Location = "Swiss Alps",
-                   Services = "Skiing, Spa, Restaurant, Free Wi-Fi",
-                   Description = "A cozy lodge nestled in the Swiss Alps, perfect for winter sports and relaxation.",
-                   HomeImage = "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                   OtherImages = "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                   Price = 300.00
-               },
-               new Hotel
-               {
-                   Id = 4,
-                   Name = "City Central Hotel",
-                   Rating = 3,
-                   Location = "New York, USA",
-                   Services = "Gym, Free Wi-Fi, Restaurant, Conference Rooms",
-                   Description = "A modern hotel located in the heart of New York City, ideal for business and leisure travelers.",
-                   HomeImage = "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                   OtherImages = "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                   Price = 250.00
-               },
-               new Hotel
-               {
-                   Id = 5,
-                   Name = "Desert Oasis Resort",
-                   Rating = 5,
-                   Location = "Dubai, UAE",
-                   Services = "Pool, Spa, Free Wi-Fi, Restaurant, Camel Riding",
-                   Description = "A luxurious resort in the middle of the desert, offering a unique blend of tradition and modernity.",
-                   HomeImage = "https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                   OtherImages = "https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-                   Price = 500.00
-               }
-           );
+            new Hotel
+            {
+                Id = 1,
+                Name = "Luxury Paradise Resort",
+                Rating = 5,
+                Location = "Maldives",
+                Services = "Spa, Pool, Gym, Free Wi-Fi, Restaurant",
+                Description = "A luxurious resort located in the heart of the Maldives, offering breathtaking views and world-class amenities.",
+                HomeImage = "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                OtherImages = "https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                Price = 450.00,
+            },
+            new Hotel
+            {
+                Id = 2,
+                Name = "Sunset Beach Hotel",
+                Rating = 4,
+                Location = "Bali, Indonesia",
+                Services = "Beach Access, Pool, Bar, Free Wi-Fi, Restaurant",
+                Description = "A serene beachfront hotel with stunning sunset views and a relaxing atmosphere.",
+                HomeImage = "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                OtherImages = "https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1549989476-69a92fa57c36?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                Price = 350.00
+            },
+            new Hotel
+            {
+                Id = 3,
+                Name = "Mountain View Lodge",
+                Rating = 4,
+                Location = "Swiss Alps",
+                Services = "Skiing, Spa, Restaurant, Free Wi-Fi",
+                Description = "A cozy lodge nestled in the Swiss Alps, perfect for winter sports and relaxation.",
+                HomeImage = "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                OtherImages = "https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                Price = 300.00
+            },
+            new Hotel
+            {
+                Id = 4,
+                Name = "City Central Hotel",
+                Rating = 3,
+                Location = "New York, USA",
+                Services = "Gym, Free Wi-Fi, Restaurant, Conference Rooms",
+                Description = "A modern hotel located in the heart of New York City, ideal for business and leisure travelers.",
+                HomeImage = "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                OtherImages = "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1499856871958-5b9627545d1a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                Price = 250.00
+            },
+            new Hotel
+            {
+                Id = 5,
+                Name = "Desert Oasis Resort",
+                Rating = 5,
+                Location = "Dubai, UAE",
+                Services = "Pool, Spa, Free Wi-Fi, Restaurant, Camel Riding",
+                Description = "A luxurious resort in the middle of the desert, offering a unique blend of tradition and modernity.",
+                HomeImage = "https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                OtherImages = "https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80,https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                Price = 500.00
+            }
+        );
+
+
+            var random = new Random();
+            var roomTypes = new[] { "One Bedroom Apartment", "Two-Bedroom Apartment", "Stand Alone Villa", "Deluxe Suite", "Executive Room", "Family Room", "Penthouse Suite" };
+            var bedTypes = new[] { "1 king bed", "2 twin beds, 1 king bed", "4 full beds, 1 king bed", "1 queen bed", "2 queen beds", "1 king bed, 1 sofa bed" };
+            var views = new[] { "Garden view", "City view", "Sea view", "Mountain view", "Pool view", "Lake view" };
+            var facilities = new[]
+            {
+        "Balcony", "Air conditioning", "Private bathroom", "Flat-screen TV", "Minibar", "Free Wifi",
+        "Soundproof", "Safe", "Tea/Coffee maker", "Kitchenette", "Jacuzzi", "Work desk", "Sitting area",
+        "Walk-in closet", "Patio", "Fireplace", "Dining area", "Washing machine", "Dryer", "Ironing facilities"
+    };
+            var services = new[]
+            {
+        "Free Wifi;fas fa-wifi",
+        "Air Conditioning;fas fa-snowflake",
+        "Private Bathroom;fas fa-bath",
+        "Minibar;fas fa-wine-glass-alt",
+        "Flat-screen TV;fas fa-tv",
+        "Balcony;fas fa-umbrella-beach",
+        "Soundproof;fas fa-volume-mute",
+        "Safe;fas fa-lock",
+        "Tea/Coffee maker;fas fa-coffee",
+        "Jacuzzi;fas fa-hot-tub",
+        "Kitchenette;fas fa-utensils",
+        "Work desk;fas fa-laptop",
+        "Sitting area;fas fa-couch",
+        "Walk-in closet;fas fa-tshirt",
+        "Patio;fas fa-umbrella",
+        "Fireplace;fas fa-fire",
+        "Dining area;fas fa-utensils",
+        "Washing machine;fas fa-washing-machine",
+        "Dryer;fas fa-wind",
+        "Ironing facilities;fas fa-iron"
+    };
+            var imageUrls = new[]
+            {
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/426630869.jpg",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/426630873.jpg",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/426630853.jpg",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/426630845.jpg",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/426630915.jpg",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/426630925.jpg",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/426630935.jpg",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/426630945.jpg",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/426630955.jpg",
+        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/426630965.jpg"
+    };
+
+            var rooms = new List<Room>();
+            for (int i = 1; i <= 25; i++)
+            {
+                rooms.Add(new Room
+                {
+                    Id = i,
+                    RoomNumber = $"Room {i}",
+                    Images = string.Join(",", imageUrls[random.Next(imageUrls.Length)], imageUrls[random.Next(imageUrls.Length)], imageUrls[random.Next(imageUrls.Length)]), // Random 3 images
+                    OfferPresentage = random.Next(0, 30),
+                    RoomType = roomTypes[random.Next(roomTypes.Length)],
+                    BedType = bedTypes[random.Next(bedTypes.Length)],
+                    Days = random.Next(1, 14),
+                    Price = random.Next(5000, 30000),
+                    OldPrice = random.Next(6000, 35000),
+                    Services = string.Join(",", services.Take(random.Next(5, services.Length)).ToArray()), // Random 5-10 services
+                    RoomSize = $"{random.Next(30, 150)} m²",
+                    RoomDescription = "A spacious and comfortable room with modern amenities.",
+                    View = views[random.Next(views.Length)],
+                    Facilities = string.Join(",", facilities.Take(random.Next(5, facilities.Length)).ToArray()), // Random 5-10 facilities
+                    HotelId = random.Next(1, 6)
+                });
+            }
+            modelBuilder.Entity<Room>().HasData(rooms);
 
             modelBuilder.Entity<CompanyOffer>().HasData(
             new CompanyOffer

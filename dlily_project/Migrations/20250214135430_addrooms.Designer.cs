@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using dlily_project.DAL;
 
@@ -11,9 +12,11 @@ using dlily_project.DAL;
 namespace dlily_project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250214135430_addrooms")]
+    partial class addrooms
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,7 +64,7 @@ namespace dlily_project.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CompanyOffers", (string)null);
+                    b.ToTable("CompanyOffers");
 
                     b.HasData(
                         new
@@ -150,7 +153,7 @@ namespace dlily_project.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Hotels", (string)null);
+                    b.ToTable("Hotels");
 
                     b.HasData(
                         new
@@ -278,7 +281,7 @@ namespace dlily_project.Migrations
 
                     b.HasIndex("HotelId");
 
-                    b.ToTable("Room", (string)null);
+                    b.ToTable("Room");
 
                     b.HasData(
                         new
@@ -485,7 +488,7 @@ namespace dlily_project.Migrations
 
                     b.HasIndex("TouristId");
 
-                    b.ToTable("ReviewCompanies", (string)null);
+                    b.ToTable("ReviewCompanies");
                 });
 
             modelBuilder.Entity("dlily_project.DAL.Models.Reviews.ReviewHotel", b =>
@@ -510,7 +513,7 @@ namespace dlily_project.Migrations
 
                     b.HasIndex("TouristId");
 
-                    b.ToTable("ReviewHotels", (string)null);
+                    b.ToTable("ReviewHotels");
                 });
 
             modelBuilder.Entity("dlily_project.DAL.Models.TouristPlaces", b =>
@@ -563,7 +566,7 @@ namespace dlily_project.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TouristPlaces", (string)null);
+                    b.ToTable("TouristPlaces");
 
                     b.HasData(
                         new
@@ -696,7 +699,7 @@ namespace dlily_project.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tourgides", (string)null);
+                    b.ToTable("Tourgides");
 
                     b.HasData(
                         new
@@ -873,7 +876,7 @@ namespace dlily_project.Migrations
 
                     b.HasIndex("TourgideId");
 
-                    b.ToTable("Tourists", (string)null);
+                    b.ToTable("Tourists");
                 });
 
             modelBuilder.Entity("dlily_project.DAL.Models.Offers.Room", b =>

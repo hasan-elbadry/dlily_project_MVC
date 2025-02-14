@@ -1,4 +1,4 @@
-﻿namespace dlily_project.ViewModels
+﻿namespace dlily_project.ViewModels.AuthViewModel
 {
     public class TouristSignInViewModel
     {

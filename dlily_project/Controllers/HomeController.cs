@@ -1,4 +1,7 @@
-using dlily_project.DAL.Models.Offers;
+﻿using dlily_project.DAL.Models.Offers;
+using Microsoft.EntityFrameworkCore;
+using System.Text;
+using System.Text.Json;
 
 namespace dlily_project.Controllers
 {
@@ -7,9 +10,12 @@ namespace dlily_project.Controllers
 
         private readonly ApplicationDbContext _context;
 
-        public HomeController(ApplicationDbContext context)
+        private readonly HttpClient _httpClient;
+
+        public HomeController(ApplicationDbContext context, HttpClient httpClient)
         {
             _context = context;
+            _httpClient = httpClient;
         }
         [Authorize]
         public IActionResult Translation()
@@ -32,26 +38,56 @@ namespace dlily_project.Controllers
             };
             return View(model);
         }
-        [Authorize]
-        public IActionResult Hotels()
-        {
-            var hotels = _context.Hotels
-      .ToList() // Move data into memory
-      .Select(x => new HotelViewModel
-      {
-          HomeImage = x.HomeImage,
-          Description = x.Description,
-          Id = x.Id,
-          Location = x.Location,
-          Name = x.Name,
-          Price = x.Price,
-          Rating = x.Rating,
-          Services = (x.Services ?? "").Split(",").ToList(),
-          OtherImages = (x.OtherImages ?? "").Split(",").ToList(),
-      })
-      .ToList();
 
+
+      ////  var hotels = _context.Hotels
+      //.ToList() // Move data into memory
+      //.Select(x => new HotelViewModel
+      //{
+      //    HomeImage = x.HomeImage,
+      //    Description = x.Description,
+      //    Id = x.Id,
+      //    Location = x.Location,
+      //    Name = x.Name,
+      //    Price = x.Price,
+      //    Rating = x.Rating,
+      //    Services = (x.Services ?? "").Split(",").ToList(),
+      //    OtherImages = (x.OtherImages ?? "").Split(",").ToList(),
+      //})
+      //.ToList();
+
+        [Authorize]
+        public async Task<IActionResult>  Hotels()
+        {
+            var hotels = await _httpClient.GetFromJsonAsync<List<HotelViewModel>>("https://localhost:7166/api/Hotel/");
             return View(hotels);
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult HotelDetails(string hotelJson)
+        {
+            if (string.IsNullOrEmpty(hotelJson))
+            {
+                return RedirectToAction("Hotels");
+            }
+
+            var hotelDetails = Newtonsoft.Json.JsonConvert.DeserializeObject<HotelViewModel>(hotelJson);
+            return View(hotelDetails);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult RoomDetails(string roomData)
+        {
+            if (string.IsNullOrEmpty(roomData))
+            {
+                return RedirectToAction("Hotels");
+            }
+
+            var hotelDetails = Newtonsoft.Json.JsonConvert.DeserializeObject<RoomViewModel>(roomData);
+            return View(hotelDetails);
         }
 
         [Authorize]

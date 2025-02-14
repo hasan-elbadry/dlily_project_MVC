@@ -1,0 +1,197 @@
+﻿@model RoomViewModel
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hotel Details</title>
+    <link rel="stylesheet" href="~/css/hotelsdetails.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @inject dlily_project.DAL.ApplicationDbContext _context
+
+</head>
+
+
+@{
+
+    if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <script>
+            Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '@ViewBag.Message',
+            timer: 2000, // Auto close after 3 seconds
+            showConfirmButton: false
+            }).then(() => {
+            window.location.href = '/Auth/TouristSignIn'; // Redirect to Sign-In page
+            });
+        </script>
+    }
+
+    if (!string.IsNullOrEmpty(ViewBag.error))
+    {
+        <script>
+            Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '@ViewBag.error'
+            });
+        </script>
+    }
+}
+
+<body>
+    <div class="popup-content">
+        <div class="slider-container">
+            <div class="main-image">
+                <img id="mainImg"
+                src="@Model.Images[0];o=&quot"
+                alt="Room Image">
+            </div>
+            <div class="gallery">
+                @if (Model.Images.Count>=2)
+                {
+                    <img src="@Model.Images[1];o=&quot"
+                    onclick="changeImage(this)" class="active">
+                }
+                @for (int i = 2; i < Model.Images.Count; i++)
+                {
+                    <img src="@Model.Images[i];o=&quot"
+                    onclick="changeImage(this)">
+                }
+
+            </div>
+            <button type="submit" id="checkout-btn" class="check-btn">Check Out</button>
+
+
+        </div>
+        <div class="content">
+            <h2 class="title">Superior Room, King Bed</h2>
+            <div class="features">
+                @foreach (var service in Model.Services)
+                {
+                    <div class="feature">
+                        <i class="@service[1] icon"></i> @service[0]
+                    </div>
+                }
+
+            </div>
+            <div class="size">
+                <h3 class="sizee">Room Size</h3>
+                <div class="feature">@Model.RoomSize</div>
+            </div>
+            <div class="feature" id="iconm">@Model.BedType <i class="material-icons icon">bed</i></i></div>
+            <p class="meter">
+                @Model.RoomDescription
+            </p>
+            <h3 class="sizee">View:</h3>
+            <ul>
+                <li>@Model.View</li>
+            </ul>
+            <h3 class="sizee">Facilities:</h3>
+            <ul>
+                @foreach (var item in Model.Facilities)
+                {
+                    <li>@item</li>
+                }
+
+            </ul>
+            <div style="display:flex;justify-content:space-around;position:relative;left:-65px">
+                <div>
+                    <h3 class="sizee" style="display:inline">Days:</h3> <span class="hotels-new-price">@Model.Days</span>
+
+                </div>
+                <div>
+                    <h3 class="sizee" style="display:inline">Price:</h3> <span class="hotels-new-price">@Model.Price EGP</span>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    @{
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        var tourist = _context.Tourists.FirstOrDefault(x => x.Id == int.Parse(userId));
+    }
+
+    <script>
+        function changeImage(img) {
+            document.getElementById("mainImg").src = img.src;
+            document.querySelectorAll(".gallery img").forEach(i => i.classList.remove("active"));
+            img.classList.add("active");
+        }
+
+            document.addEventListener("DOMContentLoaded", function () {
+            var checkoutBtn = document.getElementById("checkout-btn");
+            if (!checkoutBtn) return; // Ensure button exists
+
+            // Log the tourist object to verify its contents
+            var tourist = @Html.Raw(Json.Serialize(tourist));
+            console.log("Tourist object:", tourist);
+
+            checkoutBtn.addEventListener("click", function () {
+                // Create the booking data object
+                const bookingData = {
+                    roomNumber: "@Model.RoomNumber", // Ensure this is correct
+                    name: tourist.name, // Use the correct property name (case-sensitive)
+                    email: tourist.email,
+                    phone: tourist.phone,
+                    password: tourist.password,
+                    address: tourist.address,
+                    spokenLanguage: tourist.spokenLanguage
+                };
+
+                // Log the payload being sent
+                console.log("Sending payload:", JSON.stringify(bookingData));
+
+                // Send the request to the server
+                fetch('https://localhost:7166/api/Hotel/Book', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(bookingData)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => {
+                            throw new Error(`Server error: ${JSON.stringify(err)}`);
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Booking Successful!',
+                        text: 'Your room has been booked successfully.',
+                        timer: 2000,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.href = '/Home/Index';
+                    });
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: 'We could not complete the booking, please try again later.'
+                    });
+                    console.error('Error:', error);
+                });
+            });
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>
