@@ -15,52 +15,23 @@
 </head>
 
 
-@{
-
-    if (!string.IsNullOrEmpty(ViewBag.Message))
-    {
-        <script>
-            Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: '@ViewBag.Message',
-            timer: 2000, // Auto close after 3 seconds
-            showConfirmButton: false
-            }).then(() => {
-            window.location.href = '/Auth/TouristSignIn'; // Redirect to Sign-In page
-            });
-        </script>
-    }
-
-    if (!string.IsNullOrEmpty(ViewBag.error))
-    {
-        <script>
-            Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: '@ViewBag.error'
-            });
-        </script>
-    }
-}
-
 <body>
     <div class="popup-content">
         <div class="slider-container">
             <div class="main-image">
                 <img id="mainImg"
-                src="@Model.Images[0];o=&quot"
+                src="@Model.Images[0]"
                 alt="Room Image">
             </div>
             <div class="gallery">
                 @if (Model.Images.Count>=2)
                 {
-                    <img src="@Model.Images[1];o=&quot"
+                    <img src="@Model.Images[1]"
                     onclick="changeImage(this)" class="active">
                 }
                 @for (int i = 2; i < Model.Images.Count; i++)
                 {
-                    <img src="@Model.Images[i];o=&quot"
+                    <img src="@Model.Images[i]"
                     onclick="changeImage(this)">
                 }
 

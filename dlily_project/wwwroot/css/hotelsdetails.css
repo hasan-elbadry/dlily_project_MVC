@@ -230,7 +230,6 @@ body {
 .check-btn {
     background: #0071c2;
     color: white;
-    margin-top: 21rem;
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
@@ -519,7 +518,6 @@ body {
 .check-btn {
     background: #0071c2;
     color: white;
-    margin-top: 21rem;
     border: none;
     padding: 10px 15px;
     border-radius: 5px;
@@ -811,7 +809,6 @@ body {
     background: #0071c2;
     color: white;
     border: none;
-    margin-top: 21rem;
     padding: 15px 20px;
     border-radius: 10px;
     cursor: pointer;
