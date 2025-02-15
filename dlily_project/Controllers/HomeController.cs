@@ -59,7 +59,7 @@ namespace dlily_project.Controllers
         [Authorize]
         public async Task<IActionResult>  Hotels()
         {
-            var hotels = await _httpClient.GetFromJsonAsync<List<HotelViewModel>>("https://localhost:7166/api/Hotel/");
+            var hotels = await _httpClient.GetFromJsonAsync<List<HotelViewModel>>("http://hotelsdlily.runasp.net/api/hotel");
             return View(hotels);
         }
 
