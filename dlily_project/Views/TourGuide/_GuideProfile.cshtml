@@ -1,7 +1,8 @@
-﻿@model Tourgide 
+﻿@model Tourgide
+
 <!DOCTYPE html>
 <html lang="en">
-        <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Omar's Profile</title>
@@ -17,6 +18,7 @@
         }
 
         body {
+            border-radius: 20px;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             margin: 0;
@@ -27,7 +29,7 @@
 
         .container {
             background: white;
-            border-radius: 1.5rem;
+            border-radius: 20px;
             padding: 2.5rem;
             max-width: 1200px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -58,34 +60,34 @@
             object-fit: cover;
             margin-bottom: 1.5rem;
         }
+
         .modal-close {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    background: rgba(15, 144, 219, 0.906);
-    border: none;
-    border-radius: 50%;
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-   
-}
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(15, 144, 219, 0.906);
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
 
-.modal-close:hover {
-    background: rgba(255, 0, 0, 0.8);
-    transform: scale(1.1);
-}
+            .modal-close:hover {
+                background: rgba(255, 0, 0, 0.8);
+                transform: scale(1.1);
+            }
 
-.modal-close:active {
-    transform: scale(0.9);
-}
+            .modal-close:active {
+                transform: scale(0.9);
+            }
 
         .guide-specialties {
             display: flex;
@@ -145,7 +147,7 @@
             gap: 0.5rem;
             margin-top: 1rem;
         }
-       
+
         .calendar-day {
             padding: 0.5rem;
             text-align: center;
@@ -159,6 +161,8 @@
         }
 
         .fb-chat-btn {
+            margin:10px;
+            top:0;
             background-color: #0084ff;
             color: white;
             border: none;
@@ -169,6 +173,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+           
             cursor: pointer;
             transition: background 0.3s, transform 0.2s;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -179,7 +184,7 @@
             }
 
             .fb-chat-btn:hover {
-                background-color: #006bd6; 
+                background-color: #006bd6;
                 transform: scale(1.05);
             }
 
@@ -192,7 +197,7 @@
 <div class="container">
     <div class="profile-header">
         <div class="profile-card">
-                <img src="@Url.Action("GetImage", "TourGuide")"
+                <img src=""
                  alt="Tour Guide Photo" class="profile-pic">
             <h2>@Model.Name</h2>
             <p>@Model.Description</p>
@@ -207,7 +212,7 @@
                         <i class="far fa-star"></i>
                     }
                 </div>
-                    <button class="fb-chat-btn" onclick='connectToAgent(id)'>Chat Now</button>
+                 
             </div>
             <div class="contact-info">
                 <div class="contact-item">
@@ -219,7 +224,9 @@
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i> @Model.Email
                 </div>
+                  
             </div>
+                <button class="fb-chat-btn" onclick='connectToAgent(id)'>Chat Now</button>
         </div>
 
         <div class="profile-details">

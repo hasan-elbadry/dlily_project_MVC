@@ -32,6 +32,15 @@ namespace dlily_project.Controllers
                                           .ToList();
             return Json(tourGuideEmails); 
         }
+
+        [HttpGet]
+        public IActionResult GetTourGuide()
+        {
+            var tourGuideEmails = _context.Tourgides.ToList();
+
+
+            return Json(tourGuideEmails);
+        }
         public IActionResult GetImage(string email)
         {
             var guide = _context.Tourgides.FirstOrDefault(g => g.Email == email);
