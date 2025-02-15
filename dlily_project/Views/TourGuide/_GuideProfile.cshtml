@@ -1,0 +1,316 @@
+﻿@model Tourgide 
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omar's Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0e93ec;
+            --secondary-color: #00a6ff;
+            --accent-color: #f59e0b;
+            --text-dark: rgb(0, 0, 0);
+            --text-light: #ffefef;
+            --background-light: #f8fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            margin: 0;
+            padding: 2rem;
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+
+        .container {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            max-width: 1200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+        }
+
+        .profile-header {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .profile-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1.25rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+        }
+        .modal-close {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(15, 144, 219, 0.906);
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+   
+}
+
+.modal-close:hover {
+    background: rgba(255, 0, 0, 0.8);
+    transform: scale(1.1);
+}
+
+.modal-close:active {
+    transform: scale(0.9);
+}
+
+        .guide-specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .specialty-badge {
+            background: var(--background-light);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 1px solid var(--primary-color);
+        }
+
+        .language-section {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .language-tag {
+            background: var(--background-light);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .certification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .certification-card {
+            padding: 1.5rem;
+            border-radius: 1rem;
+            background: var(--background-light);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .tour-types {
+            columns: 2;
+            margin: 1rem 0;
+        }
+
+        .availability-calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+       
+        .calendar-day {
+            padding: 0.5rem;
+            text-align: center;
+            border-radius: 0.5rem;
+            background: var(--background-light);
+        }
+
+        .available {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .fb-chat-btn {
+            background-color: #0084ff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+            .fb-chat-btn i {
+                font-size: 18px;
+            }
+
+            .fb-chat-btn:hover {
+                background-color: #006bd6; 
+                transform: scale(1.05);
+            }
+
+            .fb-chat-btn:active {
+                transform: scale(0.95);
+            }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="profile-header">
+        <div class="profile-card">
+                <img src="@Url.Action("GetImage", "TourGuide")"
+                 alt="Tour Guide Photo" class="profile-pic">
+            <h2>@Model.Name</h2>
+            <p>@Model.Description</p>
+            <div class="rating-system">
+                <div class="stars">
+                    @for (int i = 0; i < Model.Rating; i++)
+                    {
+                        <i class="fas fa-star"></i>
+                    }
+                    @for (int i = Model.Rating; i < 5; i++)
+                    {
+                        <i class="far fa-star"></i>
+                    }
+                </div>
+                    <button class="fb-chat-btn" onclick='connectToAgent(id)'>Chat Now</button>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i> @Model.Phone
+                </div>
+                <div class="contact-item">
+                    <i class="fab fa-whatsapp"></i> @Model.Phone
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i> @Model.Email
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-details">
+            <h3>Language Proficiency</h3>
+            <div class="language-section">
+                @foreach (var lang in Model.SpokenLanguage.Split(','))
+                {
+                    <div class="language-tag">
+                        <i class="fas fa-language"></i> @lang.Trim()
+                    </div>
+                }
+            </div>
+
+             <h3>Certifications & Training</h3>
+                    <div class="certification-grid">
+                        <div class="certification-card">
+                            <h4><i class="fas fa-certificate"></i> Licensed Tour Guide</h4>
+                            <p>Egyptian Ministry of Tourism</p>
+                            <p>2022 - 2026</p>
+                        </div>
+                        <div class="certification-card">
+                            <h4><i class="fas fa-first-aid"></i> Wilderness First Aid</h4>
+                            <p>Red Cross Certified</p>
+                            <p>Valid until 2025</p>
+                        </div>
+                    </div>
+    
+                    <h3>Tour Types Offered</h3>
+                    <div class="tour-types">
+                        <p><i class="fas fa-check"></i> Private Tours</p>
+                        <p><i class="fas fa-check"></i> Group Tours</p>
+                        <p><i class="fas fa-check"></i> Custom Itineraries</p>
+                        <p><i class="fas fa-check"></i> Multi-Day Packages</p>
+                    </div>
+        </div>
+    </div>
+    <button class="modal-close" onclick="window.parent.closeModal()">&times;</button>
+</div>
+
+    <script>
+        window.__lc = window.__lc || {};
+        window.__lc.license = 19029287;
+        window.__lc.integration_name = "manual_channels";
+        window.__lc.product_name = "livechat";
+
+        (function (n, t, c) {
+            function i(n) { return e._h ? e._h.apply(null, n) : e._q.push(n) }
+            var e = {
+                _q: [], _h: null, _v: "2.0",
+                on: function () { i(["on", c.call(arguments)]) },
+                once: function () { i(["once", c.call(arguments)]) },
+                off: function () { i(["off", c.call(arguments)]) },
+                get: function () { if (!e._h) throw new Error("[LiveChatWidget] You can't use getters before load."); return i(["get", c.call(arguments)]) },
+                call: function () { i(["call", c.call(arguments)]) },
+                init: function () {
+                    var n = t.createElement("script");
+                    n.async = !0;
+                    n.src = "https://cdn.livechatinc.com/tracking.js";
+                    t.head.appendChild(n);
+                }
+            };
+            !n.__lc.asyncInit && e.init(), n.LiveChatWidget = n.LiveChatWidget || e;
+        }(window, document, [].slice));
+    </script>
+
+    <noscript>
+        <a href="https://www.livechat.com/chat-with/19029287/" rel="nofollow">Chat with us</a>, powered by
+        <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a>
+    </noscript>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        window.addEventListener('DOMContentLoaded', () => {
+            const height = document.documentElement.scrollHeight;
+            window.parent.postMessage({ type: 'resize', height: height }, '*');
+        });
+        function connectToAgent(id) {
+            if (window.LiveChatWidget) {
+                LiveChatWidget.on('ready', function () {
+                    LiveChatWidget.call("set_session_variables", {
+                        assigned_agent: id
+                    });
+
+                    LiveChatWidget.call("maximize");
+                });
+            } else {
+                console.error("❌ LiveChatWidget is not available. Make sure the script is loaded correctly.");
+            }
+        }
+
+        window.connectToAgent = connectToAgent;
+    </script>
+</body>
+</html>
