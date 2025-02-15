@@ -73,7 +73,7 @@
                 <div class="text-content">
                     <h1><span>EXPLORE</span> <br> THE <span>HOTELS</span></h1>
                     <br><br><br>
-                    <a asp-action="Hotels"><button class="book-button">BOOK NOW </button></a>
+                    <a asp-action="Hotels" asp-controller="Hotel"><button class="book-button">BOOK NOW </button></a>
                 </div>
             </div>
 
@@ -98,7 +98,7 @@
                                 <span class="new-price">@Model.Hotels[0].Price</span>
                             </div>
                         </div>
-                        <a asp-action="Hotels" class="explore-btn">EXPLORE NOW</a>
+                        <a asp-action="Hotels" asp-controller="Hotel" class="explore-btn">EXPLORE NOW</a>
                     </div>
                 </div>
 
@@ -121,7 +121,7 @@
                                 <span class="new-price">@Model.Hotels[1].Price</span>
                             </div>
                         </div>
-                        <a asp-action="Hotels" class="explore-btn">EXPLORE NOW</a>
+                        <a asp-action="Hotels" asp-controller="Hotel" class="explore-btn">EXPLORE NOW</a>
                     </div>
                 </div>
 
@@ -145,7 +145,7 @@
                                 <span class="new-price">@Model.Hotels[2].Price</span>
                             </div>
                         </div>
-                        <a asp-action="Hotels" class="explore-btn">EXPLORE NOW</a>
+                        <a asp-action="Hotels" asp-controller="Hotel" class="explore-btn">EXPLORE NOW</a>
                     </div>
                 </div>
                 <div class="nav-buttons">

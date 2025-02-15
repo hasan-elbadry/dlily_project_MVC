@@ -59,7 +59,7 @@
                             <span class="label">Avg price per night</span>
                             <span class="amount">@hotel.Price.ToString("c")</span>
                         </div>
-                        <form method="post" action="@Url.Action("HotelDetails", "Home")">
+                        <form method="post" action="@Url.Action("HotelDetails", "Hotel")">
                             <input type="hidden" name="hotelJson" value='@Newtonsoft.Json.JsonConvert.SerializeObject(hotel)' />
                             <button type="submit" class="check-btn">See More</button>
                         </form>
