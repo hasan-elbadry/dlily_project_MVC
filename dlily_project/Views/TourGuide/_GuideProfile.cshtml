@@ -197,7 +197,9 @@
 <div class="container">
     <div class="profile-header">
         <div class="profile-card">
-                <img src=""
+                <img src="@(Model.ProfilePicture != null && Model.ProfilePicture.Length > 0
+        ? $"data:image/png;base64,{Convert.ToBase64String(Model.ProfilePicture)}"
+        : "/images/placeholder.jpg")"
                  alt="Tour Guide Photo" class="profile-pic">
             <h2>@Model.Name</h2>
             <p>@Model.Description</p>
@@ -217,9 +219,6 @@
             <div class="contact-info">
                 <div class="contact-item">
                     <i class="fas fa-phone"></i> @Model.Phone
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-whatsapp"></i> @Model.Phone
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i> @Model.Email

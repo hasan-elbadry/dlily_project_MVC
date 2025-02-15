@@ -4,10 +4,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
-builder.Services
-    .AddDbContext<ApplicationDbContext>(x=>x
-    .UseSqlServer(builder.Configuration
-    .GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<ApplicationDbContext>((serviceProvider, options) =>
+{
+    var hostingEnvironment = serviceProvider.GetRequiredService<IWebHostEnvironment>();
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -16,11 +17,22 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = "/Home/Error";
     });
 
+
+
 builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var dbContext = services.GetRequiredService<ApplicationDbContext>();
+    var hostingEnvironment = services.GetRequiredService<IWebHostEnvironment>();
+
+    // Ensure the database is created and seeded
+    dbContext.Database.EnsureCreated();
+}
 
 if (!app.Environment.IsDevelopment())
 {

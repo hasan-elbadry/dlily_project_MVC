@@ -57,27 +57,59 @@
                         else
                         {
                             var tourist = _context.Tourists.FirstOrDefault(x => x.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!));
-                            string base64Image = Convert.ToBase64String(tourist.ProfilePicture);
-                            string imageUrl = "data:image/jpeg;base64," + base64Image;
-                            <img src="@imageUrl" alt="User" class="profile-img" id="profileImg">
 
-                            <div class="profile-dropdown" id="profileDropdown">
-                                <ul class="dropdown-menu">
-                                    @{
-                                        if (User.FindFirstValue(ClaimTypes.Role) == "Tourist")
-                                        {
-                                           
-                                            <li><a class="dropdown-item" asp-controller="Tourist" asp-action="Profile">Edit Profile</a></li>
+                            if(tourist != null){
+                                string base64Image = Convert.ToBase64String(tourist.ProfilePicture);
+                                string imageUrl = "data:image/jpeg;base64," + base64Image;
+                                <img src="@imageUrl" alt="User" class="profile-img" id="profileImg">
+
+                                <div class="profile-dropdown" id="profileDropdown">
+                                    <ul class="dropdown-menu">
+                                        @{
+                                            if (User.FindFirstValue(ClaimTypes.Role) == "Tourist")
+                                            {
+
+                                                <li><a class="dropdown-item" asp-controller="Tourist" asp-action="Profile">Edit Profile</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a class="dropdown-item">Edit Profile</a></li>
+                                            }
                                         }
-                                        else
-                                        {
-                                            <li><a class="dropdown-item">Edit Profile</a></li>
+                                        <li><a class="dropdown-item" href="#">Support</a></li>
+                                        <li><a class="dropdown-item text-danger" href="javascript:void(0);" id="logoutBtn" onclick="confirmLogout()">Logout</a></li>
+                                    </ul>
+                                </div>
+                            }
+                            else
+                            {
+                                var tourgide = _context.Tourgides.FirstOrDefault(x => x.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!));
+                                if (tourgide == null)
+                                    return;
+
+                                string base64Image = Convert.ToBase64String(tourgide.ProfilePicture);
+                                string imageUrl = "data:image/jpeg;base64," + base64Image;
+                                <img src="@imageUrl" alt="User" class="profile-img" id="profileImg">
+
+                                <div class="profile-dropdown" id="profileDropdown">
+                                    <ul class="dropdown-menu">
+                                        @{
+                                            if (User.FindFirstValue(ClaimTypes.Role) == "Tourist")
+                                            {
+
+                                                <li><a class="dropdown-item" asp-controller="Tourist" asp-action="Profile">Edit Profile</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li><a class="dropdown-item">Edit Profile</a></li>
+                                            }
                                         }
-                                    }
-                                    <li><a class="dropdown-item" href="#">Support</a></li>
-                                    <li><a class="dropdown-item text-danger" href="javascript:void(0);" id="logoutBtn" onclick="confirmLogout()">Logout</a></li>
-                                </ul>
-                            </div>
+                                        <li><a class="dropdown-item" href="#">Support</a></li>
+                                        <li><a class="dropdown-item text-danger" href="javascript:void(0);" id="logoutBtn" onclick="confirmLogout()">Logout</a></li>
+                                    </ul>
+                                </div>
+
+                            }
                         }
                     }
                 </div>

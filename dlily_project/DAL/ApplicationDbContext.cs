@@ -1,23 +1,166 @@
-﻿
-using dlily_project.DAL.Models.Offers;
+﻿using dlily_project.DAL.Models.Offers;
 using dlily_project.DAL.Models.Reviews;
-using dlily_project.DAL.Models.Users;
-using System;
-
 namespace dlily_project.DAL
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions options) : base(options)
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IWebHostEnvironment hostingEnvironment)
+            : base(options)
         {
+            _hostingEnvironment = hostingEnvironment;
         }
 
-        private static byte[] GetImageBytes(string imagePath)
+        private static void SeedTourgides(ModelBuilder modelBuilder, IWebHostEnvironment hostingEnvironment)
         {
-            return File.Exists(imagePath) ? File.ReadAllBytes(imagePath) : Array.Empty<byte>();
+            modelBuilder.Entity<Tourgide>().HasData(
+      new Tourgide
+      {
+          Id = 1,
+          Name = "Ahmed Aly Ahmed",
+          Gender = Gender.Male,
+          Phone = "01019273234",
+          Email = "ahmed.aly@gmail.com",
+          Address = "10 Karnak Temple Street, Luxor, Luxor Governorate",
+          Rating = 3,
+          Description = "Italian-speaking guide",
+          Price = 55.0,
+          SpokenLanguage = "Italian",
+          ProfilePicture = GetImageBytes("Assets/Images/AhmedAlyAhmed.jpeg", hostingEnvironment)
+      },
+      new Tourgide
+      {
+          Id = 2,
+          Name = "Ahmed Ramadan",
+          Gender = Gender.Male,
+          Phone = "01065502465",
+          Email = "ahmed.ramadan@gmail.com",
+          Address = "30 Zamalek Street, Cairo, Cairo Governorate",
+          Rating = 3,
+          Description = "German-speaking guide",
+          Price = 52.0,
+          SpokenLanguage = "German",
+          ProfilePicture = GetImageBytes("Assets/Images/AhmedRamadan.jpeg", hostingEnvironment)
+      },
+      new Tourgide
+      {
+          Id = 3,
+          Name = "Amr Fouad",
+          Gender = Gender.Male,
+          Phone = "01146146691",
+          Email = "amr.fouad@gmail.com",
+          Address = "25 Sharia Al Muizz Li-Din Allah, Cairo, Cairo Governorate",
+          Rating = 5,
+          Description = "English-speaking tour guide",
+          Price = 42.0,
+          SpokenLanguage = "English",
+          ProfilePicture = GetImageBytes("Assets/Images/AmrFouad.jpeg", hostingEnvironment)
+      },
+      new Tourgide
+      {
+          Id = 4,
+          Name = "Ibrahim Ghalwash",
+          Gender = Gender.Male,
+          Phone = "01033823595",
+          Email = "ibrahim.ghalwash@gmail.com",
+          Address = "18 Luxor Temple Street, Luxor, Luxor Governorate",
+          Rating = 4,
+          Description = "German-speaking guide",
+          Price = 50.0,
+          SpokenLanguage = "German",
+          ProfilePicture = GetImageBytes("Assets/Images/IbrahimGhalwash.jpeg", hostingEnvironment)
+      },
+      new Tourgide
+      {
+          Id = 5,
+          Name = "Mariam Ali",
+          Gender = Gender.Female,
+          Phone = "01065502465",
+          Email = "mariam.ali@gmail.com",
+          Address = "7 Philae Temple Road, Aswan, Aswan Governorate",
+          Rating = 5,
+          Description = "German-speaking guide",
+          Price = 48.0,
+          SpokenLanguage = "German",
+          ProfilePicture = GetImageBytes("Assets/Images/MariamAli.jpeg", hostingEnvironment)
+      },
+      new Tourgide
+      {
+          Id = 6,
+          Name = "Ahmed",
+          Gender = Gender.Male,
+          Phone = "01104682219",
+          Email = "ahmed.guide@gmail.com",
+          Address = "20 Al Azhar Street, Islamic Cairo, Cairo Governorate",
+          Rating = 3,
+          Description = "Italian-speaking guide",
+          Price = 55.0,
+          SpokenLanguage = "Italian",
+          ProfilePicture = GetImageBytes("Assets/Images/SignorAhmedElAlily.jpeg", hostingEnvironment)
+      },
+      new Tourgide
+      {
+          Id = 7,
+          Name = "Ebram Melles",
+          Gender = Gender.Male,
+          Phone = "01220801758",
+          Email = "ebram_melles.guide@gmail.com",
+          Address = "20 Al Azhar Street, Islamic Cairo, Cairo Governorate",
+          Rating = 3,
+          Description = "Speaking English and Japanese",
+          Price = 55.0,
+          SpokenLanguage = "English",
+          ProfilePicture = GetImageBytes("Assets/Images/EbramMelles.jpeg", hostingEnvironment)
+      },
+      new Tourgide
+      {
+          Id = 8,
+          Name = "Mohamed Gomaa",
+          Gender = Gender.Male,
+          Phone = "01022510710",
+          Email = "mohamed.gomaa@gmail.com",
+          Address = "12 Corniche El Nile Street, Aswan, Aswan Governorate",
+          Rating = 5,
+          Description = "English & Russian-speaking guide",
+          Price = 50.0,
+          SpokenLanguage = "English, Russian",
+          ProfilePicture = GetImageBytes("Assets/Images/MohamedFriday.jpeg", hostingEnvironment)
+      }
+  );
+
         }
-    
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+        private static byte[] GetImageBytes(string imagePath, IWebHostEnvironment hostingEnvironment)
+    {
+        // Resolve the full path for relative paths
+        string fullPath;
+
+        if (Path.IsPathRooted(imagePath))
+        {
+            // If the path is already absolute, use it as-is
+            fullPath = imagePath;
+        }
+        else
+        {
+            // Combine the relative path with the wwwroot folder
+            fullPath = Path.Combine(hostingEnvironment.WebRootPath, imagePath);
+        }
+
+        // Check if the file exists and return its bytes
+        if (File.Exists(fullPath))
+        {
+            return File.ReadAllBytes(fullPath);
+        }
+        else
+        {
+            // Log or handle the case where the file doesn't exist
+            Console.WriteLine($"File not found: {fullPath}");
+            return Array.Empty<byte>();
+        }
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ReviewCompany>().HasKey(x => new {x.CompanyId,x.TouristId });
             modelBuilder.Entity<ReviewHotel>().HasKey(x => new { x.HotelId, x.TouristId });
@@ -95,121 +238,7 @@ namespace dlily_project.DAL
     }
 );
 
-            modelBuilder.Entity<Tourgide>().HasData(
-                new Tourgide
-                {
-                    Id = 1,
-                    Name = "Ahmed Aly Ahmed",
-                    Gender = Gender.Male,
-                    Phone = "01019273234",
-                    Email = "ahmed.aly@gmail.com",
-                    Address = "10 Karnak Temple Street, Luxor, Luxor Governorate",
-                    Rating = 3,
-                    Description = "Italian-speaking guide",
-                    Price = 55.0,
-                    SpokenLanguage = "Italian",
-                    ProfilePicture = GetImageBytes("Images/AhmedAlyAhmed.jpeg")
-                },
-                new Tourgide
-                {
-                    Id = 2,
-                    Name = "Ahmed Ramadan",
-                    Gender = Gender.Male,
-                    Phone = "01065502465",
-                    Email = "ahmed.ramadan@gmail.com",
-                    Address = "30 Zamalek Street, Cairo, Cairo Governorate",
-                    Rating = 3,
-                    Description = "German-speaking guide",
-                    Price = 52.0,
-                    SpokenLanguage = "German",
-                    ProfilePicture = GetImageBytes("Images/AhmedRamadan.jpeg")
-                },
-                new Tourgide
-                {
-                    Id = 3,
-                    Name = "Amr Fouad",
-                    Gender = Gender.Male,
-                    Phone = "01146146691",
-                    Email = "amr.fouad@gmail.com",
-                    Address = "25 Sharia Al Muizz Li-Din Allah, Cairo, Cairo Governorate",
-                    Rating = 5,
-                    Description = "English-speaking tour guide",
-                    Price = 42.0,
-                    SpokenLanguage = "English",
-                    ProfilePicture = GetImageBytes("Images/AmrFouad.jpeg")
-                },
-                new Tourgide
-                {
-                    Id = 4,
-                    Name = "Ibrahim Ghalwash",
-                    Gender = Gender.Male,
-                    Phone = "01033823595",
-                    Email = "ibrahim.ghalwash@gmail.com",
-                    Address = "18 Luxor Temple Street, Luxor, Luxor Governorate",
-                    Rating = 4,
-                    Description = "German-speaking guide",
-                    Price = 50.0,
-                    SpokenLanguage = "German",
-                    ProfilePicture = GetImageBytes("Images/IbrahimGhalwash.jpeg")
-                },
-                new Tourgide
-                {
-                    Id = 5,
-                    Name = "Mariam Ali",
-                    Gender = Gender.Female,
-                    Phone = "01065502465",
-                    Email = "mariam.ali@gmail.com",
-                    Address = "7 Philae Temple Road, Aswan, Aswan Governorate",
-                    Rating = 5,
-                    Description = "German-speaking guide",
-                    Price = 48.0,
-                    SpokenLanguage = "German",
-                    ProfilePicture = GetImageBytes("Images/MariamAli.jpeg")
-                },
-                new Tourgide
-                {
-                    Id = 6,
-                    Name = "Ahmed",
-                    Gender = Gender.Male,
-                    Phone = "01104682219",
-                    Email = "ahmed.guide@gmail.com",
-                    Address = "20 Al Azhar Street, Islamic Cairo, Cairo Governorate",
-                    Rating = 3,
-                    Description = "Italian-speaking guide",
-                    Price = 55.0,
-                    SpokenLanguage = "Italian",
-                    ProfilePicture = GetImageBytes("Images/SignorAhmedElAlily.jpeg")
-                },
-                new Tourgide
-                {
-                    Id = 7,
-                    Name = "Ebram Melles",
-                    Gender = Gender.Male,
-                    Phone = "01220801758",
-                    Email = "ebram_melles.guide@gmail.com",
-                    Address = "20 Al Azhar Street, Islamic Cairo, Cairo Governorate",
-                    Rating = 3,
-                    Description = "Speaking English and Japanese",
-                    Price = 55.0,
-                    SpokenLanguage = "English",
-                    ProfilePicture = GetImageBytes("Images/EbramMelles.jpeg")
-                },
-                new Tourgide
-                {
-                    Id = 8,
-                    Name = "Mohamed Gomaa",
-                    Gender = Gender.Male,
-                    Phone = "01022510710",
-                    Email = "mohamed.gomaa@gmail.com",
-                    Address = "12 Corniche El Nile Street, Aswan, Aswan Governorate",
-                    Rating = 5,
-                    Description = "English & Russian-speaking guide",
-                    Price = 50.0,
-                    SpokenLanguage = "English, Russian",
-                    ProfilePicture = GetImageBytes("Images/MohamedFriday.jpeg")
-                }
-            );
-
+            SeedTourgides(modelBuilder, _hostingEnvironment);
 
             modelBuilder.Entity<Hotel>().HasData(
     new Hotel

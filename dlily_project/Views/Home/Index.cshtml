@@ -286,73 +286,32 @@
                 <div class="containerl">
                     <div class="carousel-containers">
                         <div class="carousel-tracks">
-                            <div class="cards actives" id="maxim">
-                                <img src="companies_home/photo_3.png" alt="" class="photo_3s">
-                                <h3>MAXIM TOURS</h3>
+                            <div class="cards active" id="travel">
+                                <img src="@(@Model.Tourgides[5].ProfilePicture != null && @Model.Tourgides[5].ProfilePicture.Length> 0
+        ? $"data:image/png;base64,{Convert.ToBase64String(@Model.Tourgides[5].ProfilePicture)}"
+        : "/images/placeholder.jpg")" alt="" class="photo_4s">
+                                <h3>@Model.Tourgides[5].Name</h3>
                                 <p>
-                                    Maxim Tours is one of the most distinguished tourism companies,
-                                    as it has more than thirteen years of experience in the tourism field.
+                                    @Model.Tourgides[5].Description
                                 </p>
                                 <a asp-action="tourgides"><button>Read More</button></a>
                             </div>
 
-                            <div class="cards" id="travel">
-                                <img src="~/Assets/@Model.Tourgides[0].ProfilePicture" alt="" class="photo_4s">
-                                <h3>@Model.Tourgides[0].Name</h3>
-                                <p>
-                                    @Model.Tourgides[0].Description
-                                </p>
-                                <a asp-action="tourgides" ><button>Read More</button></a>
-                            </div>
+                            @foreach (var tourgide in @Model.Tourgides.GetRange(1,@Model.Tourgides.Count-1))
+                            {
+                                <div class="cards active" id="travel">
+                                    <img src="@(tourgide.ProfilePicture != null && tourgide.ProfilePicture.Length> 0
+        ? $"data:image/png;base64,{Convert.ToBase64String(tourgide.ProfilePicture)}"
+        : "/images/placeholder.jpg")" alt="" class="photo_4s">
+                                    <h3>@tourgide.Name</h3>
+                                    <p>
+                                        @tourgide.Description
+                                    </p>
+                                    <a asp-action="tourgides"><button>Read More</button></a>
+                                </div>
+                            }
 
-                            <div class="cards">
-                                <img src="companies_home/photo_1.png" alt="" class="photo_1s">
-                                <h3>SEEGYPT</h3>
-                                <p>
-                                    SEEgypt is one of the most prominent tourism companies in Egypt,
-                                    and is distinguished by providing integrated tourism services that include
-                                    organizing trips and tourist tours inside and outside Egypt.
-                                </p>
-                                <a><button>Read More</button></a>
-                            </div>
 
-                            <div class="cards" id="sky">
-                                <img src="companies_home/photo_5.png" alt="" class="photo_5s">
-                                <h3>SKY EGYPT TOURS</h3>
-                                <p>
-                                    Sky Egypt Tours is one of <br>the distinguished tourism companies, <br>
-                                    as it provides its clients with all the services required for travel abroad or domestically.
-                                </p>
-                                <a><button>Read More</button></a>
-                            </div>
-
-                            <div class="cards" id="tri">
-                                <img src="companies_home/photo_6.png" alt="" class="photo_6s">
-                                <h3>TRI JOLIE TOURISM</h3>
-                                <p>Tri Jolie Tourism Company is keen <br>to provide the best services that its clients may need.</p>
-                                <a><button>Read More</button></a>
-                            </div>
-
-                            <div class="cards" id="masr">
-                                <img src="companies_home/photo_7.png" alt="" class="photo_7s">
-                                <h3>MASR ELGDEDA TRAVEL</h3>
-                                <p>
-                                    Masr Elgdeda Travel Company is considered one of the top 10 tourism companies in Egypt.
-                                    New Cairo Company is interested in domestic and international tourism,
-                                    as well as organizing Hajj and Umrah trips, as well as honeymoon trips.
-                                </p>
-                                <a><button>Read More</button></a>
-                            </div>
-
-                            <div class="cards" id="ejaza">
-                                <img src="companies_home/photo_2.png" alt="" class="photo_2s">
-                                <h3>EJAZA CLUB</h3>
-                                <p>
-                                    Ejaza Club Tourism Company is the best and strongest competitor in
-                                    the world of tourism due to its highly experienced and efficient work team that has exceeded fifteen years.
-                                </p>
-                                <a><button>Read More</button></a>
-                            </div>
                         </div>
                         <div class="controlss">
                             <button class="prevs">&laquo;</button>
