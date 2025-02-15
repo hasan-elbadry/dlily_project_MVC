@@ -2,221 +2,471 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corporate Directory</title>
+    <title>Tourism Companies | DLYLY Tourism</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-                :root {
-                    --primary: #2A4365;
-                    --secondary: #4299E1;
-                    --accent: #48BB78;
-                    --text: #4A5568;
-                }
 
-                * {
-                    margin: 0;
-                    padding: 0;
-                    box-sizing: border-box;
-                    font-family: 'Inter', sans-serif;
-                }
+        :root {
+            --primary-color: #2c88af;
+            --secondary-color: #264653;
+            --accent-color: #e9c46a;
+            --text-dark: #2b2d42;
+            --text-light: #edf6f9;
+        }
 
-               
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-                .container {
+        body {
+            background-color: #f8f9fa;
+            color: var(--text-dark);
+        }
+
+        /* Floating Logo */
+
+
+        .hero {
+            margin-top: 80px;
+            height: 60vh;
+            background: linear-gradient(rgba(42, 157, 143, 0.2), rgba(38, 70, 83, 0.7)), url('https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
             padding: 2rem;
+        }
+
+        .hero-title {
+            color: white;
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            padding: 5rem 5%;
             max-width: 1400px;
-                    margin: 0 auto;
-                }
-
-                /* Filters Section */
-                .controls {
-                    margin: 3rem;
-                    display: flex;
-                    gap: 1.5rem;
-                    margin-bottom: 2rem;
-                    flex-wrap: wrap;
-                }
-
-                .search-bar {
-                    flex: 1;
-                    max-width: 400px;
-                    position: relative;
-                }
-
-                .search-input {
-                    width: 100%;
-                    padding: 0.8rem 1rem;
-                    border: 2px solid #E2E8F0;
-                    border-radius: 8px;
-                    font-size: 1rem;
-                }
-
-         
-
-                /* Company Grid */
-                .company-grid {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                    gap: 2rem;
-                }
-
-                .company-card {
-                    background: white;
-                    border-radius: 12px;
-                    padding: 1.5rem;
-                    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-                    transition: transform 0.3s ease, box-shadow 0.3s ease;
-                    position: relative;
-                }
-
-                .company-card:hover {
-                    transform: translateY(-5px);
-                    box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-                }
-
-                .company-header {
-                    display: flex;
-                    align-items: center;
-                    margin-bottom: 1.5rem;
-                }
-
-                .company-logo {
-                    width: 60px;
-                    height: 60px;
-                    border-radius: 12px;
-                    margin-right: 1rem;
-                    object-fit: contain;
-                }
-
-                .company-name {
-                    font-size: 1.25rem;
-                    color: var(--primary);
-                    font-weight: 600;
-                }
-
-                .company-industry {
-                    color: var(--secondary);
-                    font-size: 0.9rem;
-                    text-transform: uppercase;
-                    letter-spacing: 0.5px;
-                }
-
-                .company-details {
-                    margin: 1rem 0;
-                    color: var(--text);
-                }
-
-                .detail-item {
-                    display: flex;
-                    align-items: center;
-                    margin: 0.5rem 0;
-                    gap: 0.75rem;
-                }
-
-                .detail-icon {
-                    color: var(--secondary);
-                    width: 20px;
-                    text-align: center;
-                }
-
-
-
-                .company-footer {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-top: 1.5rem;
-                    padding-top: 1rem;
-                    border-top: 1px solid #EDF2F7;
-                }
-
-                .website-link {
-                    color: var(--secondary);
-                    text-decoration: none;
-                    font-weight: 500;
-                }
-
-                .employees {
-                    color: var(--text);
-                    font-size: 0.9rem;
-                }
-                .company-rating {
-            color: #F6E05E;
-            margin-top: 0.25rem;
+            margin: 0 auto;
         }
 
-        .company-rating .fa-star {
-            margin-right: 0.25rem;
+        .company-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
         }
 
-        .detail-item.price {
-            font-weight: 600;
-            color: var(--accent);
+        img {
+            width: 100%;
+            height: 280px;
         }
 
-       
+        .company-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+        }
+
+        .company-image {
+            width: 100%;
+            height: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .company-image::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height: 40%;
+                background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            }
+
+        .company-location {
+            margin: 10px;
+        }
+
+        .company-info {
+            padding: 2rem;
+            position: relative;
+        }
+
+
+
+        .specialty-tag {
+            background: rgba(42, 157, 143, 0.1);
+            color: var(--primary-color);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+            .specialty-tag:hover {
+                background: var(--primary-color);
+                color: white;
+            }
+
+        .company-stats {
+            display: flex;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+            padding: 1rem 0;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-color);
+            transition: all 0.3s;
+        }
+
+            .social-link:hover {
+                background: var(--primary-color);
+                color: white;
+                transform: translateY(-3px);
+            }
+
+
+        .company-rating {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #FFD700;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 8px 14px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .company-rating i {
+                margin-right: 6px;
+                font-size: 20px;
+            }
+
+            .company-rating:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="controls">
-            <input type="text" class="search-input" placeholder="Search companies...">
-        </div>
 
-        <div class="company-grid" id="companyList">
-            @foreach (var company in Model)
-            {
-                <div class="company-card">
-                    <div class="company-header">
-                        <img src="@company.ImageUrl" class="company-logo" alt="@company.Name">
-                        <div>
-                            <h2 class="company-name">@company.Name</h2>
-                            <div class="company-rating">
-                                @for (int i = 0; i < company.Rating; i++)
-                                {
-                                    <i class="fas fa-star"></i>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                    <div class="company-details">
-                        <p>@company.Description</p>
-                        <div class="detail-item">
-                            <i class="fas fa-map-marker-alt detail-icon"></i>
-                            @company.Location
-                        </div>
-                    </div>
-                    <div>
-                        <div class="company-footer">
-                            <span class="price">$@company.Price</span>
-                        </div>
-                    </div>
+    <section class="hero">
+        <h1 class="hero-title">Explore Top Tourism Companies</h1>
+    </section>
 
-                      <div class="company-footer">
-                        <a href="@company.WebSiteUrl" class="website-link" target="_blank">
-                            Visit Website <i class="fas fa-external-link-alt"></i>
-                        </a>-
+    <main class="companies-grid">
+        <article class="company-card">
+            <div class="company-image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqzVWjeeXVk3uEWVrEBpe_dG6nHfPy0Va2nN0KdZ5F0A_m9LCjSP5Bm6q9ESn7UPxmdg0&usqp=CAU" alt="Elite Journeys">
+
+
+                <div class="company-rating">
+                    <i class="fas fa-star"></i> 4.9
+                </div>
+
+
+            </div>
+            <div class="company-info">
+                <h3 class="company-name">Elite Journeys <i class="fas fa-check-circle verified-badge"></i></h3>
+                <div class="company-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Dubai, UAE | Established 2005</span>
+                </div>
+
+
+                <p class="company-description">
+                    Specialists in bespoke luxury travel experiences. Offering exclusive access to VIP events,
+                    private island rentals, and personalized concierge services worldwide.
+                </p>
+
+                <div class="company-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">18K+</div>
+                        <div class="stat-label">Travelers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">54</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">24/7</div>
+                        <div class="stat-label">Support</div>
                     </div>
                 </div>
-            }
-        </div>
-    </div>
 
-    <script>
-        $(document).ready(function() {
-            $(".search-input").on("input", function() {
-                var searchTerm = $(this).val().toLowerCase();
-                $(".company-card").each(function() {
-                    var companyName = $(this).find(".company-name").text().toLowerCase();
-                    $(this).toggle(companyName.includes(searchTerm));
-                });
-            });
-        });
-    </script>
+                <div class="company-price">
+                    <span class="price-tag">Premium Packages</span>
+                    <a href="@Url.Action("ReadMore", "Home")" class="cta-button">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="far fa-envelope"></i></a>
+                </div>
+            </div>
+        </article>
+        <article class="company-card">
+            <div class="company-image">
+                <img src="https://infoeg.com/uploads/pages/648977-logo.jpg" alt="Elite Journeys">
+
+                <div class="company-rating">
+                    <i class="fas fa-star"></i> 4.9
+                </div>
+            </div>
+            <div class="company-info">
+                <h3 class="company-name">Elite Journeys <i class="fas fa-check-circle verified-badge"></i></h3>
+                <div class="company-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Dubai, UAE | Established 2005</span>
+                </div>
+                <p class="company-description">
+                    Specialists in bespoke luxury travel experiences. Offering exclusive access to VIP events,
+                    private island rentals, and personalized concierge services worldwide.
+                </p>
+
+                <div class="company-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">18K+</div>
+                        <div class="stat-label">Travelers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">54</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">24/7</div>
+                        <div class="stat-label">Support</div>
+                    </div>
+                </div>
+
+                <div class="company-price">
+                    <span class="price-tag">Premium Packages</span>
+                    <a href="@Url.Action("ReadMore", "Home")" class="cta-button">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="far fa-envelope"></i></a>
+                </div>
+            </div>
+        </article>
+        <article class="company-card">
+            <div class="company-image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTS0mCXZnPKOisY34P6t9c62OtN0dKK8Tv4NQ&s" alt="Elite Journeys">
+
+                <div class="company-rating">
+                    <i class="fas fa-star"></i> 4.9
+                </div>
+            </div>
+            <div class="company-info">
+                <h3 class="company-name">Elite Journeys <i class="fas fa-check-circle verified-badge"></i></h3>
+                <div class="company-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Dubai, UAE | Established 2005</span>
+                </div>
+
+
+
+                <p class="company-description">
+                    Specialists in bespoke luxury travel experiences. Offering exclusive access to VIP events,
+                    private island rentals, and personalized concierge services worldwide.
+                </p>
+
+                <div class="company-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">18K+</div>
+                        <div class="stat-label">Travelers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">54</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">24/7</div>
+                        <div class="stat-label">Support</div>
+                    </div>
+                </div>
+
+                <div class="company-price">
+                    <span class="price-tag">Premium Packages</span>
+                    <a href="@Url.Action("ReadMore", "Home")" class="cta-button">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="far fa-envelope"></i></a>
+                </div>
+            </div>
+        </article>
+        <article class="company-card">
+            <div class="company-image">
+                <img src="https://maximtours.net/wp-content/uploads/2024/11/Maxim-Tours_What-to-Expect-on-Your-Australia-Tour-A-Travelers-Guide.jpg" alt="Elite Journeys">
+
+                <div class="company-rating">
+                    <i class="fas fa-star"></i> 4.9
+                </div>
+            </div>
+            <div class="company-info">
+                <h3 class="company-name">Elite Journeys <i class="fas fa-check-circle verified-badge"></i></h3>
+                <div class="company-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Dubai, UAE | Established 2005</span>
+                </div>
+
+
+
+                <p class="company-description">
+                    Specialists in bespoke luxury travel experiences. Offering exclusive access to VIP events,
+                    private island rentals, and personalized concierge services worldwide.
+                </p>
+
+                <div class="company-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">18K+</div>
+                        <div class="stat-label">Travelers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">54</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">24/7</div>
+                        <div class="stat-label">Support</div>
+                    </div>
+                </div>
+
+                <div class="company-price">
+                    <span class="price-tag">Premium Packages</span>
+                    <a href="@Url.Action("ReadMore", "Home")" class="cta-button">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="far fa-envelope"></i></a>
+                </div>
+            </div>
+        </article>
+        <article class="company-card">
+            <div class="company-image">
+                <img src="https://gludo.org/U/d/2024_11_25/931/og-TJLgZCh05a-1732566292.jpg" alt="Elite Journeys">
+
+                <div class="company-rating">
+                    <i class="fas fa-star"></i> 4.9
+                </div>
+            </div>
+            <div class="company-info">
+                <h3 class="company-name">Elite Journeys <i class="fas fa-check-circle verified-badge"></i></h3>
+                <div class="company-location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Dubai, UAE | Established 2005</span>
+                </div>
+
+
+
+                <p class="company-description">
+                    Specialists in bespoke luxury travel experiences. Offering exclusive access to VIP events,
+                    private island rentals, and personalized concierge services worldwide.
+                </p>
+
+                <div class="company-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">18K+</div>
+                        <div class="stat-label">Travelers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">54</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">24/7</div>
+                        <div class="stat-label">Support</div>
+                    </div>
+                </div>
+
+                <div class="company-price">
+                    <span class="price-tag">Premium Packages</span>
+                    <a href="@Url.Action("ReadMore", "Home")" class="cta-button">
+                        Read More <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="far fa-envelope"></i></a>
+                </div>
+            </div>
+        </article>
+        <!-- Add more cards following the same structure -->
+    </main>
+
+
+
 </body>
 </html>
