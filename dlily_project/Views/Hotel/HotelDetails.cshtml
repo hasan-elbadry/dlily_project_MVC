@@ -64,7 +64,7 @@
                 @foreach (var room in Model.Rooms)
                 {
 
-                        <form method="post" asp-action="RoomDetails">
+                    <form method="post" asp-action="RoomDetails" asp-action="Hotel">
                             <!-- Hidden Input to Send Entire Room Data as JSON -->
                             <input type="hidden" name="roomData" value='@System.Text.Json.JsonSerializer.Serialize(room)' />
 

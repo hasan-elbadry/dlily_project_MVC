@@ -12,8 +12,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/css/Auth/signup.css" asp-append-version="true">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 </head>
 <body>
+    <!-- Particle Animation Background -->
+    <div id="particles-js"></div>
+
     @{
         if (!string.IsNullOrEmpty(ViewBag.EmailExists))
         {
@@ -25,8 +29,6 @@
                 });
             </script>
         }
-
-        
 
         if (!string.IsNullOrEmpty(ViewBag.error))
         {
@@ -55,120 +57,123 @@
         }
     }
 
-    <div class="container">
-        <h1>Sign Up</h1>
-        <form method="post" enctype="multipart/form-data" id="signupForm">
-            @Html.AntiForgeryToken()
+    <div class="auth-container">
+        <div class="auth-form">
+            <h1 class="auth-title">Sign Up</h1>
+            <form method="post" enctype="multipart/form-data" id="signupForm">
+                @Html.AntiForgeryToken()
 
-            <div class="input-group">
-                <i class="fas fa-user"></i>
-                <input asp-for="Name" class="form-control" placeholder="Username" required id="username" />
-            </div>
-            <div class="error-message">
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-
-            <div class="input-group">
-                <i class="fas fa-envelope"></i>
-                <input asp-for="Email" class="form-control" placeholder="Email" required id="email" />
-            </div>
-            <div class="error-message">
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-
-            <div class="input-group">
-                <i class="fas fa-lock"></i>
-                <input asp-for="Password" class="form-control" type="password" placeholder="Password" required id="password" />
-            </div>
-            <div class="error-message">
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-
-            <div class="input-group">
-                <i class="fas fa-lock"></i>
-                <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="Confirm Password" required id="confirmPassword" />
-            </div>
-            <div class="error-message">
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-
-            <div class="input-group-inline">
-                <div class="input-group">
-                    <i class="fas fa-phone"></i>
-                    <input asp-for="Phone" class="form-control" placeholder="Phone" required id="phone" />
+                <div class="auth-input-group">
+                    <i class="fas fa-user"></i>
+                    <input asp-for="Name" class="auth-input" placeholder="Username" required id="username" />
                 </div>
-                <div class="input-group">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <input asp-for="Address" class="form-control" placeholder="Address" required id="address" />
+                <div class="auth-error-message">
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
+
+                <div class="auth-input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input asp-for="Email" class="auth-input" placeholder="Email" required id="email" />
+                </div>
+                <div class="auth-error-message">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="auth-input-group">
+                    <i class="fas fa-lock"></i>
+                    <input asp-for="Password" class="auth-input" type="password" placeholder="Password" required id="password" />
+                </div>
+                <div class="auth-error-message">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="auth-input-group">
+                    <i class="fas fa-lock"></i>
+                    <input asp-for="ConfirmPassword" class="auth-input" type="password" placeholder="Confirm Password" required id="confirmPassword" />
+                </div>
+                <div class="auth-error-message">
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <div class="auth-input-inline">
+                    <div class="auth-input-group">
+                        <i class="fas fa-phone"></i>
+                        <input asp-for="Phone" class="auth-input" placeholder="Phone" required id="phone" />
+                    </div>
+                    <div class="auth-input-group">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input asp-for="Address" class="auth-input" placeholder="Address" required id="address" />
+                    </div>
+                </div>
+
+                <div class="auth-input-inline">
+                    <div class="auth-input-group">
+                        <select asp-for="Gender" class="auth-input" required id="gender">
+                            <option value="">Gender</option>
+                            <option value="2">Unknown</option>
+                            <option value="0">Male</option>
+                            <option value="1">Female</option>
+                        </select>
+                    </div>
+                    <div class="auth-input-group">
+                        <select asp-for="SpokenLanguage" class="auth-input" required id="SpokenLanguage">
+                            <option value="" disabled selected>Select a Language</option>
+                            <option value="English">English (EN)</option>
+                            <option value="Spanish">Spanish (ES)</option>
+                            <option value="Chinese">Chinese (ZH)</option>
+                            <option value="Hindi">Hindi (HI)</option>
+                            <option value="Arabic">Arabic (AR)</option>
+                            <option value="French">French (FR)</option>
+                            <option value="Russian">Russian (RU)</option>
+                            <option value="Portuguese">Portuguese (PT)</option>
+                            <option value="German">German (DE)</option>
+                            <option value="Japanese">Japanese (JA)</option>
+                            <option value="Korean">Korean (KO)</option>
+                            <option value="Italian">Italian (IT)</option>
+                            <option value="Turkish">Turkish (TR)</option>
+                            <option value="Dutch">Dutch (NL)</option>
+                            <option value="Swedish">Swedish (SV)</option>
+                            <option value="Polish">Polish (PL)</option>
+                            <option value="Thai">Thai (TH)</option>
+                            <option value="Vietnamese">Vietnamese (VI)</option>
+                            <option value="Indonesian">Indonesian (ID)</option>
+                            <option value="Hebrew">Hebrew (HE)</option>
+                            <option value="Persian">Persian (FA)</option>
+                            <option value="Bengali">Bengali (BN)</option>
+                            <option value="Ukrainian">Ukrainian (UK)</option>
+                            <option value="Greek">Greek (EL)</option>
+                            <option value="Hungarian">Hungarian (HU)</option>
+                            <option value="Czech">Czech (CS)</option>
+                            <option value="Romanian">Romanian (RO)</option>
+                            <option value="Finnish">Finnish (FI)</option>
+                            <option value="Danish">Danish (DA)</option>
+                            <option value="Norwegian">Norwegian (NO)</option>
+                            <option value="Serbian">Serbian (SR)</option>
+                            <option value="Croatian">Croatian (HR)</option>
+                            <option value="Malay">Malay (MS)</option>
+                            <option value="Tagalog">Tagalog (TL)</option>
+                            <option value="Urdu">Urdu (UR)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="auth-upload-container">
+                    <div class="auth-upload-box" onclick="document.getElementById('profilePic').click()">
+                        <i class="fas fa-upload"></i>
+                        <span id="upload-text">Click to upload Profile Picture</span>
+                    </div>
+                    <input type="file" asp-for="ProfilePicture" id="profilePic" accept="image/*" style="display: none;" required onchange="handleFileUpload(this)" />
+                    <div class="auth-error-message">
+                        <span asp-validation-for="ProfilePicture" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="auth-button">Sign Up</button>
+            </form>
+
+            <div class="auth-link">
+                <p>Already have an account? <a asp-controller="Auth" asp-action="TouristSignIn">Sign In</a></p>
             </div>
-
-            <div class="input-group-inline">
-                <div class="input-group">
-                    <select asp-for="Gender" class="form-control" required id="gender">
-                        <option value="">Gender</option>
-                        <option value="2">Unknown</option>
-                        <option value="0">Male</option>
-                        <option value="1">Female</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <select asp-for="SpokenLanguage" class="form-control" required id="SpokenLanguage">
-                        <option value="" disabled selected>Select a Language</option>
-                        <option value="English">English (EN)</option>
-                        <option value="Spanish">Spanish (ES)</option>
-                        <option value="Chinese">Chinese (ZH)</option>
-                        <option value="Hindi">Hindi (HI)</option>
-                        <option value="Arabic">Arabic (AR)</option>
-                        <option value="French">French (FR)</option>
-                        <option value="Russian">Russian (RU)</option>
-                        <option value="Portuguese">Portuguese (PT)</option>
-                        <option value="German">German (DE)</option>
-                        <option value="Japanese">Japanese (JA)</option>
-                        <option value="Korean">Korean (KO)</option>
-                        <option value="Italian">Italian (IT)</option>
-                        <option value="Turkish">Turkish (TR)</option>
-                        <option value="Dutch">Dutch (NL)</option>
-                        <option value="Swedish">Swedish (SV)</option>
-                        <option value="Polish">Polish (PL)</option>
-                        <option value="Thai">Thai (TH)</option>
-                        <option value="Vietnamese">Vietnamese (VI)</option>
-                        <option value="Indonesian">Indonesian (ID)</option>
-                        <option value="Hebrew">Hebrew (HE)</option>
-                        <option value="Persian">Persian (FA)</option>
-                        <option value="Bengali">Bengali (BN)</option>
-                        <option value="Ukrainian">Ukrainian (UK)</option>
-                        <option value="Greek">Greek (EL)</option>
-                        <option value="Hungarian">Hungarian (HU)</option>
-                        <option value="Czech">Czech (CS)</option>
-                        <option value="Romanian">Romanian (RO)</option>
-                        <option value="Finnish">Finnish (FI)</option>
-                        <option value="Danish">Danish (DA)</option>
-                        <option value="Norwegian">Norwegian (NO)</option>
-                        <option value="Serbian">Serbian (SR)</option>
-                        <option value="Croatian">Croatian (HR)</option>
-                        <option value="Malay">Malay (MS)</option>
-                        <option value="Tagalog">Tagalog (TL)</option>
-                        <option value="Urdu">Urdu (UR)</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="upload-container">
-                <div class="upload-box" onclick="document.getElementById('profilePic').click()">
-                    <i class="fas fa-upload"></i> Click to upload Profile Picture
-                </div>
-                <input type="file" asp-for="ProfilePicture" id="profilePic" accept="image/*" style="display: none;" required />
-                <div class="error-message">
-                    <span asp-validation-for="ProfilePicture" class="text-danger"></span>
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Sign Up</button>
-        </form>
-
-        <div class="login-link">
-            <p>Already have an account? <a asp-controller="Auth" asp-action="TouristSignIn">Sign In</a></p>
         </div>
     </div>
 
@@ -180,5 +185,116 @@
     @section Scripts {
         <partial name="_ValidationScriptsPartial" />
     }
+
+
+    <script>
+        function handleFileUpload(input) {
+            const uploadBox = document.querySelector('.auth-upload-box');
+            const uploadText = document.getElementById('upload-text');
+
+            if (input.files && input.files[0]) {
+                // Change the design when a file is selected
+                uploadBox.classList.add('file-selected');
+                uploadText.textContent = input.files[0].name; // Show the file name
+            } else {
+                // Reset the design if no file is selected
+                uploadBox.classList.remove('file-selected');
+                uploadText.textContent = 'Click to upload Profile Picture';
+            }
+        }
+    </script>
+
+    <script>
+        // Particle.js Configuration
+        particlesJS("particles-js", {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#1D8FE1" // Blue color for particles
+                },
+                shape: {
+                    type: "circle",
+                    stroke: {
+                        width: 0,
+                        color: "#000000"
+                    },
+                    polygon: {
+                        nb_sides: 5
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false,
+                    anim: {
+                        enable: false,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: false,
+                        speed: 40,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#1D8FE1",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "bounce",
+                    bounce: true,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "repulse"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    repulse: {
+                        distance: 100,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+    </script>
 </body>
 </html>

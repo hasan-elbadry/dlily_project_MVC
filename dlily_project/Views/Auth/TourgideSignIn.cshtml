@@ -11,11 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600,800&display=swap" rel="stylesheet">
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/Auth/signup.css" asp-append-version="true">
+    <link rel="stylesheet" href="~/css/Auth/signin.css" asp-append-version="true">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+    <!-- Particle Animation Background -->
+    <div id="particles-js"></div>
 
     @{
         if (!string.IsNullOrEmpty(ViewBag.error))
@@ -39,47 +42,143 @@
                     timer: 2000, // Auto close after 3 seconds
                     showConfirmButton: false
                 }).then(() => {
-                    window.location.href = '/Home/Index'; // Redirect to Sign-In page
+                     window.location.href = '/Home/Index';
                 });
             </script>
         }
     }
 
     <div class="container">
-        <h1>Sign In</h1>
-        <form method="post" id="signinForm">
-            @Html.AntiForgeryToken()
+        <div class="form-wrapper">
+            <h1>Sign In</h1>
+            <form method="post" id="signinForm">
+                @Html.AntiForgeryToken()
 
-            <div class="input-group">
-                <i class="fas fa-envelope"></i>
-                <input asp-for="Email" class="form-control" placeholder="Email" required id="email" />
-            </div>
-            <div class="error-message">
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input asp-for="Email" class="form-control" placeholder="Email" required id="email" />
+                </div>
+                <div class="error-message">
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
 
-            <div class="input-group">
-                <i class="fas fa-lock"></i>
-                <input asp-for="Password" class="form-control" type="password" placeholder="Password" required id="password" />
-            </div>
-            <div class="error-message">
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input asp-for="Password" class="form-control" type="password" placeholder="Password" required id="password" />
+                </div>
+                <div class="error-message">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
 
-            <button type="submit" class="btn btn-primary">Sign In</button>
-        </form>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
 
-        <div class="signup-link">
-            <p>Don't have an account? <a asp-controller="Auth" asp-action="TourgideSignUp">Sign Up</a></p>
+            <div class="signup-link">
+                <p>Don't have an account? <a asp-controller="Auth" asp-action="TourgideSignUp">Sign Up</a></p>
+            </div>
         </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
     @section Scripts {
         <partial name="_ValidationScriptsPartial" />
     }
+
+    <script>
+        // Particle.js Configuration
+        particlesJS("particles-js", {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: "#1D8FE1" // Blue color for particles
+                },
+                shape: {
+                    type: "circle",
+                    stroke: {
+                        width: 0,
+                        color: "#000000"
+                    },
+                    polygon: {
+                        nb_sides: 5
+                    }
+                },
+                opacity: {
+                    value: 0.5,
+                    random: false,
+                    anim: {
+                        enable: false,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    anim: {
+                        enable: false,
+                        speed: 40,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#1D8FE1",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 6,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "bounce",
+                    bounce: true,
+                    attract: {
+                        enable: false,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: "repulse"
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    repulse: {
+                        distance: 100,
+                        duration: 0.4
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+    </script>
 </body>
 </html>

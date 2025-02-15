@@ -10,12 +10,10 @@ namespace dlily_project.Controllers
 
         private readonly ApplicationDbContext _context;
 
-        private readonly HttpClient _httpClient;
 
-        public HomeController(ApplicationDbContext context, HttpClient httpClient)
+        public HomeController(ApplicationDbContext context)
         {
             _context = context;
-            _httpClient = httpClient;
         }
         [Authorize]
         public IActionResult Translation()
@@ -56,39 +54,6 @@ namespace dlily_project.Controllers
       //})
       //.ToList();
 
-        [Authorize]
-        public async Task<IActionResult>  Hotels()
-        {
-            var hotels = await _httpClient.GetFromJsonAsync<List<HotelViewModel>>("http://hotelsdlily.runasp.net/api/hotel");
-            return View(hotels);
-        }
-
-
-        [Authorize]
-        [HttpPost]
-        public IActionResult HotelDetails(string hotelJson)
-        {
-            if (string.IsNullOrEmpty(hotelJson))
-            {
-                return RedirectToAction("Hotels");
-            }
-
-            var hotelDetails = Newtonsoft.Json.JsonConvert.DeserializeObject<HotelViewModel>(hotelJson);
-            return View(hotelDetails);
-        }
-
-        [Authorize]
-        [HttpPost]
-        public IActionResult RoomDetails(string roomData)
-        {
-            if (string.IsNullOrEmpty(roomData))
-            {
-                return RedirectToAction("Hotels");
-            }
-
-            var hotelDetails = Newtonsoft.Json.JsonConvert.DeserializeObject<RoomViewModel>(roomData);
-            return View(hotelDetails);
-        }
 
         [Authorize]
         public IActionResult Companies()

@@ -11,6 +11,7 @@ body {
     align-items: center;
     min-height: 100vh;
     background: #f0f0f0;
+    overflow: hidden;
 }
 
 #particles-js {
@@ -21,7 +22,7 @@ body {
     z-index: -1;
 }
 
-.auth-container {
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,7 +32,7 @@ body {
     z-index: 1;
 }
 
-.auth-form {
+.form-wrapper {
     background: #fff;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -53,41 +54,41 @@ body {
     }
 }
 
-.auth-title {
+h1 {
     font-weight: 800;
     margin-bottom: 20px;
     color: #1D8FE1;
     font-size: 2rem;
 }
 
-.auth-input-group {
+.input-group {
     position: relative;
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
 
-    .auth-input-group i {
+    .input-group i {
         position: absolute;
         left: 15px;
         color: #1D8FE1;
     }
 
-.auth-input {
-    width: 100%;
-    padding: 12px 12px 12px 40px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-    transition: all 0.3s ease;
-}
-
-    .auth-input:focus {
-        border-color: #1D8FE1;
-        box-shadow: 0 0 8px rgba(29, 143, 225, 0.5);
+    .input-group input {
+        width: 100%;
+        padding: 12px 12px 12px 40px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        transition: all 0.3s ease;
     }
 
-.auth-button {
+        .input-group input:focus {
+            border-color: #1D8FE1;
+            box-shadow: 0 0 8px rgba(29, 143, 225, 0.5);
+        }
+
+button {
     width: 100%;
     padding: 12px;
     border-radius: 8px;
@@ -99,96 +100,42 @@ body {
     transition: background 0.3s ease;
 }
 
-    .auth-button:hover {
+    button:hover {
         background: #1565c0;
     }
 
-.auth-link {
+.signup-link {
     margin-top: 15px;
     font-size: 14px;
 }
 
-    .auth-link a {
+    .signup-link a {
         text-decoration: none;
         color: #1D8FE1;
         transition: color 0.3s ease;
     }
 
-        .auth-link a:hover {
+        .signup-link a:hover {
             color: #1565c0;
         }
 
-.auth-error-message {
+.error-message {
     text-align: left;
     font-size: 12px;
     color: red;
     margin-top: 5px;
 }
 
-.auth-input-inline {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-}
-.auth-upload-container {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.auth-upload-box {
-    width: 100%;
-    padding: 20px;
-    border: 2px dashed #1D8FE1;
-    border-radius: 8px;
-    background: #f9f9f9;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-    .auth-upload-box:hover {
-        border-color: #1565c0;
-        background: #f1f1f1;
-    }
-
-    .auth-upload-box i {
-        font-size: 24px;
-        color: #1D8FE1;
-        margin-bottom: 10px;
-    }
-
-    .auth-upload-box span {
-        font-size: 14px;
-        color: #333;
-    }
-
-    /* Style when a file is selected */
-    .auth-upload-box.file-selected {
-        border-color: #4CAF50; /* Green border to indicate success */
-        background: #e8f5e9; /* Light green background */
-    }
-
-        .auth-upload-box.file-selected i {
-            color: #4CAF50; /* Green icon */
-        }
-
-        .auth-upload-box.file-selected span {
-            color: #4CAF50; /* Green text */
-        }
-
 @media (max-width: 768px) {
     body {
         padding: 10px;
     }
 
-    .auth-form {
+    .form-wrapper {
         padding: 20px;
     }
 
-    .auth-title {
+    h1 {
         font-size: 1.5rem;
     }
 }
