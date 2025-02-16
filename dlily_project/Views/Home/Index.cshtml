@@ -355,34 +355,22 @@
         </div>
         <div class="slider-container">
             <div class="slider">
-                <div class="slide">
-                    <img src="~/Assets/touristplaces/img1.jpg" alt="">
-                    <div class="slide-content">
-                        <h2>Fiord Bay</h2>
-                        <p>A hidden gem in Egypt, offering crystal-clear waters, stunning fjords, and a peaceful escape for nature lovers and divers.</p>
+                @for (int i = 0; i < 3; i++)
+                {
+                    <div class="slide">
+                        <img src="@Model.TouristPlaces[i].ImageUrl" alt="@Model.TouristPlaces[i].Article">
+                        <div class="slide-content">
+                            <h2>@Model.TouristPlaces[i].Name</h2>
+                            <p>@Model.TouristPlaces[i].Description</p>
+                        </div>
                     </div>
-
-                </div>
-                <div class="slide">
-                    <img src="~/Assets/touristplaces/img2.jpg" alt="">
-                    <div class="slide-content">
-                        <h2>Ras Muhammad, Sharm El-Sheikh</h2>
-                        <p>A stunning national park with crystal-clear waters, vibrant coral reefs, and diverse marine life, perfect for snorkeling and diving.</p>
-                    </div>
-
-                </div>
-                <div class="slide">
-                    <img src="~/Assets/touristplaces/img3.jpg" alt="">
-                    <div class="slide-content">
-                        <h2>Sharm El-Sheikh</h2>
-                        <h3>A world-famous resort city with stunning beaches, vibrant coral reefs, and luxurious resorts, offering an unforgettable Red Sea experience.</h3>
-                    </div>
-                </div>
+                }
             </div>
+            <button class="slider-btn prev-btn">&lt;</button>
+            <button class="slider-btn next-btn">&gt;</button>
         </div>
-
         <!-- Gallery Section -->
-        <section class="gallery">
+        <section class="gallery">   
             <div class="gallery-grid">
                 <!-- Gallery Item 1 -->
                 <div class="gallery-item">
@@ -390,10 +378,12 @@
                     <div class="gallery-info">
                         <h2>Lake Siwa</h2>
                         <p>A tranquil saltwater lake nestled in the heart of Egypt's Siwa Oasis, known for its healing properties and picturesque surroundings.</p>
-                        <button class="btn see-more" data-title="Paris, France"
-                                data-desc="Paris is the capital and most populous city of France. Known for its iconic landmarks like the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral.">
-                            See More Info
-                        </button>
+                        <a asp-controller="Attractions" asp-action="Index">
+                            <button class="btn see-more" data-title="Paris, France"
+                                    data-desc="Paris is the capital and most populous city of France. Known for its iconic landmarks like the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral.">
+                                See More Info
+                            </button>
+                        </a> 
                     </div>
                 </div>
 
@@ -403,10 +393,12 @@
                     <div class="gallery-info">
                         <h2>Wadi Elweshwash</h2>
                         <p>A stunning valley in Nuweiba, Sinai, known for its crystal-clear springs, breathtaking rock formations, and serene desert beauty.</p>
-                        <button class="btn see-more" data-title="Tokyo, Japan"
-                                data-desc="Tokyo, Japan’s busy capital, mixes the ultramodern and the traditional, from neon-lit skyscrapers to historic temples.">
-                            See More Info
-                        </button>
+                        <a asp-controller="Attractions" asp-action="Index">
+                            <button class="btn see-more" data-title="Paris, France"
+                                    data-desc="Paris is the capital and most populous city of France. Known for its iconic landmarks like the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral.">
+                                See More Info
+                            </button>
+                        </a>
                     </div>
                 </div>
 
@@ -416,10 +408,12 @@
                     <div class="gallery-info">
                         <h2>Juzur Abū Minqār</h2>
                         <p>An idyllic island in Egypt, known for its crystal-clear waters, rich marine life, and serene atmosphere, perfect for a tranquil getaway.</p>
-                        <button class="btn see-more" data-title="New York City, USA"
-                                data-desc="New York City comprises 5 boroughs sitting where the Hudson River meets the Atlantic Ocean. Its iconic sites include skyscrapers such as the Empire State Building and sprawling Central Park.">
-                            See More Info
-                        </button>
+                        <a asp-controller="Attractions" asp-action="Index">
+                            <button class="btn see-more" data-title="Paris, France"
+                                    data-desc="Paris is the capital and most populous city of France. Known for its iconic landmarks like the Eiffel Tower, Louvre Museum, and Notre-Dame Cathedral.">
+                                See More Info
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -428,4 +422,3 @@
     </section>
     <script src="~/js/Home/index.js" asp-append-version="true"></script>
 </body>
-</html>

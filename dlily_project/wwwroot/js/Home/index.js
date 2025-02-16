@@ -119,25 +119,62 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCards();
 });
 // ddddddddddd
+document.addEventListener("DOMContentLoaded", () => {
+    const slider = document.querySelector(".slider");
+    const slides = document.querySelectorAll(".slide");
+    const prevBtn = document.querySelector(".prev-btn");
+    const nextBtn = document.querySelector(".next-btn");
+    let currentIndex = 0;
+    let autoSlideInterval;
 
-// Slider Functionality
-let currentSlide = 0;
-const slides = document.querySelectorAll('.slide');
-const totalSlides = slides.length;
+    // Function to move to the next slide
+    const nextSlide = () => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateSlider();
+    };
 
-function showSlide(index) {
-    slides.forEach((slide, i) => {
-        slide.style.transform = `translateX(${100 * (i - index)}%)`;
+    // Function to move to the previous slide
+    const prevSlide = () => {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        updateSlider();
+    };
+
+    // Function to update the slider position
+    const updateSlider = () => {
+        slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    };
+
+    // Auto-slide functionality
+    const startAutoSlide = () => {
+        autoSlideInterval = setInterval(nextSlide, 3000); // Change slide every 5 seconds
+    };
+
+    const stopAutoSlide = () => {
+        clearInterval(autoSlideInterval);
+    };
+
+    // Event listeners for buttons
+    prevBtn.addEventListener("click", () => {
+        stopAutoSlide();
+        prevSlide();
+        startAutoSlide();
     });
-}
 
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    showSlide(currentSlide);
-}
+    nextBtn.addEventListener("click", () => {
+        stopAutoSlide();
+        nextSlide();
+        startAutoSlide();
+    });
 
-// Auto-advance slider every 5 seconds
-setInterval(nextSlide, 5000);
+    // Start auto-slide on page load
+    startAutoSlide();
+
+    // Pause auto-slide on hover
+    slider.addEventListener("mouseenter", stopAutoSlide);
+    slider.addEventListener("mouseleave", startAutoSlide);
+});
+
+
 
 // Modal functionality
 // Modal functionality

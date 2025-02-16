@@ -25,6 +25,8 @@ namespace dlily_project.Controllers
             var hotels = _context.Hotels.ToList();
             var compaines = _context.CompanyOffers.ToList();
             var tourgide = _context.Tourgides.ToList();
+            var touristPlaces = _context.TouristPlaces.ToList();
+
 
 
 
@@ -32,7 +34,8 @@ namespace dlily_project.Controllers
             {
                 Hotels = hotels,
                 CompanyOffers  = compaines,
-                Tourgides = tourgide
+                Tourgides = tourgide,
+                TouristPlaces = touristPlaces
             };
             return View(model);
         }

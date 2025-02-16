@@ -7,5 +7,6 @@ namespace dlily_project.ViewModels
         public List<Hotel> Hotels { get; set; }
         public List<CompanyOffer> CompanyOffers{ get; set; }
         public List<Tourgide> Tourgides { get; set; }
+        public List<TouristPlaces> TouristPlaces { get; set; }
     }
 }
