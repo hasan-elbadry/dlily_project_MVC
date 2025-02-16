@@ -85,6 +85,22 @@ namespace dlily_project.Controllers
             return View("Details");
         }
 
+        [HttpPost]
+        public IActionResult FeedBack(string meesage, int id)
+        {
 
+            var toursit = _context.Tourists.FirstOrDefault(x => x.Id == id);
+            if (toursit == null)
+            {
+                ViewBag.error = "Tourist not found";
+                return View("Index");
+            }
+
+            toursit.FeedBack = meesage;
+            _context.SaveChanges();
+
+            ViewBag.success = "Feedback sended successfully, we will contact you shortly!";
+            return View("Index");
+        }
     }
 }

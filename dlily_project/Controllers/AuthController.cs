@@ -90,6 +90,7 @@ namespace dlily_project.Controllers
                     Address = model.Address,
                     Gender = (Gender)model.Gender,
                     Password = model.Password,
+                    SpokenLanguage = model.SpokenLanguage,
                 };
 
 

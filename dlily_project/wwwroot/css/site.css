@@ -153,8 +153,7 @@ footer .content .link-boxes {
     justify-content: space-between;
 }
 
-    footer .content .link-boxes .box {
-        width: calc(100% / 5 - 10px);
+    footer .content .link-boxes .box {  
     }
 
 .content .link-boxes .box .link_name {
@@ -292,7 +291,7 @@ footer .bottom-details {
     }
 
     footer .content .link-boxes .box {
-        width: calc(100% / 3 - 10px);
+        width: 130%;
     }
 
     footer .content .link-boxes .input-box {
@@ -505,4 +504,279 @@ footer .bottom-details {
         width: 80%;
         margin: 10px auto;
     }
+}
+/* General Footer Styles */
+footer {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
+    padding: 50px 0;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+    footer .content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    footer .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+        animation: fadeInUp 1s ease-in-out;
+    }
+
+    footer .logo-details .logo_name {
+        font-size: 28px;
+        font-weight: 700;
+        color: #fff;
+        letter-spacing: 1px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Social Media Icons */
+    footer .media-icons {
+        display: flex;
+        gap: 15px;
+    }
+
+        footer .media-icons a {
+            color: #fff;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+
+            footer .media-icons a:hover {
+                color: #00bcd4;
+                transform: translateY(-5px) scale(1.2);
+            }
+
+    /* Link Boxes */
+    footer .link-boxes {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 30px;
+        animation: slideIn 1s ease-in-out;
+    }
+
+    footer .box {
+        flex: 1 1 220px;
+    }
+
+        footer .box .link_name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #00bcd4;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        footer .box li {
+            margin-bottom: 10px;
+        }
+
+            footer .box li a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 16px;
+                transition: all 0.3s ease;
+            }
+
+                footer .box li a:hover {
+                    color: #00bcd4;
+                    padding-left: 5px;
+                }
+
+    /* Feedback Form */
+    footer .input-box {
+        width: 100%;
+        max-width: 420px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        animation: slideIn 1s ease-in-out;
+    }
+
+        footer .input-box textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            font-size: 16px;
+            resize: none;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2c3e50;
+        }
+
+            footer .input-box textarea:focus {
+                border-color: #00bcd4;
+                outline: none;
+                box-shadow: 0px 0px 10px rgba(0, 188, 212, 0.5);
+            }
+
+    /* Submit Button */
+    footer .submit-button {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        background: linear-gradient(135deg, #00bcd4, #007bff);
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        animation: bounceIn 0.6s ease-in-out forwards;
+    }
+
+        footer .submit-button:hover {
+            background: linear-gradient(135deg, #007bff, #00bcd4);
+            transform: scale(1.05);
+            box-shadow: 0px 4px 15px rgba(0, 123, 255, 0.5);
+        }
+
+    /* Bottom Section */
+    footer .bottom-details {
+        text-align: center;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        animation: fadeInUp 1s ease-in-out;
+    }
+
+    footer .bottom_text {
+        font-size: 14px;
+        color: #fff;
+    }
+
+    footer .policy_terms a {
+        margin-left: 15px;
+        color: #00bcd4;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+        footer .policy_terms a:hover {
+            color: #007bff;
+        }
+
+/* Animations */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Submit Button - Animated */
+footer .submit-button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: linear-gradient(45deg, #ff7eb3, #ff758c, #ff5964);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(255, 87, 87, 0.5);
+    animation: pulse 1.5s infinite alternate;
+}
+
+    /* Hover Effect - Bounce */
+    footer .submit-button:hover {
+        transform: scale(1.05);
+        background: linear-gradient(45deg, #ff758c, #ff5964, #ff1e56);
+        box-shadow: 0px 8px 20px rgba(255, 87, 87, 0.7);
+        animation: bounce 0.6s ease-in-out forwards;
+    }
+
+/* Pulse Animation */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0px 4px 10px rgba(255, 87, 87, 0.5);
+    }
+
+    100% {
+        transform: scale(1.03);
+        box-shadow: 0px 6px 15px rgba(255, 87, 87, 0.7);
+    }
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1.05);
+    }
+}
+
+footer .content .link-boxes .box {
+    width: 130%;
 }

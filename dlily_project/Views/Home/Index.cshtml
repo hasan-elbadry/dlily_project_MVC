@@ -10,6 +10,15 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
+    <!-- Wow.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+    <!-- Wow.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+    <script>
+        new WOW().init(); // Initialize Wow.js
+    </script>
+
     <title>Home</title>
  @if(User.Identity.IsAuthenticated){
         <!-- Start of LiveChat (www.livechat.com) code -->
@@ -27,7 +36,7 @@
 </head>
 
 <body>
-    <section id="home" class="home">
+    <section id="home" class="home wow animate__animated animate__fadeIn">
         <div class="content">
             <h3>DLYLY Tourism</h3>
             <p>discover new places with us, adventure awaits</p>
@@ -52,7 +61,7 @@
 
     
 
-    <section class="hotels">
+    <section class="hotels  wow animate__animated animate__fadeInUp">
 
         <div class="explore-heading">
 
@@ -156,7 +165,7 @@
 
         </div>
     </section>
-    <section id="companiess" class="companiess">
+    <section id="companiess" class="companiess wow animate__animated animate__fadeInLeft">
         <div class="cos">
             <div class="explore-heading">
                 <h1 class="heading">
@@ -267,7 +276,7 @@
         </div>
     </section>
 
-    <section id="companiess" class="tourgides">
+    <section id="companiess" class="tourgides wow animate__animated animate__fadeInRight">
         <div class="cos">
             <div class="explore-heading">
                 <h1 class="heading">
@@ -325,7 +334,7 @@
             </div>
         </div>
     </section>
-    <section id="touristplaces" class="touristplaces">
+    <section id="touristplaces" class="touristplaces wow animate__animated animate__fadeIn">
         <div class="explore-heading">
 
             <h1 class="heading">

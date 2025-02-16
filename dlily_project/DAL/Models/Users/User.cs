@@ -35,6 +35,10 @@ namespace dlily_project.DAL.Models.Users
         [StringLength(100)]
         public string SpokenLanguage { get; set; } = string.Empty;
 
+        [Required]
+        [StringLength(100)]
+        public string FeedBack { get; set; } = string.Empty;
+
         public byte[] ProfilePicture { get; set; } = Array.Empty<byte>();
     }
 }

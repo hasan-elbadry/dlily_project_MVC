@@ -12,6 +12,35 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @inject dlily_project.DAL.ApplicationDbContext _context
     <script>
+
+        @{
+            if (!string.IsNullOrEmpty(ViewBag.error))
+            {
+                    <script>
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: '@ViewBag.error'
+                        });
+            </script>
+            }
+
+            if (!string.IsNullOrEmpty(ViewBag.success))
+            {
+            <script>
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: '@ViewBag.success',
+                    showConfirmButton: true
+                })
+            </script>
+            }
+        }
+
+
+
+
         function confirmLogout() {
         Swal.fire({
         title: 'Are you sure?',
@@ -35,7 +64,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <div class="navbar-nav ms-3">
                         <a class="nav-link" id="homeLink" asp-controller="Home" asp-action="Index">Home</a>
-                        <a class="nav-link" id="hotelsLink" asp-controller="Home" asp-action="hotels">Hotels</a>
+                        <a class="nav-link" id="hotelsLink" asp-controller="Hotel" asp-action="hotels">Hotels</a>
                         <a class="nav-link" id="companiesLink" asp-controller="Home" asp-action="companies">Companies</a>
                         <a class="nav-link" id="touristPlacesLink"  asp-controller="Attractions" asp-action="Index">Tourist Places</a>
                     </div>
@@ -120,7 +149,6 @@
         <main role="main" class="mb-5">
             @RenderBody()
         </main>
-
     <footer>
         <div class="content">
             <div class="top">
@@ -151,30 +179,28 @@
                     <li><a href="#">Hotel Booking</a></li>
                     <li><a href="#">Tourist Transportation</a></li>
                 </ul>
-                <ul class="box">
-                    <li class="link_name">Account</li>
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="#">My Bookings</a></li>
-                    <li><a href="#">Preferences</a></li>
-                    <li><a href="#">Purchases</a></li>
-                </ul>
-                <ul class="box">
-                    <li class="link_name">Explore</li>
-                    <li><a href="#">Popular Destinations</a></li>
-                    <li><a href="#">Travel Tips</a></li>
-                    <li><a href="#">Traveler Reviews</a></li>
-                    <li><a href="#">Travel Insurance</a></li>
-                </ul>
-                <ul class="box input-box">
-                    <li class="link_name">Subscribe</li>
-                    <li><input type="text" placeholder="Enter your email"></li>
-                    <li><input type="button" value="Subscribe"></li>
-                </ul>
+                <form action="@Url.Action("FeedBack", "Home")" method="post">
+                    <ul class="box input-box">
+                        <li class="link_name">Feedback</li>
+                        <li>
+                            <textarea name="message" placeholder="Enter your feedback here..." rows="3"></textarea>
+                        </li>
+                        <li>
+                            <input type="hidden" name="id" value="1" />
+                        </li>
+                        <li>
+                            <button type="submit" class="submit-button">Submit Feedback</button>
+                        </li>
+                    </ul>
+                </form>
             </div>
         </div>
         <div class="bottom-details">
             <div class="bottom_text">
-                <span class="copyright_text">Copyright © 2025 <a href="#">DLYLY TOURISM.</a> All rights reserved</span>
+                <span class="copyright_text">
+                    Copyright © 2025
+                    <a href="#">DLYLY TOURISM.</a> All rights reserved
+                </span>
                 <span class="policy_terms">
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms & Conditions</a>
@@ -182,8 +208,6 @@
             </div>
         </div>
     </footer>
-
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
