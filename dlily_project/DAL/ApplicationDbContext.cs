@@ -1,4 +1,5 @@
-﻿using dlily_project.DAL.Models.Offers;
+﻿using dlily_project.DAL.Models;
+using dlily_project.DAL.Models.Offers;
 using dlily_project.DAL.Models.Reviews;
 namespace dlily_project.DAL
 {
@@ -166,77 +167,133 @@ namespace dlily_project.DAL
             modelBuilder.Entity<ReviewHotel>().HasKey(x => new { x.HotelId, x.TouristId });
 
             modelBuilder.Entity<TouristPlaces>().HasData(
-    new TouristPlaces
-    {
-        Id = 4,
-        Name = "Great Pyramids of Giza",
-        Description = "Ancient pyramids and the last surviving Wonder of the Ancient World",
-        Article = "The Giza pyramid complex includes the Great Pyramid of Giza...",
-        Location = "https://www.google.com/maps/place/The+Great+Pyramid+of+Giza/@29.9792345,31.1342019,15z/",
-        OpenAt = new TimeSpan(8, 0, 0),
-        CloseAt = new TimeSpan(17, 0, 0),
-        Rating = 5,
-        Category = "Ancient Monument",
-        EntryFee = 200.00,
-        ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/a/af/Giza_pyramid_complex_%28edited%29.jpg"
-    },
-    new TouristPlaces
-    {
-        Id = 5,
-        Name = "Luxor Temple",
-        Description = "Massive Ancient Egyptian temple complex on the east bank of the Nile",
-        Article = "Built approximately 1400 BCE, this temple was dedicated to the Theban Triad...",
-        Location = "https://www.google.com/maps/place/Luxor+Temple/@25.6996147,32.6366406,17z/",
-        OpenAt = new TimeSpan(6, 0, 0),
-        CloseAt = new TimeSpan(22, 0, 0),
-        Rating = 5,
-        Category = "Archaeological Site",
-        EntryFee = 160.00,
-        ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/4/49/Luxor_Temple_18.jpg"
-    },
-    new TouristPlaces
-    {
-        Id = 6,
-        Name = "Abu Simbel Temples",
-        Description = "Twin rock-cut temples dating back to the 13th century BCE",
-        Article = "Commissioned by Pharaoh Ramesses II to commemorate his victory...",
-        Location = "https://www.google.com/maps/place/Abu+Simbel+Temples/@22.3369232,31.6254713,17z/",
-        OpenAt = new TimeSpan(5, 0, 0),
-        CloseAt = new TimeSpan(18, 0, 0),
-        Rating = 5,
-        Category = "Historical Site",
-        EntryFee = 240.00,
-        ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/8/8e/Abu_Simbel_Temple_%288488942077%29.jpg"
-    },
-    new TouristPlaces
-    {
-        Id = 7,
-        Name = "The Egyptian Museum",
-        Description = "Home to the world's most extensive collection of Pharaonic antiquities",
-        Article = "Contains over 120,000 items including the treasures of Tutankhamun...",
-        Location = "https://www.google.com/maps/place/The+Egyptian+Museum/@30.0478085,31.2335643,17z/",
-        OpenAt = new TimeSpan(9, 0, 0),
-        CloseAt = new TimeSpan(17, 0, 0),
-        Rating = 5,
-        Category = "Museum",
-        EntryFee = 300.00,
-        ImageUrl = "https://live.staticflickr.com/65535/53609865504_1c1a8d7c0e_b.jpg"
-    },
-    new TouristPlaces
-    {
-        Id = 8,
-        Name = "Valley of the Kings",
-        Description = "Ancient burial ground for Egyptian royalty",
-        Article = "Contains 63 magnificent royal tombs from the New Kingdom period...",
-        Location = "https://www.google.com/maps/place/Valley+of+the+Kings/@25.7401865,32.6015273,17z/",
-        OpenAt = new TimeSpan(6, 0, 0),
-        CloseAt = new TimeSpan(17, 0, 0),
-        Rating = 5,
-        Category = "Archaeological Site",
-        EntryFee = 240.00,
-        ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/4/4a/Valley_of_the_Kings_Overview.jpg"
-    }
-);
+                new TouristPlaces
+                {
+                    Id = 1,
+                    Name = "Pyramids of Giza",
+                    Description = "The Pyramids of Giza, including the Great Pyramid, are ancient monumental tombs built for pharaohs and stand as a testament to Egypt's historical grandeur.",
+                    Article = "These structures are among the most iconic symbols of ancient Egypt, reflecting advanced engineering and serving as royal tombs.",
+                    Location = "Giza, Egypt",
+                    OpenAt = new TimeSpan(8, 0, 0),
+                    CloseAt = new TimeSpan(17, 0, 0),
+                    Rating = 5,
+                    Category = "Historical Monument",
+                    EntryFee = 200,
+                    ImageUrl = "https://egyptianstreets.com/wp-content/uploads/2012/10/pyramids-with-giza.jpg"
+                },
+                new TouristPlaces
+                {
+                    Id = 2,
+                    Name = "Karnak Temple",
+                    Description = "A vast open-air museum and the largest ancient religious site in the world, dedicated to Theban gods.",
+                    Article = "The temple complex showcases impressive columns and sanctuaries, reflecting the grandeur of ancient Egyptian architecture.",
+                    Location = "Luxor, Egypt",
+                    OpenAt = new TimeSpan(6, 0, 0),
+                    CloseAt = new TimeSpan(17, 30, 0),
+                    Rating = 5,
+                    Category = "Temple Complex",
+                    EntryFee = 150,
+                    ImageUrl = "https://www.expeditions.com/globalassets/expedition-stories/exploring-egypt-5-must-see-sights-at-karnak-temple-complex/karnak-temple-complex-main-image.jpg"
+                },
+                new TouristPlaces
+                {
+                    Id = 3,
+                    Name = "Valley of the Kings",
+                    Description = "A royal burial ground for pharaohs, including the tomb of Tutankhamun, adorned with intricate wall paintings.",
+                    Article = "This valley contains the tombs of pharaohs and nobles, offering insights into ancient Egyptian beliefs about the afterlife.",
+                    Location = "Luxor, Egypt",
+                    OpenAt = new TimeSpan(6, 0, 0),
+                    CloseAt = new TimeSpan(16, 0, 0),
+                    Rating = 5,
+                    Category = "Archaeological Site",
+                    EntryFee = 240,
+                    ImageUrl = "https://s27363.pcdn.co/wp-content/uploads/2020/01/Valley-of-the-Kings-Overview.jpg.optimal.jpg"
+                },
+                new TouristPlaces
+                {
+                    Id = 4,
+                    Name = "Abu Simbel Temples",
+                    Description = "Massive rock-cut temples built by Ramses II, featuring colossal statues and intricate interiors.",
+                    Article = "These temples are renowned for their impressive architecture and the relocation efforts to preserve them from flooding.",
+                    Location = "Aswan Governorate, Egypt",
+                    OpenAt = new TimeSpan(5, 0, 0),
+                    CloseAt = new TimeSpan(18, 0, 0),
+                    Rating = 5,
+                    Category = "Historical Monument",
+                    EntryFee = 255,
+                    ImageUrl = "https://humanoriginproject.com/wp-content/uploads/2019/07/Abu-Simbel-Temple-Egypt.jpg"
+                },
+                new TouristPlaces
+                {
+                    Id = 5,
+                    Name = "Egyptian Museum",
+                    Description = "Houses an extensive collection of ancient Egyptian artifacts, including the treasures of Tutankhamun.",
+                    Article = "The museum offers a comprehensive overview of ancient Egypt's history through its vast array of artifacts.",
+                    Location = "Cairo, Egypt",
+                    OpenAt = new TimeSpan(9, 0, 0),
+                    CloseAt = new TimeSpan(17, 0, 0),
+                    Rating = 5,
+                    Category = "Museum",
+                    EntryFee = 200,
+                    ImageUrl = "https://egyptianstreets.com/wp-content/uploads/2021/04/museum2.jpg"
+                },
+                new TouristPlaces
+                {
+                    Id = 6,
+                    Name = "Siwa Oasis",
+                    Description = "A remote oasis known for its lush palm groves, natural springs, and rich cultural heritage.",
+                    Article = "Siwa offers a tranquil retreat with its unique landscapes and traditional Berber culture.",
+                    Location = "Siwa, Egypt",
+                    OpenAt = new TimeSpan(0, 0, 0),
+                    CloseAt = new TimeSpan(23, 59, 59),
+                    Rating = 4,
+                    Category = "Natural Attraction",
+                    EntryFee = 0,
+                    ImageUrl = "https://www.mediterraholidays.com/photos/tour/191/banner.jpg"
+                },
+                new TouristPlaces
+                {
+                    Id = 7,
+                    Name = "Luxor Temple",
+                    Description = "A large Ancient Egyptian temple complex located on the east bank of the Nile River, known for its well-preserved structures and grand architecture.",
+                    Article = "Luxor Temple was constructed approximately 3,400 years ago during the New Kingdom period and was dedicated to the rejuvenation of kingship.",
+                    Location = "Luxor, Egypt",
+                    OpenAt = new TimeSpan(6, 0, 0),
+                    CloseAt = new TimeSpan(21, 0, 0),
+                    Rating = 4,
+                    Category = "Historical Monument",
+                    EntryFee = 160,
+                    ImageUrl = "https://i.pinimg.com/originals/fe/b2/e9/feb2e9a88d11b9c4f6520c4d94159377.jpg"
+                },
+                new TouristPlaces
+                {
+                    Id = 8,
+                    Name = "Temple of Hatshepsut",
+                    Description = "A mortuary temple built for Pharaoh Hatshepsut, showcasing unique terraced architecture set against limestone cliffs.",
+                    Article = "This temple is considered one of the incomparable monuments of ancient Egypt, reflecting the grandeur of the pharaoh it was built to honor.",
+                    Location = "Deir el-Bahari, Luxor, Egypt",
+                    OpenAt = new TimeSpan(6, 0, 0),
+                    CloseAt = new TimeSpan(17, 0, 0),
+                    Rating = 4,
+                    Category = "Historical Monument",
+                    EntryFee = 140,
+                    ImageUrl = "https://www.egyptpyramidstours.com/wp-content/uploads/2020/05/Temple-of-Queen-Hatshepsut.jpg"
+                },
+                new TouristPlaces
+                {
+                    Id = 9,
+                    Name = "Philae Temple",
+                    Description = "An island temple complex dedicated to the goddess Isis, known for its beautiful architecture and scenic location.",
+                    Article = "The Philae Temple complex was relocated to Agilkia Island to preserve it from the rising waters of the Nile due to the Aswan High Dam construction.",
+                    Location = "Aswan, Egypt",
+                    OpenAt = new TimeSpan(7, 0, 0),
+                    CloseAt = new TimeSpan(16, 0, 0),
+                    Rating = 4,
+                    Category = "Historical Monument",
+                    EntryFee = 180,
+                    ImageUrl = "https://www.tripsavvy.com/thmb/xpMXo-XFKdCy2a6Rp75kLaXb1rk=/3648x2428/filters:fill(auto,1)/GettyImages-500053303-5c80e80b46e0fb0001a5f168.jpg"
+                }
+            );
 
             SeedTourgides(modelBuilder, _hostingEnvironment);
 

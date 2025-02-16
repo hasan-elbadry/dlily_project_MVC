@@ -14,27 +14,27 @@
     <script>
 
         @{
-            if (!string.IsNullOrEmpty(ViewBag.error))
+            @if (!string.IsNullOrEmpty(ViewBag.error))
             {
-                    <script>
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: '@ViewBag.error'
-                        });
-            </script>
+                <text>
+                    Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '@Html.Raw(ViewBag.error)'
+                    });
+                </text>
             }
 
-            if (!string.IsNullOrEmpty(ViewBag.success))
+            @if (!string.IsNullOrEmpty(ViewBag.success))
             {
-            <script>
-                  Swal.fire({
+                <text>
+                    Swal.fire({
                     icon: 'success',
                     title: 'Success!',
-                    text: '@ViewBag.success',
+                    text: '@Html.Raw(ViewBag.success)',
                     showConfirmButton: true
-                })
-            </script>
+                    });
+                </text>
             }
         }
 
@@ -85,58 +85,63 @@
                         }
                         else
                         {
-                            var tourist = _context.Tourists.FirstOrDefault(x => x.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!));
+                            if (User.FindFirstValue(ClaimTypes.Role) == "Tourist"){
+                                var tourist = _context.Tourists.FirstOrDefault(x => x.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!));
 
-                            if(tourist != null){
-                                string base64Image = Convert.ToBase64String(tourist.ProfilePicture);
-                                string imageUrl = "data:image/jpeg;base64," + base64Image;
-                                <img src="@imageUrl" alt="User" class="profile-img" id="profileImg">
+                                if (tourist != null)
+                                {
 
-                                <div class="profile-dropdown" id="profileDropdown">
-                                    <ul class="dropdown-menu">
-                                        @{
-                                            if (User.FindFirstValue(ClaimTypes.Role) == "Tourist")
-                                            {
+                                    string base64Image = Convert.ToBase64String(tourist.ProfilePicture);
+                                    string imageUrl = "data:image/jpeg;base64," + base64Image;
+                                    <img src="@imageUrl" alt="User" class="profile-img" id="profileImg">
 
-                                                <li><a class="dropdown-item" asp-controller="Tourist" asp-action="Profile">Edit Profile</a></li>
+                                    <div class="profile-dropdown" id="profileDropdown">
+                                        <ul class="dropdown-menu">
+                                            @{
+                                                if (User.FindFirstValue(ClaimTypes.Role) == "Tourist")
+                                                {
+
+                                                    <li><a class="dropdown-item" asp-controller="Tourist" asp-action="Profile">Edit Profile</a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li><a class="dropdown-item">Edit Profile</a></li>
+                                                }
                                             }
-                                            else
-                                            {
-                                                <li><a class="dropdown-item">Edit Profile</a></li>
-                                            }
-                                        }
-                                        <li><a class="dropdown-item" href="#">Support</a></li>
-                                        <li><a class="dropdown-item text-danger" href="javascript:void(0);" id="logoutBtn" onclick="confirmLogout()">Logout</a></li>
-                                    </ul>
-                                </div>
+                                            <li><a class="dropdown-item" href="#">Support</a></li>
+                                            <li><a class="dropdown-item text-danger" href="javascript:void(0);" id="logoutBtn" onclick="confirmLogout()">Logout</a></li>
+                                        </ul>
+                                    </div>
+                                }
                             }
                             else
                             {
                                 var tourgide = _context.Tourgides.FirstOrDefault(x => x.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!));
-                                if (tourgide == null)
-                                    return;
+                                if (tourgide != null){
+                                    string base64Image = Convert.ToBase64String(tourgide.ProfilePicture);
+                                    string imageUrl = "data:image/jpeg;base64," + base64Image;
+                                    <img src="@imageUrl" alt="User" class="profile-img" id="profileImg">
 
-                                string base64Image = Convert.ToBase64String(tourgide.ProfilePicture);
-                                string imageUrl = "data:image/jpeg;base64," + base64Image;
-                                <img src="@imageUrl" alt="User" class="profile-img" id="profileImg">
+                                    <div class="profile-dropdown" id="profileDropdown">
+                                        <ul class="dropdown-menu">
+                                            @{
+                                                if (User.FindFirstValue(ClaimTypes.Role) == "Tourist")
+                                                {
 
-                                <div class="profile-dropdown" id="profileDropdown">
-                                    <ul class="dropdown-menu">
-                                        @{
-                                            if (User.FindFirstValue(ClaimTypes.Role) == "Tourist")
-                                            {
-
-                                                <li><a class="dropdown-item" asp-controller="Tourist" asp-action="Profile">Edit Profile</a></li>
+                                                    <li><a class="dropdown-item" asp-controller="Tourist" asp-action="Profile">Edit Profile</a></li>
+                                                }
+                                                else
+                                                {
+                                                    <li><a class="dropdown-item">Edit Profile</a></li>
+                                                }
                                             }
-                                            else
-                                            {
-                                                <li><a class="dropdown-item">Edit Profile</a></li>
-                                            }
-                                        }
-                                        <li><a class="dropdown-item" href="#">Support</a></li>
-                                        <li><a class="dropdown-item text-danger" href="javascript:void(0);" id="logoutBtn" onclick="confirmLogout()">Logout</a></li>
-                                    </ul>
-                                </div>
+                                            <li><a class="dropdown-item" href="#">Support</a></li>
+                                            <li><a class="dropdown-item text-danger" href="javascript:void(0);" id="logoutBtn" onclick="confirmLogout()">Logout</a></li>
+                                        </ul>
+                                    </div>
+                                }
+
+
 
                             }
                         }
@@ -146,9 +151,9 @@
         </nav>
     </header>
 
-        <main role="main" class="mb-5">
-            @RenderBody()
-        </main>
+    <main role="main" class="mb-5">
+        @RenderBody()
+    </main>
     <footer>
         <div class="content">
             <div class="top">
@@ -163,36 +168,56 @@
                     <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
-            <div class="link-boxes">
-                <ul class="box">
-                    <li class="link_name">Dlyly</li>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Tourist Places</a></li>
-                    <li><a href="#">Hotels</a></li>
-                    <li><a href="#">Companies</a></li>
-                    <li><a href="#">Get Started</a></li>
-                </ul>
-                <ul class="box">
-                    <li class="link_name">Tourism Services</li>
-                    <li><a href="#">Tourist Packages</a></li>
-                    <li><a href="#">Guide Booking</a></li>
-                    <li><a href="#">Hotel Booking</a></li>
-                    <li><a href="#">Tourist Transportation</a></li>
-                </ul>
-                <form action="@Url.Action("FeedBack", "Home")" method="post">
-                    <ul class="box input-box">
-                        <li class="link_name">Feedback</li>
-                        <li>
-                            <textarea name="message" placeholder="Enter your feedback here..." rows="3"></textarea>
-                        </li>
-                        <li>
-                            <input type="hidden" name="id" value="1" />
-                        </li>
-                        <li>
-                            <button type="submit" class="submit-button">Submit Feedback</button>
-                        </li>
+            <div>
+                <div class="link-boxes">
+                    <ul class="box">
+                        <li class="link_name">Dlyly</li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Tourist Places</a></li>
+                        <li><a href="#">Hotels</a></li>
+                        <li><a href="#">Companies</a></li>
+                        <li><a href="#">Get Started</a></li>
                     </ul>
-                </form>
+                    <ul class="box">
+                        <li class="link_name">Tourism Services</li>
+                        <li><a href="#">Tourist Packages</a></li>
+                        <li><a href="#">Guide Booking</a></li>
+                        <li><a href="#">Hotel Booking</a></li>
+                        <li><a href="#">Tourist Transportation</a></li>
+                    </ul>
+
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            dynamic t = null;
+
+
+                            if (User.FindFirstValue(ClaimTypes.Role) == "Tourist")
+                            {
+                                t = _context.Tourists.FirstOrDefault(x => x.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!));
+                            }
+                            else
+                            {
+                                t = _context.Tourgides.FirstOrDefault(x => x.Id == int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!));
+                            }
+                    <form action="@Url.Action("FeedBack", "Home")" method="post">
+                        <ul class="box input-box">
+                            <li class="link_name">Feedback</li>
+                            <li>
+                                <textarea name="message" placeholder="Enter your feedback here..." rows="3"></textarea>
+                            </li>
+                            <li>
+                                <input type="hidden" name="id" value="@t.Id" />
+                            </li>
+                            <li>
+                                <button type="submit" class="submit-button">Submit Feedback</button>
+                            </li>
+                        </ul>
+                    </form>
+                    }
+                    }
+
+                </div>
             </div>
         </div>
         <div class="bottom-details">

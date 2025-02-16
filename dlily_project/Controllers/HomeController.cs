@@ -86,21 +86,35 @@ namespace dlily_project.Controllers
         }
 
         [HttpPost]
-        public IActionResult FeedBack(string meesage, int id)
+        public IActionResult FeedBack(string message, int id)
         {
+
+            var hotels = _context.Hotels.ToList();
+            var compaines = _context.CompanyOffers.ToList();
+            var tourgide = _context.Tourgides.ToList();
+
+
+
+            var model = new HomeViewModel
+            {
+                Hotels = hotels,
+                CompanyOffers = compaines,
+                Tourgides = tourgide
+            };
+      
 
             var toursit = _context.Tourists.FirstOrDefault(x => x.Id == id);
             if (toursit == null)
             {
                 ViewBag.error = "Tourist not found";
-                return View("Index");
+                return View("Index",model);
             }
 
-            toursit.FeedBack = meesage;
+            toursit.FeedBack = message;
             _context.SaveChanges();
 
             ViewBag.success = "Feedback sended successfully, we will contact you shortly!";
-            return View("Index");
+            return View("Index", model);
         }
     }
 }
