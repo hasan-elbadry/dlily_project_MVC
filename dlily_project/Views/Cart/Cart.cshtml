@@ -1,0 +1,219 @@
+﻿@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<div class="container py-5">
+    <!-- Cart Items Section -->
+    <div id="cart-container">
+        <div id="cart-items" class="row g-4 mb-4"></div>
+
+        <!-- Empty Cart Message -->
+        <div id="empty-cart-message" class="text-center d-none">
+            <div class="empty-state-icon mb-4">
+                <i class="bi bi-cart-x fs-1 text-muted"></i>
+            </div>
+            <h3 class="mb-3">Your Cart Feels Lonely</h3>
+            <a href="/Products" class="btn btn-primary btn-lg px-5">
+                <i class="bi bi-arrow-left me-2"></i>Find Gear
+            </a>
+        </div>
+
+        <!-- Cart Summary -->
+        <div id="cart-summary" class="card border-0 shadow-lg d-none">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="mb-0 text-dark">Total:</h4>
+                    <h2 id="total-price" class="mb-0 text-success">$0.00</h2>
+                </div>
+                <div id="paypal-button-container" class="mt-4"></div>
+                <div class="mt-4 text-center">
+                    <small class="text-muted">Secure checkout processed by</small>
+                    <img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_37x23.jpg"
+                         class="ms-2" alt="PayPal Logo" style="height: 23px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    :root {
+        --glass-bg: rgba(255, 255, 255, 0.98);
+        --shadow-normal: 0 2px 8px rgba(0, 0, 0, 0.08);
+        --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .cart-item {
+        transition: all 0.25s ease;
+        background: var(--glass-bg);
+        box-shadow: var(--shadow-normal);
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+        .cart-item:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+    .product-image {
+        width: 140px;
+        height: 140px;
+        object-fit: contain;
+        border-radius: 8px;
+        padding: 1.25rem;
+        background: #f8f9fa;
+    }
+
+    .quantity-display {
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #666;
+    }
+
+    .empty-state-icon {
+        opacity: 0.8;
+        transition: opacity 0.3s ease;
+    }
+
+    .total-price {
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
+
+    .remove-btn {
+        transition: all 0.2s ease;
+        opacity: 0.7;
+        padding: 0.5rem;
+    }
+
+        .remove-btn:hover {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+</style>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AWkIHQeACTJbHcq1plYgjtwj2fObzE0p6LMLnTnLjtJb8E2FqrtRfe4UdbwvjDX9Z8CWBTXivcJ6oXpS&currency=USD"></script>
+<script>
+    const CartManager = {
+        getCart: () => JSON.parse(localStorage.getItem('cart')) || [],
+
+        updateCart: (cart) => {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            CartManager.toggleUIState();
+        },
+
+        groupCartItems: (cart) => {
+            const grouped = {};
+            cart.forEach(item => {
+                const key = item.id || item.name;
+                grouped[key] = grouped[key] || { ...item, quantity: 0, total: 0 };
+                grouped[key].quantity++;
+                grouped[key].total += item.price;
+            });
+            return Object.values(grouped);
+        },
+
+        toggleUIState: () => {
+            const cart = CartManager.getCart();
+            document.getElementById('empty-cart-message').classList.toggle('d-none', cart.length > 0);
+            document.getElementById('cart-summary').classList.toggle('d-none', cart.length === 0);
+        }
+    };
+
+    function renderCartItems() {
+        const cart = CartManager.getCart();
+        const groupedCart = CartManager.groupCartItems(cart);
+        const itemsContainer = document.getElementById('cart-items');
+
+        itemsContainer.innerHTML = groupedCart.map(item => `
+                <div class="col-12">
+                    <div class="cart-item card p-3">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-md-2">
+                                <img src="${item.image || '/images/placeholder-product.jpg'}"
+                                     class="product-image" alt="${item.name}">
+                            </div>
+                            <div class="col-md-6">
+                                <h5 class="mb-1">${item.name}</h5>
+                                <div class="d-flex align-items-center gap-4 text-muted">
+                                    <div>$${item.price.toFixed(2)} each</div>
+                                    <div class="quantity-display">Qty: ${item.quantity}</div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <button class="btn btn-link text-danger remove-btn"
+                                        data-action="remove" data-id="${item.id || item.name}">
+                                    <i class="bi bi-trash fs-5"></i>
+                                </button>
+                                <div class="mt-2">
+                                    <div class="text-dark fw-bold">$${item.total.toFixed(2)}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+    }
+
+    function updateTotalPrice() {
+        const cart = CartManager.getCart();
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
+    }
+
+    function handleCartAction(event) {
+        const action = event.target.dataset.action;
+        const itemId = event.target.dataset.id;
+        let cart = CartManager.getCart();
+
+        if (action === 'remove') {
+            cart = cart.filter(item => (item.id || item.name) !== itemId);
+            CartManager.updateCart(cart);
+            renderCartItems();
+            updateTotalPrice();
+        }
+    }
+
+    function initCart() {
+        CartManager.toggleUIState();
+        renderCartItems();
+        updateTotalPrice();
+
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('[data-action="remove"]')) {
+                handleCartAction(e);
+            }
+        });
+
+        paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color: 'gold',
+                shape: 'rect',
+                label: 'checkout'
+            },
+            createOrder: (data, actions) => {
+                const cart = CartManager.getCart();
+                const total = cart.reduce((sum, item) => sum + item.price, 0);
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: total.toFixed(2),
+                            currency_code: 'USD'
+                        }
+                    }]
+                });
+            },
+            onApprove: (data, actions) => {
+                return actions.order.capture().then(details => {
+                    localStorage.removeItem('cart');
+                    window.location.href = `/Order/Complete?transactionId=${details.id}`;
+                });
+            }
+        }).render('#paypal-button-container');
+    }
+
+    document.addEventListener('DOMContentLoaded', initCart);
+</script>
