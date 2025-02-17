@@ -35,7 +35,7 @@ namespace dlily_project.Controllers
                 Hotels = hotels,
                 CompanyOffers  = compaines,
                 Tourgides = tourgide,
-                TouristPlaces = touristPlaces
+                 TouristPlaces = touristPlaces
             };
             return View(model);
         }
