@@ -316,7 +316,8 @@
                             </div>
                             <div class="guide-footer" data-guide-email="@guide.Email">
                                 <span class="price">@(guide.Price * 10)/day</span>
-                                <button class="checkout-btn" data-id="@guide.Id">Checkout</button>
+                                <button class="checkout-btn" data-id="@guide.Id" onclick="location.href='@Url.Action("Cart", "Cart")'">Checkout</button>
+
                             </div>
                         </div>
                     </div>
@@ -366,14 +367,14 @@
 
 
     </script>
-    <a href="@Url.Action("Cart", "Cart")">Go to Cart</a>
+  
     <script src="https://cdn.livechatinc.com/widget.js" async></script>
 
     <div>
         <script>
-            const encodedToken = "YmQ4MDZhMzYtMGE3Ny00ZDJiLWEwYWUtZTY1YmM4N2U1M2M3OmRhbDpsanFVeVRZQTVwSTgxSGFydHdQMXRsNTROWUk=";
+            // const encodedToken = "YmQ4MDZhMzYtMGE3Ny00ZDJiLWEwYWUtZTY1YmM4N2U1M2M3OmRhbDpsanFVeVRZQTVwSTgxSGFydHdQMXRsNTROWUk=";
 
-
+            const encodedToken = "ZmU4NmMwN2ItYjNkYS00NDYxLTgwOWYtYTk5ZjAxMDliNTc0OmRhbDpwRUdjcVNPZXUzYTdHUWprbEFBbHF4eGFreVU=";
             async function fetchTourGuides() {
                 try {
                     const response = await fetch("/TourGuide/GetTourGuide");
@@ -398,8 +399,9 @@
                     const response = await fetch("https://api.livechatinc.com/v3.5/configuration/action/create_agent", {
                         method: "POST",
                         headers: {
-                            "Authorization": `Basic ${encodedToken}`,  // تأكد من أن التوكن محدث بصلاحيات مناسبة
+                            "Authorization": `Basic ZmU4NmMwN2ItYjNkYS00NDYxLTgwOWYtYTk5ZjAxMDliNTc0OmRhbDpwRUdjcVNPZXUzYTdHUWprbEFBbHF4eGFreVU=`,  // تأكد من أن التوكن محدث بصلاحيات مناسبة
                             "Content-Type": "application/json"
+
                         },
                         body: JSON.stringify({
                             "id": tourGuideEmail,  // استخدم الإيميل كـ ID

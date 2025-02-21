@@ -21,21 +21,37 @@ namespace dlily_project.Controllers
         public IActionResult AddToCart(int id)
         {
             var selectedGuide = _context.Tourgides.FirstOrDefault(g => g.Id == id);
-            if (selectedGuide == null)
+            var selectedRoom = _context.Hotels
+                .SelectMany(h => h.Rooms) // Flatten all rooms across hotels
+                .FirstOrDefault(room => room.Id == id); // Assuming rooms have a unique ID
+
+            if (selectedGuide == null && selectedRoom == null)
             {
                 return NotFound();
             }
 
-          
-            cart.Add(new CartItem
+            if (selectedGuide != null)
             {
-                Id = selectedGuide.Id,
-                Name = selectedGuide.Name,
-                Price = selectedGuide.Price
-            });
+                cart.Add(new CartItem
+                {
+                    Id = selectedGuide.Id,
+                    Name = selectedGuide.Name,
+                    Price = selectedGuide.Price
+                });
+            }
+            else if (selectedRoom != null)
+            {
+                cart.Add(new CartItem
+                {
+                    Id = selectedRoom.Id,
+                    Name = $"Room {selectedRoom.RoomNumber}",
+                    Price = selectedRoom.Price // Assuming rooms have a price
+                });
+            }
 
             return RedirectToAction("Cart");
         }
+
 
         public IActionResult Cart()
         {

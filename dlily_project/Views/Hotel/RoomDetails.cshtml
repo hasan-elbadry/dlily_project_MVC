@@ -11,6 +11,22 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @inject dlily_project.DAL.ApplicationDbContext _context
+    <style>
+        .checkout-btn {
+            background: #27ae60;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-left: 0.5rem;
+        }
+
+            .checkout-btn:hover {
+                background: #219a52;
+            }
+    </style>
 
 </head>
 
@@ -36,9 +52,15 @@
                 }
 
             </div>
-            <button type="submit" id="checkout-btn" class="check-btn">Check Out</button>
 
-            <button class="checkout-btn" data-id="">Checkout</button>
+
+            <button class="checkout-btn"
+                    data-id="@Model.RoomNumber"
+                    data-price="@Model.Price"
+                    onclick="location.href='@Url.Action("Cart", "Cart")'">
+                Checkout
+            </button>
+
         </div>
         <div class="content">
             <h2 class="title">Superior Room, King Bed</h2>
@@ -78,7 +100,7 @@
                 </div>
                 <div>
                     <h3 class="sizee" style="display:inline">Price:</h3> <span class="hotels-new-price">@Model.Price EGP</span>
-
+                   
                 </div>
             </div>
 
@@ -160,6 +182,26 @@
         });
     </script>
 
+    <script>
+        document.querySelectorAll('.checkout-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const roomNumber = this.dataset.id; // RoomNumber is a string
+                const price = parseFloat(this.dataset.price); // Convert price to a number
+
+                const room = {
+                    id: roomNumber,
+                    name: `Room ${roomNumber}`,
+                    price: price // Ensure price is stored as a double
+                };
+
+                const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+                cart.push(room);
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                alert(`Added Room ${roomNumber} to cart!`);
+            });
+        });
+    </script>
 
 
 
