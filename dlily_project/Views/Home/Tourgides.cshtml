@@ -316,7 +316,7 @@
                             </div>
                             <div class="guide-footer" data-guide-email="@guide.Email">
                                 <span class="price">@(guide.Price * 10)/day</span>
-                                <button class="checkout-btn" data-id="@guide.Id" onclick="location.href='@Url.Action("Cart", "Cart")'">Checkout</button>
+                                <button class="checkout-btn" data-id="@guide.Id" data-image="@guide.ProfilePicture.FirstOrDefault()" onclick="location.href='@Url.Action("Cart", "Cart")'">Checkout</button>
 
                             </div>
                         </div>
@@ -578,6 +578,7 @@
                 
                     const guide = {
                         id: this.dataset.id,
+                        image: this.dataset.image,
                         name: this.closest('.guide-card').querySelector('.guide-name').textContent, 
                         price: parseFloat(this.closest('.guide-footer').querySelector('.price').textContent.match(/\d+/)[0]) // أخذ السعر
                     };
@@ -587,7 +588,13 @@
                     cart.push(guide);
                     localStorage.setItem('cart', JSON.stringify(cart));
 
-                    alert('Added to cart!');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Added to Cart!',
+                        text: `${guide.name} added successfully`, // Fixed this line
+                        timer: 12500,
+                        showConfirmButton: false
+                    });
                 });
             });
         </script>

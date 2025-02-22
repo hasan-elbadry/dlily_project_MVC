@@ -35,6 +35,9 @@ namespace dlily_project.Controllers
                 cart.Add(new CartItem
                 {
                     Id = selectedGuide.Id,
+                    Image = selectedGuide.ProfilePicture != null
+    ? "data:image/png;base64," + Convert.ToBase64String(selectedGuide.ProfilePicture)
+    : null,
                     Name = selectedGuide.Name,
                     Price = selectedGuide.Price
                 });
@@ -44,6 +47,7 @@ namespace dlily_project.Controllers
                 cart.Add(new CartItem
                 {
                     Id = selectedRoom.Id,
+                    Image = selectedRoom.Images,
                     Name = $"Room {selectedRoom.RoomNumber}",
                     Price = selectedRoom.Price // Assuming rooms have a price
                 });

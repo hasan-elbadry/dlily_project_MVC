@@ -57,6 +57,7 @@
             <button class="checkout-btn"
                     data-id="@Model.RoomNumber"
                     data-price="@Model.Price"
+                    data-image="@Model.Images.FirstOrDefault()"
                     onclick="location.href='@Url.Action("Cart", "Cart")'">
                 Checkout
             </button>
@@ -187,18 +188,25 @@
             button.addEventListener('click', function () {
                 const roomNumber = this.dataset.id; // RoomNumber is a string
                 const price = parseFloat(this.dataset.price); // Convert price to a number
-
+                const image = this.dataset.image;
                 const room = {
                     id: roomNumber,
+                    image: image ,
                     name: `Room ${roomNumber}`,
-                    price: price // Ensure price is stored as a double
+                    price: price // Ensure price is stored as a number
                 };
 
                 const cart = JSON.parse(localStorage.getItem('cart') || '[]');
                 cart.push(room);
                 localStorage.setItem('cart', JSON.stringify(cart));
 
-                alert(`Added Room ${roomNumber} to cart!`);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Added to Cart!',
+                    text: `${room.name} added successfully`, // Fixed this line
+                    timer: 12500,
+                    showConfirmButton: false
+                });
             });
         });
     </script>
