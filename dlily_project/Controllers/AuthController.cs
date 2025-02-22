@@ -163,7 +163,7 @@ namespace dlily_project.Controllers
 
                 await _context.Tourgides.AddAsync(tourgide);
                 await _context.SaveChangesAsync();
-                ViewBag.SuccessMessage = "Your account has been created successfully!";
+                ViewBag.SuccessMessage = "Your account has been registered successfully! We will contact you soon via email as soon as possible.";
                 return View(model);
             }
             catch (Exception ex)
@@ -173,47 +173,47 @@ namespace dlily_project.Controllers
             }
         }
 
-        [HttpGet]
-        public IActionResult TourgideSignIn()
-        {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> TourgideSignIn(TourgideSignInViewModel model)
-        {
+        //[HttpGet]
+        //public IActionResult TourgideSignIn()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> TourgideSignIn(TourgideSignInViewModel model)
+        //{
 
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
 
-            var user = await _context.Tourgides.FirstOrDefaultAsync(x => x.Email == model.Email && x.Password == model.Password);
-            if (user == null)
-            {
-                ViewBag.error = "Incorrect email or password, please try agian";
-                return View(model);
-            }
+        //    var user = await _context.Tourgides.FirstOrDefaultAsync(x => x.Email == model.Email && x.Password == model.Password);
+        //    if (user == null)
+        //    {
+        //        ViewBag.error = "Incorrect email or password, please try agian";
+        //        return View(model);
+        //    }
 
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Name),
-                new Claim(ClaimTypes.Role, "Tourgide"),
-            };
+        //    var claims = new List<Claim>
+        //    {
+        //        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        //        new Claim(ClaimTypes.Name, user.Name),
+        //        new Claim(ClaimTypes.Role, "Tourgide"),
+        //    };
 
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            var authProperties = new AuthenticationProperties();
+        //    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        //    var authProperties = new AuthenticationProperties();
 
-            await HttpContext.SignInAsync(
-                CookieAuthenticationDefaults.AuthenticationScheme,
-                new ClaimsPrincipal(claimsIdentity),
-                authProperties
-            );
+        //    await HttpContext.SignInAsync(
+        //        CookieAuthenticationDefaults.AuthenticationScheme,
+        //        new ClaimsPrincipal(claimsIdentity),
+        //        authProperties
+        //    );
 
-            ViewBag.success = "Login sucessfully!";
-            return View(model);
-        }
+        //    ViewBag.success = "Login sucessfully!";
+        //    return View(model);
+        //}
 
         public async Task<IActionResult> Logout()
         {

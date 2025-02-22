@@ -1111,3 +1111,8 @@
 .next-btn {
     right: 20px;
 }
+
+
+.wow {
+    animation-delay: 0.2s; /* Add a 1-second delay to all Wow.js animations */
+}

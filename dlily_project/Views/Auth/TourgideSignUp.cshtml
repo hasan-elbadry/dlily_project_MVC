@@ -48,10 +48,10 @@
                     icon: 'success',
                     title: 'Success!',
                     text: '@ViewBag.SuccessMessage',
-                    timer: 2000, // Auto close after 3 seconds
-                    showConfirmButton: false
+                    timer: 5000, // Auto close after 3 seconds
+                    showConfirmButton: true
                 }).then(() => {
-                    window.location.href = '/Auth/TourgideSignIn'; // Redirect to Sign-In page
+                    window.location.href = '/Home';
                 });
             </script>
         }
