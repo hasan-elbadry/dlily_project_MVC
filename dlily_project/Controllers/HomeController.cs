@@ -41,23 +41,6 @@ namespace dlily_project.Controllers
         }
 
 
-      ////  var hotels = _context.Hotels
-      //.ToList() // Move data into memory
-      //.Select(x => new HotelViewModel
-      //{
-      //    HomeImage = x.HomeImage,
-      //    Description = x.Description,
-      //    Id = x.Id,
-      //    Location = x.Location,
-      //    Name = x.Name,
-      //    Price = x.Price,
-      //    Rating = x.Rating,
-      //    Services = (x.Services ?? "").Split(",").ToList(),
-      //    OtherImages = (x.OtherImages ?? "").Split(",").ToList(),
-      //})
-      //.ToList();
-
-
         [Authorize]
         public IActionResult Companies()
         {

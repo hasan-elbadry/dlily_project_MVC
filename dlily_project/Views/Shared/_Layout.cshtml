@@ -189,7 +189,7 @@
                     @{
                         if (User.Identity.IsAuthenticated)
                         {
-                            dynamic t = null;
+                            dynamic? t = null;
 
 
                             if (User.FindFirstValue(ClaimTypes.Role) == "Tourist")
