@@ -807,7 +807,7 @@
         cursor: pointer;
         transition: all 0.3s;
         position: absolute;
-        bottom: 2rem;
+        bottom: 0.5rem;
         right: 2rem;
         display: flex;
         align-items: center;

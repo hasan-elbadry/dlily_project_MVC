@@ -55,10 +55,10 @@
 
 
             <button class="checkout-btn"
+                    id="checkout-btn"
                     data-id="@Model.RoomNumber"
                     data-price="@Model.Price"
-                    data-image="@Model.Images.FirstOrDefault()"
-                    onclick="location.href='@Url.Action("Cart", "Cart")'">
+                    data-image="@Model.Images.FirstOrDefault()">
                 Checkout
             </button>
 
@@ -120,7 +120,7 @@
             img.classList.add("active");
         }
 
-            document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
             var checkoutBtn = document.getElementById("checkout-btn");
             if (!checkoutBtn) return; // Ensure button exists
 
@@ -128,7 +128,24 @@
             var tourist = @Html.Raw(Json.Serialize(tourist));
             console.log("Tourist object:", tourist);
 
-            checkoutBtn.addEventListener("click", function () {
+            checkoutBtn.addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent the default redirect behavior
+
+                // Add room to cart
+                const roomNumber = checkoutBtn.dataset.id; // RoomNumber is a string
+                const price = parseFloat(checkoutBtn.dataset.price); // Convert price to a number
+                const image = checkoutBtn.dataset.image;
+                       const room = {
+            id: roomNumber,
+            image: image,
+            name: `${roomNumber}`,
+            price: price
+        };
+
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push(room);
+        localStorage.setItem('cart', JSON.stringify(cart));
+
                 // Create the booking data object
                 const bookingData = {
                     roomNumber: "@Model.RoomNumber", // Ensure this is correct
@@ -148,7 +165,6 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'Accept': 'application/json'
                     },
                     body: JSON.stringify(bookingData)
                 })
@@ -166,9 +182,11 @@
                         title: 'Booking Successful!',
                         text: 'Your room has been booked successfully.',
                         timer: 2000,
-                        showConfirmButton: false
+                        showConfirmButton: true
                     }).then(() => {
-                        window.location.href = '/Home/Index';
+                        // Redirect to the cart after a delay
+                            window.location.href = '@Url.Action("Cart", "Cart")';
+            
                     });
                 })
                 .catch(error => {
@@ -182,35 +200,6 @@
             });
         });
     </script>
-
-    <script>
-        document.querySelectorAll('.checkout-btn').forEach(button => {
-            button.addEventListener('click', function () {
-                const roomNumber = this.dataset.id; // RoomNumber is a string
-                const price = parseFloat(this.dataset.price); // Convert price to a number
-                const image = this.dataset.image;
-                const room = {
-                    id: roomNumber,
-                    image: image ,
-                    name: `Room ${roomNumber}`,
-                    price: price // Ensure price is stored as a number
-                };
-
-                const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-                cart.push(room);
-                localStorage.setItem('cart', JSON.stringify(cart));
-
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Added to Cart!',
-                    text: `${room.name} added successfully`, // Fixed this line
-                    timer: 12500,
-                    showConfirmButton: false
-                });
-            });
-        });
-    </script>
-
 
 
 </body>
