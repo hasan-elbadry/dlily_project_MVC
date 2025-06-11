@@ -5,338 +5,332 @@ document.addEventListener("DOMContentLoaded", () => {
     const videoBtn = document.querySelectorAll('.vid-btn');
     const videoSlider = document.querySelector('#video-slider');
 
-    if (videoBtn.length === 0 || !videoSlider) {
-        console.warn("Video buttons or video slider not found.");
-        return;
-    }
+    if (videoBtn.length > 0 && videoSlider) {
+        let videoSources = Array.from(videoBtn).map(btn => btn.getAttribute('data-src')).filter(src => src);
+        let currentVideoIndex = 0;
 
-    let videoSources = Array.from(videoBtn).map(btn => btn.getAttribute('data-src')).filter(src => src);
-    let currentVideoIndex = 0;
+        if (videoSources.length > 0) {
+            videoBtn.forEach((btn, index) => {
+                btn.addEventListener('click', () => {
+                    currentVideoIndex = index;
+                    updateVideo();
+                });
+            });
 
-    if (videoSources.length === 0) {
-        console.warn("No valid video sources found.");
-        return;
-    }
+            function nextVideo() {
+                currentVideoIndex = (currentVideoIndex + 1) % videoSources.length;
+                updateVideo();
+            }
 
-    videoBtn.forEach((btn, index) => {
-        btn.addEventListener('click', () => {
-            currentVideoIndex = index;
+            function prevVideo() {
+                currentVideoIndex = (currentVideoIndex - 1 + videoSources.length) % videoSources.length;
+                updateVideo();
+            }
+
+            function updateVideo() {
+                videoSlider.src = videoSources[currentVideoIndex];
+                videoSlider.play().catch(err => console.warn("Auto-play blocked:", err));
+
+                document.querySelector('.controls .active')?.classList.remove('active');
+                videoBtn[currentVideoIndex].classList.add('active');
+            }
+
+            videoSlider.addEventListener('ended', nextVideo);
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === "ArrowRight" || event.key === "d") {
+                    nextVideo();
+                } else if (event.key === "ArrowLeft" || event.key === "a") {
+                    prevVideo();
+                }
+            });
+
+            // Initialize the first video
             updateVideo();
-        });
-    });
-
-    function nextVideo() {
-        currentVideoIndex = (currentVideoIndex + 1) % videoSources.length;
-        updateVideo();
-    }
-
-    function prevVideo() {
-        currentVideoIndex = (currentVideoIndex - 1 + videoSources.length) % videoSources.length;
-        updateVideo();
-    }
-
-    function updateVideo() {
-        videoSlider.src = videoSources[currentVideoIndex];
-        videoSlider.play().catch(err => console.warn("Auto-play blocked:", err));
-
-        document.querySelector('.controls .active')?.classList.remove('active');
-        videoBtn[currentVideoIndex].classList.add('active');
-    }
-
-    videoSlider.addEventListener('ended', nextVideo);
-
-    document.addEventListener('keydown', (event) => {
-        if (event.key === "ArrowRight" || event.key === "d") {
-            nextVideo();
-        } else if (event.key === "ArrowLeft" || event.key === "a") {
-            prevVideo();
         }
-    });
+    }
 
-    // Initialize the first video
-    updateVideo();
-
-    // Cards Rotation Logic
+    // Cards Rotation Logic (for other cards, not tourguides)
     const cards = document.querySelectorAll('.card');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
 
-    if (cards.length === 0 || !prevBtn || !nextBtn) {
-        console.warn("Cards or navigation buttons not found.");
-        return;
-    }
+    if (cards.length > 0 && prevBtn && nextBtn) {
+        let currentIndex = 0;
 
-    let currentIndex = 0;
+        function updateCards() {
+            cards.forEach((card, index) => {
+                card.classList.remove('active', 'prev', 'next');
 
-    function updateCards() {
-        cards.forEach((card, index) => {
-            card.classList.remove('active', 'prev', 'next');
+                if (index === currentIndex) {
+                    card.classList.add('active');
+                } else if (index === (currentIndex + 1) % cards.length) {
+                    card.classList.add('next');
+                } else if (index === (currentIndex - 1 + cards.length) % cards.length) {
+                    card.classList.add('prev');
+                }
+            });
+        }
 
-            if (index === currentIndex) {
-                card.classList.add('active');
-            } else if (index === (currentIndex + 1) % cards.length) {
-                card.classList.add('next');
-            } else if (index === (currentIndex - 1 + cards.length) % cards.length) {
-                card.classList.add('prev');
-            }
+        function rotateNext() {
+            currentIndex = (currentIndex + 1) % cards.length;
+            updateCards();
+        }
+
+        function rotatePrev() {
+            currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+            updateCards();
+        }
+
+        prevBtn.addEventListener('click', rotatePrev);
+        nextBtn.addEventListener('click', rotateNext);
+
+        // Auto-rotate every 8 seconds
+        let interval = setInterval(rotateNext, 8000);
+
+        // Pause auto-rotate on hover
+        const cardsWrapper = document.querySelector('.cards-wrapper');
+        if (cardsWrapper) {
+            cardsWrapper.addEventListener('mouseenter', () => clearInterval(interval));
+            cardsWrapper.addEventListener('mouseleave', () => {
+                interval = setInterval(rotateNext, 8000);
+            });
+        }
+
+        // Handle card clicks
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                const clickedIndex = Array.from(cards).indexOf(card);
+                if (clickedIndex !== currentIndex) {
+                    currentIndex = clickedIndex;
+                    updateCards();
+                }
+            });
         });
-    }
 
-    function rotateNext() {
-        currentIndex = (currentIndex + 1) % cards.length;
+        // Initialize cards
         updateCards();
     }
 
-    function rotatePrev() {
-        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-        updateCards();
-    }
-
-    prevBtn.addEventListener('click', rotatePrev);
-    nextBtn.addEventListener('click', rotateNext);
-
-    // Auto-rotate every 8 seconds
-    const interval = setInterval(rotateNext, 8000);
-
-    // Pause auto-rotate on hover
-    document.querySelector('.cards-wrapper')?.addEventListener('mouseenter', () => clearInterval(interval));
-
-    // Resume auto-rotate on mouse leave
-    document.querySelector('.cards-wrapper')?.addEventListener('mouseleave', () => setInterval(rotateNext, 8000));
-
-    // Handle card clicks
-    cards.forEach(card => {
-        card.addEventListener('click', () => {
-            const clickedIndex = Array.from(cards).indexOf(card);
-            if (clickedIndex !== currentIndex) {
-                currentIndex = clickedIndex;
-                updateCards();
-            }
-        });
-    });
-
-    // Initialize cards
-    updateCards();
-});
-// ddddddddddd
-document.addEventListener("DOMContentLoaded", () => {
+    // Basic Slider Logic (for .slider elements)
     const slider = document.querySelector(".slider");
     const slides = document.querySelectorAll(".slide");
-    const prevBtn = document.querySelector(".prev-btn");
-    const nextBtn = document.querySelector(".next-btn");
-    let currentIndex = 0;
-    let autoSlideInterval;
+    const sliderPrevBtn = document.querySelector(".prev-btn");
+    const sliderNextBtn = document.querySelector(".next-btn");
 
-    // Function to move to the next slide
-    const nextSlide = () => {
-        currentIndex = (currentIndex + 1) % slides.length;
-        updateSlider();
-    };
+    if (slider && slides.length > 0 && sliderPrevBtn && sliderNextBtn) {
+        let currentIndex = 0;
+        let autoSlideInterval;
 
-    // Function to move to the previous slide
-    const prevSlide = () => {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        updateSlider();
-    };
+        const nextSlide = () => {
+            currentIndex = (currentIndex + 1) % slides.length;
+            updateSlider();
+        };
 
-    // Function to update the slider position
-    const updateSlider = () => {
-        slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-    };
+        const prevSlide = () => {
+            currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+            updateSlider();
+        };
 
-    // Auto-slide functionality
-    const startAutoSlide = () => {
-        autoSlideInterval = setInterval(nextSlide, 3000); // Change slide every 5 seconds
-    };
+        const updateSlider = () => {
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+        };
 
-    const stopAutoSlide = () => {
-        clearInterval(autoSlideInterval);
-    };
+        const startAutoSlide = () => {
+            autoSlideInterval = setInterval(nextSlide, 3000);
+        };
 
-    // Event listeners for buttons
-    prevBtn.addEventListener("click", () => {
-        stopAutoSlide();
-        prevSlide();
-        startAutoSlide();
-    });
+        const stopAutoSlide = () => {
+            clearInterval(autoSlideInterval);
+        };
 
-    nextBtn.addEventListener("click", () => {
-        stopAutoSlide();
-        nextSlide();
-        startAutoSlide();
-    });
-
-    // Start auto-slide on page load
-    startAutoSlide();
-
-    // Pause auto-slide on hover
-    slider.addEventListener("mouseenter", stopAutoSlide);
-    slider.addEventListener("mouseleave", startAutoSlide);
-});
-
-
-
-// Modal functionality
-// Modal functionality
-const modal = document.getElementById('infoModal');
-const closeBtn = document.querySelector('.close-btn');
-
-if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-} else {
-    console.warn("Close button not found!");
-}
-
-const seeMoreBtns = document.querySelectorAll('.see-more');
-
-seeMoreBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.getElementById('modalTitle').textContent = btn.dataset.title;
-        document.getElementById('modalDesc').textContent = btn.dataset.desc;
-        modal.style.display = 'block';
-    });
-});
-
-closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-});
-
-window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        modal.style.display = 'none';
-    }
-});
-
-// Initialize slider
-showSlide(currentSlide);
-
-// Carousel functionality
-document.addEventListener('DOMContentLoaded', () => {
-    const track = document.querySelector('.carousel-tracks');
-    const cards = document.querySelectorAll('.cards');
-    const prevBtn = document.querySelector('.prevs');
-    const nextBtn = document.querySelector('.nexts');
-    const indicatorsContainer = document.querySelector('.indicatorss');
-    let currentIndex = 0;
-    let cardWidth = cards[0].offsetWidth + 40;
-    let autoSlideInterval;
-    let isAnimating = false;
-
-    cards.forEach((_, index) => {
-        const indicator = document.createElement('div');
-        indicator.classList.add('indicator');
-        if (index === 0) indicator.classList.add('active');
-        indicator.addEventListener('click', () => goToSlide(index));
-        indicatorsContainer.appendChild(indicator);
-    });
-
-    function updateCarousel() {
-        isAnimating = true;
-        track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-
-        cards.forEach((card, index) => {
-            card.classList.toggle('active', index === currentIndex);
+        sliderPrevBtn.addEventListener("click", () => {
+            stopAutoSlide();
+            prevSlide();
+            startAutoSlide();
         });
 
-        document.querySelectorAll('.indicator').forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === currentIndex);
+        sliderNextBtn.addEventListener("click", () => {
+            stopAutoSlide();
+            nextSlide();
+            startAutoSlide();
         });
 
-        setTimeout(() => isAnimating = false, 600);
-    }
-
-    function goToSlide(index) {
-        if (isAnimating) return;
-        currentIndex = (index + cards.length) % cards.length;
-        updateCarousel();
-        resetAutoSlide();
-    }
-
-    function nextSlide() {
-        goToSlide(currentIndex + 1);
-    }
-
-    function prevSlide() {
-        goToSlide(currentIndex - 1);
-    }
-
-    function startAutoSlide() {
-        autoSlideInterval = setInterval(nextSlide, 6000);
-    }
-
-    function resetAutoSlide() {
-        clearInterval(autoSlideInterval);
         startAutoSlide();
+
+        slider.addEventListener("mouseenter", stopAutoSlide);
+        slider.addEventListener("mouseleave", startAutoSlide);
     }
 
-    // Event listeners
-    prevBtn.addEventListener('click', prevSlide);
-    nextBtn.addEventListener('click', nextSlide);
-    track.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
-    track.addEventListener('mouseleave', startAutoSlide);
+    // TOURGUIDES CAROUSEL - Fixed Implementation
+    const tourguidesTrack = document.querySelector('.carousel-tracks');
+    const tourguidesCards = document.querySelectorAll('.carousel-tracks .cards');
+    const tourguidesPrevBtn = document.querySelector('.prevs');
+    const tourguidesNextBtn = document.querySelector('.nexts');
+    const tourguidesIndicatorsContainer = document.querySelector('.indicatorss');
 
-    // Touch handling
-    let touchStartX = 0;
-    let touchEndX = 0;
+    if (tourguidesTrack && tourguidesCards.length > 0 && tourguidesPrevBtn && tourguidesNextBtn && tourguidesIndicatorsContainer) {
+        let tourguidesCurrentIndex = 0;
+        let tourguidesAutoSlideInterval;
+        let tourguidesIsAnimating = false;
 
-    track.addEventListener('touchstart', e => {
-        touchStartX = e.changedTouches[0].screenX;
-    });
-
-    track.addEventListener('touchend', e => {
-        touchEndX = e.changedTouches[0].screenX;
-        if (Math.abs(touchStartX - touchEndX) > 50) {
-            if (touchStartX > touchEndX) nextSlide();
-            else prevSlide();
+        // Calculate card width dynamically
+        function getCardWidth() {
+            const cardStyle = window.getComputedStyle(tourguidesCards[0]);
+            const cardWidth = tourguidesCards[0].offsetWidth;
+            const marginLeft = parseFloat(cardStyle.marginLeft) || 0;
+            const marginRight = parseFloat(cardStyle.marginRight) || 0;
+            return cardWidth + marginLeft + marginRight;
         }
-    });
 
-    // Initialize
-    updateCarousel();
-    startAutoSlide();
+        let tourguidesCardWidth = getCardWidth();
 
-    window.addEventListener('resize', () => {
-        cardWidth = cards[0].offsetWidth + 40;
-        updateCarousel();
-    });
+        // Create indicators
+        tourguidesIndicatorsContainer.innerHTML = '';
+        tourguidesCards.forEach((_, index) => {
+            const indicator = document.createElement('div');
+            indicator.classList.add('indicator');
+            if (index === 0) indicator.classList.add('active');
+            indicator.addEventListener('click', () => tourguidesGoToSlide(index));
+            tourguidesIndicatorsContainer.appendChild(indicator);
+        });
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') prevSlide();
-        if (e.key === 'ArrowRight') nextSlide();
-    });
-});
+        function tourguidesUpdateCarousel() {
+            tourguidesIsAnimating = true;
+            tourguidesTrack.style.transform = `translateX(-${tourguidesCurrentIndex * tourguidesCardWidth}px)`;
 
-// Additional Slider Functionality
-const trackL = document.querySelector('.slider-trackl');
-const cardsL = document.querySelectorAll('.cardl');
-const prevBtnL = document.querySelector('.prev-btnl');
-const nextBtnL = document.querySelector('.next-btnl');
+            // Update active states
+            tourguidesCards.forEach((card, index) => {
+                card.classList.toggle('active', index === tourguidesCurrentIndex);
+            });
 
-if (!prevBtnL || !nextBtnL) {
-    console.warn("Previous or Next buttons not found!");
-} else {
-    let currentIndexL = 0;
-    let cardWidthL = cardsL[0].offsetWidth + 30; // Include margin
+            // Update indicators
+            document.querySelectorAll('.indicatorss .indicator').forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === tourguidesCurrentIndex);
+            });
 
-    function updateSlider() {
-        trackL.style.transform = `translateX(-${currentIndexL * cardWidthL}px)`;
+            setTimeout(() => tourguidesIsAnimating = false, 600);
+        }
+
+        function tourguidesGoToSlide(index) {
+            if (tourguidesIsAnimating) return;
+            tourguidesCurrentIndex = (index + tourguidesCards.length) % tourguidesCards.length;
+            tourguidesUpdateCarousel();
+            tourguidesResetAutoSlide();
+        }
+
+        function tourguidesNextSlide() {
+            tourguidesGoToSlide(tourguidesCurrentIndex + 1);
+        }
+
+        function tourguidesPrevSlide() {
+            tourguidesGoToSlide(tourguidesCurrentIndex - 1);
+        }
+
+        function tourguidesStartAutoSlide() {
+            tourguidesAutoSlideInterval = setInterval(tourguidesNextSlide, 6000);
+        }
+
+        function tourguidesResetAutoSlide() {
+            clearInterval(tourguidesAutoSlideInterval);
+            tourguidesStartAutoSlide();
+        }
+
+        // Event listeners
+        tourguidesPrevBtn.addEventListener('click', tourguidesPrevSlide);
+        tourguidesNextBtn.addEventListener('click', tourguidesNextSlide);
+
+        tourguidesTrack.addEventListener('mouseenter', () => clearInterval(tourguidesAutoSlideInterval));
+        tourguidesTrack.addEventListener('mouseleave', tourguidesStartAutoSlide);
+
+        // Touch handling for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        tourguidesTrack.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        tourguidesTrack.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            if (Math.abs(touchStartX - touchEndX) > 50) {
+                if (touchStartX > touchEndX) tourguidesNextSlide();
+                else tourguidesPrevSlide();
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            tourguidesCardWidth = getCardWidth();
+            tourguidesUpdateCarousel();
+        });
+
+        // Initialize tourguides carousel
+        tourguidesUpdateCarousel();
+        tourguidesStartAutoSlide();
     }
 
-    nextBtnL.addEventListener('click', () => {
-        currentIndexL = Math.min(currentIndexL + 1, cardsL.length - 1);
-        updateSlider();
-    });
+    // Additional Slider Functionality (for .slider-trackl)
+    const trackL = document.querySelector('.slider-trackl');
+    const cardsL = document.querySelectorAll('.cardl');
+    const prevBtnL = document.querySelector('.prev-btnl');
+    const nextBtnL = document.querySelector('.next-btnl');
 
-    prevBtnL.addEventListener('click', () => {
-        currentIndexL = Math.max(currentIndexL - 1, 0);
-        updateSlider();
-    });
+    if (trackL && cardsL.length > 0 && prevBtnL && nextBtnL) {
+        let currentIndexL = 0;
+        let cardWidthL = cardsL[0].offsetWidth + 30;
 
-    // Handle window resize
-    window.addEventListener('resize', () => {
-        cardWidthL = cardsL[0].offsetWidth + 30;
-        updateSlider();
-    });
-}
+        function updateSliderL() {
+            trackL.style.transform = `translateX(-${currentIndexL * cardWidthL}px)`;
+        }
+
+        nextBtnL.addEventListener('click', () => {
+            currentIndexL = Math.min(currentIndexL + 1, cardsL.length - 1);
+            updateSliderL();
+        });
+
+        prevBtnL.addEventListener('click', () => {
+            currentIndexL = Math.max(currentIndexL - 1, 0);
+            updateSliderL();
+        });
+
+        window.addEventListener('resize', () => {
+            cardWidthL = cardsL[0].offsetWidth + 30;
+            updateSliderL();
+        });
+    }
+});
+
+// Modal functionality
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById('infoModal');
+    const closeBtn = document.querySelector('.close-btn');
+    const seeMoreBtns = document.querySelectorAll('.see-more');
+
+    if (modal && closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
+
+    if (seeMoreBtns.length > 0 && modal) {
+        seeMoreBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modalTitle = document.getElementById('modalTitle');
+                const modalDesc = document.getElementById('modalDesc');
+
+                if (modalTitle && modalDesc) {
+                    modalTitle.textContent = btn.dataset.title;
+                    modalDesc.textContent = btn.dataset.desc;
+                    modal.style.display = 'block';
+                }
+            });
+        });
+    }
+});
