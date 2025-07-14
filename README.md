@@ -48,5 +48,8 @@ Dlily promotes:
 - [Hasan Ayman Elbadry](https://github.com/hasan-elbadry)
 
 ---
-![image](https://github.com/user-attachments/assets/5166d4d6-d58c-4f43-8c7b-561b6dea5364)
+### 🎥 Click the image below to watch the project demo:
+
+[![Project Demo](https://github.com/user-attachments/assets/5166d4d6-d58c-4f43-8c7b-561b6dea5364)](https://www.linkedin.com/posts/hasan-elbadry_dlilyapp-tourismtech-dotnet8-ugcPost-7339712531654963201-lURn?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAEGEn_QBi7EWFLs6EwtB1AvT8AUGyc6BDdA&utm_campaign=copy_link)
+
 
