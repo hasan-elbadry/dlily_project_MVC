@@ -1,55 +1,55 @@
-# 🎯 [Dlily – Smart Tourism Platform for Egypt]
+# MostafaMedhat19
 
-Built with **ASP.NET MVC  · REST APIs  · Entity Framework Core**
+![cover](link_to_your_cover_image)
 
-Dlily is an innovative tourism platform designed to **combat fraud**, **enhance guide quality**, and **improve booking trustworthiness** in Egypt’s tourism industry.  
-Developed as part of our capstone project, the system integrates external hotel and tourism APIs to offer a **seamless, secure, and real-time travel experience**.
+![Typing SVG](link_to_typing_svg)
 
----
-
-## 🚀 Key Features & Innovations
-
-- ✅ **Secure Authentication** – Cookie-based login with JWT support for secure, stateless sessions  
-- 🏨 **Live Hotel Booking** – Integrated APIs prevent overbooking by showing real-time availability  
-- 🌍 **Tour Packages in Real-Time** – Tourists compare and instantly book from verified companies  
-- 💬 **Live Chat Support** – WebSocket-based chat between tourists and certified guides  
-- 🔐 **Robust Validation** – Client-side via jQuery + custom JS, with server-side security  
-- 🛠️ **Clean Backend Architecture** – ASP.NET Core Web API + EF Core with layered architecture  
-- 🏨 **Dedicated Hotel API** – Simulates real-world hotel management for seamless integration  
-- 🛡️ **Problem-Oriented Approach** – Built to tackle real pain points in Egypt’s tourism sector  
+## .NET Specialist C# Backend
 
 ---
 
-## 🌱 Supporting UN Sustainable Development Goals (SDGs)
-
-Dlily promotes:
-- Sustainable tourism
-- Fair pricing
-- Tourist safety
-- Local guide inclusion and empowerment
-
-📊 **60%+ of surveyed users believe Dlily can significantly reduce fraud and boost tourism in Egypt.**
-
----
-
-## 👨‍💻 Team Members
-
-- [Batol Magdy](https://github.com/batolmagdy092)  
-- [Taghred Ahmed](https://github.com/taghred153)  
-- [Mostafa Medhat](https://github.com/MostafaMedhat19)  
-- [Abdelrahman Wagih](https://github.com/wagih2007)  
-- [Hasan Ayman](https://github.com/hasan-elbadry)
+## 🧠 About Me
+👨‍💻 I'm a highly motivated software developer specializing in .NET technologies.  
+🖥️ I build web, desktop, and mobile applications with clean code.  
+💡 I enjoy solving real-world problems and learning new tools.  
+🎯 Currently diving deeper into Cloud Computing and System Design.  
+📫 Reach me at: mostafamedhat.0522019@gmail.com  
+📄 [View My Resume](link_to_resume)  
+🔗 [Connect with Me](#links)
 
 ---
 
-## 🏗️ Developed By
+## 👨‍💻 About Me
+I'm Mostafa Medhat, a passionate .NET Backend Developer who loves building efficient, scalable, and clean code for real-world applications.
 
-- [Mostafa Medhat](https://github.com/MostafaMedhat19)  
-- [Hasan Ayman Elbadry](https://github.com/hasan-elbadry)
+Specialized in C# / ASP.NET, working across Web, APIs, and System Integration. I'm always looking to grow, learn new technologies, and collaborate on exciting projects.
+
+[LinkedIn](your_linkedin_link) • [Facebook](your_facebook_link) • [Instagram](your_instagram_link)
 
 ---
-### 🎥 Click the image below to watch the project demo:
 
-[![Project Demo](https://github.com/user-attachments/assets/5166d4d6-d58c-4f43-8c7b-561b6dea5364)](https://www.linkedin.com/posts/hasan-elbadry_dlilyapp-tourismtech-dotnet8-ugcPost-7339712531654963201-lURn?utm_source=social_share_send&utm_medium=android_app&rcm=ACoAAEGEn_QBi7EWFLs6EwtB1AvT8AUGyc6BDdA&utm_campaign=copy_link)
+## ⚙️ Languages, Frameworks & Tools
+- C#
+- ASP.NET Core
+- Entity Framework
+- SQL
+- Git / GitHub
+- Azure
+- etc.
 
+---
 
+## 📈 GitHub Stats
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=MostafaMedhat19&show_icons=true&theme=radical)
+![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=MostafaMedhat19&theme=radical)
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=MostafaMedhat19&layout=compact&theme=radical)
+
+---
+
+## 🐍 Contribution Snake
+![Snake animation](https://github.com/MostafaMedhat19/MostafaMedhat19/blob/output/github-contribution-grid-snake.svg)
+
+---
+
+## 🤝 Let's Connect & Collaborate
+🌟 Thank you for visiting my profile! Feel free to connect or collaborate on exciting projects. 🌟
