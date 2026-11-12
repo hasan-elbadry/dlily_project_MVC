@@ -30,11 +30,11 @@ The project uses server-rendered Razor views and follows the MVC pattern, backed
 ## Destination gallery
 
 <div align="center">
-  <img src="./dlily_project/wwwroot/Assets/touristplaces/img2.jpg" width="48%" alt="Aerial view of a clear blue coastal destination" />
-  <img src="./dlily_project/wwwroot/Assets/touristplaces/img6.jpg" width="48%" alt="Aerial view of a turquoise island destination" />
+  <img src="./docs/gallery/destination-coast.webp" width="48%" alt="Aerial view of a clear blue coastal destination" />
+  <img src="./docs/gallery/destination-island.webp" width="48%" alt="Aerial view of a turquoise island destination" />
   <br />
-  <img src="./dlily_project/wwwroot/Assets/touristplaces/img10.jpg" width="48%" alt="Egyptian tourist destination featured in Dlily" />
-  <img src="./dlily_project/wwwroot/Assets/touristplaces/img11.jpg" width="48%" alt="Scenic tourist destination featured in Dlily" />
+  <img src="./docs/gallery/destination-spring.webp" width="48%" alt="Egyptian tourist destination featured in Dlily" />
+  <img src="./docs/gallery/destination-canyon.webp" width="48%" alt="Scenic tourist destination featured in Dlily" />
 </div>
 
 ## How it works
