@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Dlily tourism platform</title>
+  <desc id="desc">Explore Egypt, discover stays, and connect with local guides.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#071a2c"/><stop offset=".55" stop-color="#0b3f59"/><stop offset="1" stop-color="#0b7f85"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#39e6c5"/><stop offset="1" stop-color="#70b7ff"/></linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+  <rect width="1200" height="360" rx="32" fill="url(#bg)"/>
+  <circle cx="1025" cy="55" r="150" fill="#36e1c0" opacity=".12" filter="url(#glow)"/>
+  <circle cx="1110" cy="310" r="180" fill="#65a9ff" opacity=".14" filter="url(#glow)"/>
+  <path d="M0 286 Q180 228 350 286 T700 286 T1050 286 T1400 286 V360 H0Z" fill="#06131f" opacity=".75"/>
+  <g transform="translate(72 66)"><rect width="82" height="82" rx="24" fill="url(#accent)"/><path d="M22 50c16-23 34-31 43-21 8 9-1 25-24 42M30 27l11 44M57 24l-5 38" fill="none" stroke="#071a2c" stroke-width="7" stroke-linecap="round"/></g>
+  <text x="180" y="117" font-family="Segoe UI,Arial,sans-serif" font-size="70" font-weight="800" fill="#fff">DLILY</text>
+  <text x="76" y="177" font-family="Segoe UI,Arial,sans-serif" font-size="30" font-weight="600" fill="#9ff5e4">Your digital guide to remarkable journeys</text>
+  <text x="76" y="223" font-family="Segoe UI,Arial,sans-serif" font-size="21" fill="#d7eef3">Discover destinations · Find stays · Meet local guides · Plan with confidence</text>
+  <g transform="translate(76 262)" font-family="Segoe UI,Arial,sans-serif" font-size="15" font-weight="700"><rect width="168" height="42" rx="21" fill="#fff" opacity=".1" stroke="#67dccb"/><text x="84" y="27" fill="#fff" text-anchor="middle">ASP.NET CORE MVC</text><rect x="181" width="142" height="42" rx="21" fill="#fff" opacity=".1" stroke="#67dccb"/><text x="252" y="27" fill="#fff" text-anchor="middle">SQL SERVER</text><rect x="336" width="176" height="42" rx="21" fill="#fff" opacity=".1" stroke="#67dccb"/><text x="424" y="27" fill="#fff" text-anchor="middle">ENTITY FRAMEWORK</text></g>
+  <g transform="translate(786 76)" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M33 170c73-81 148-112 280-81" stroke="#8df2df" stroke-width="5" stroke-dasharray="3 14"/><path d="M48 170c0 28-48 28-48 0 0-25 24-53 24-53s24 28 24 53Z" fill="#39e6c5" stroke="#d9fff7" stroke-width="4"/><path d="M327 85c0 28-48 28-48 0 0-25 24-53 24-53s24 28 24 53Z" fill="#70b7ff" stroke="#e7f3ff" stroke-width="4"/><path d="M105 219h170M127 219l18-46h91l18 46M158 173v-39h65v39" stroke="#fff" stroke-width="7"/><path d="M174 134V98h34v36M191 98V70" stroke="#fff" stroke-width="7"/><circle cx="191" cy="58" r="10" fill="#ffd76a" stroke="#fff" stroke-width="4"/></g>
+</svg>
